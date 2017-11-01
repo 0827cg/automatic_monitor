@@ -1,0 +1,69 @@
+============= RESTART: D:\work\python\automatic_monitor-dev\monitor.py =============
+配置文件monitor.conf不存在,脚本自动创建并初始化
+配置文件monitor.conf路径为conf/monitor.conf
+showdebuglog值为no,将不显示输出
+2017-10-30 16:32:40
+>>> showdebuglog值为yes,将打印输出到log文件
+2017-10-30 16:37:40
+logs/monitor_content-20171030163740.txt
+send: 'ehlo smtp.qq.com\r\n'
+reply: b'250-smtp.qq.com\r\n'
+reply: b'250-PIPELINING\r\n'
+reply: b'250-SIZE 73400320\r\n'
+reply: b'250-AUTH LOGIN PLAIN\r\n'
+reply: b'250-AUTH=LOGIN\r\n'
+reply: b'250-MAILCOMPRESS\r\n'
+reply: b'250 8BITMIME\r\n'
+reply: retcode (250); Msg: b'smtp.qq.com\nPIPELINING\nSIZE 73400320\nAUTH LOGIN PLAIN\nAUTH=LOGIN\nMAILCOMPRESS\n8BITMIME'
+send: 'AUTH PLAIN AHlha3VsdC1jZ0BxcS5jb20AbHNjZ3NibmpkZHRnZGVnYw==\r\n'
+reply: b'235 Authentication successful\r\n'
+reply: retcode (235); Msg: b'Authentication successful'
+send: 'mail FROM:<yakult-cg@qq.com> size=1085\r\n'
+reply: b'250 Ok\r\n'
+reply: retcode (250); Msg: b'Ok'
+send: 'rcpt TO:<1732821152@qq.com>\r\n'
+reply: b'250 Ok\r\n'
+reply: retcode (250); Msg: b'Ok'
+send: 'data\r\n'
+reply: b'354 End data with <CR><LF>.<CR><LF>\r\n'
+reply: retcode (354); Msg: b'End data with <CR><LF>.<CR><LF>'
+data: (354, b'End data with <CR><LF>.<CR><LF>')
+send: b'Content-Type: multipart/mixed; boundary="===============2389784957262893596=="\r\nMIME-Version: 1.0\r\nSubject: =?utf-8?b?MTE25LuK5pelMTYzN+aXtuajgOa1i+WIsOW8guW4uA==?=\r\nFrom: =?utf-8?q?monitor=3Cyakult-cg=40qq=2Ecom=3E?=\r\nTo: =?utf-8?q?monitor=2Eadmin?=\r\n\r\n--===============2389784957262893596==\r\nContent-Type: text/plain; charset="utf-8"\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\n\r\nPT09PT09PT09PT09PT09PT09PT0KbmdpbnjmnKrov5DooYwK6ISa5pys5bCd6K+V5bCG5YW25ZCv\r\n5YqoLi4uLgrohJrmnKzlkK/liqhuZ2lueOacquaIkOWKn++8jOivt+aJi+WKqOWQr+WKqApyZWRp\r\nc+acqui/kOihjArohJrmnKzlsJ3or5XlsIblhbblkK/liqguLi4uCuiEmuacrOWQr+WKqHJlZGlz\r\n5pyq5oiQ5Yqf77yM6K+35omL5Yqo5ZCv5YqoCgo9PT09PT09PT09PT09PT09PT09PQotLS3mnpfn\r\nuYEKLS0tMjAxNy0xMC0zMCAxNjozNzo0MA==\r\n\r\n--===============2389784957262893596==\r\nContent-Type: text/base64; charset="utf-8"\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\nContent-Type: application/octet-stream\r\nContent-Disposition: attachment; filename="err_logs.txt"\r\n\r\nDQpuZ2lueDogz7XNs9XSsru1vda4tqi1xMK3vrahow0KDQpyZWRpczog\r\n\r\n--===============2389784957262893596==--\r\n.\r\n'
+reply: b'250 Ok: queued as \r\n'
+reply: retcode (250); Msg: b'Ok: queued as'
+data: (250, b'Ok: queued as')
+send: 'quit\r\n'
+reply: b'221 Bye\r\n'
+reply: retcode (221); Msg: b'Bye'
+showdebuglog值为yes,将打印输出到log文件
+2017-10-30 16:42:42
+logs/monitor_content-20171030164242.txt
+send: 'ehlo smtp.qq.com\r\n'
+reply: b'250-smtp.qq.com\r\n'
+reply: b'250-PIPELINING\r\n'
+reply: b'250-SIZE 73400320\r\n'
+reply: b'250-AUTH LOGIN PLAIN\r\n'
+reply: b'250-AUTH=LOGIN\r\n'
+reply: b'250-MAILCOMPRESS\r\n'
+reply: b'250 8BITMIME\r\n'
+reply: retcode (250); Msg: b'smtp.qq.com\nPIPELINING\nSIZE 73400320\nAUTH LOGIN PLAIN\nAUTH=LOGIN\nMAILCOMPRESS\n8BITMIME'
+send: 'AUTH PLAIN AHlha3VsdC1jZ0BxcS5jb20AbHNjZ3NibmpkZHRnZGVnYw==\r\n'
+reply: b'235 Authentication successful\r\n'
+reply: retcode (235); Msg: b'Authentication successful'
+send: 'mail FROM:<yakult-cg@qq.com> size=1085\r\n'
+reply: b'250 Ok\r\n'
+reply: retcode (250); Msg: b'Ok'
+send: 'rcpt TO:<1732821152@qq.com>\r\n'
+reply: b'250 Ok\r\n'
+reply: retcode (250); Msg: b'Ok'
+send: 'data\r\n'
+reply: b'354 End data with <CR><LF>.<CR><LF>\r\n'
+reply: retcode (354); Msg: b'End data with <CR><LF>.<CR><LF>'
+data: (354, b'End data with <CR><LF>.<CR><LF>')
+send: b'Content-Type: multipart/mixed; boundary="===============4783100761138158779=="\r\nMIME-Version: 1.0\r\nSubject: =?utf-8?b?MTE25LuK5pelMTY0MuaXtuajgOa1i+WIsOW8guW4uA==?=\r\nFrom: =?utf-8?q?monitor=3Cyakult-cg=40qq=2Ecom=3E?=\r\nTo: =?utf-8?q?monitor=2Eadmin?=\r\n\r\n--===============4783100761138158779==\r\nContent-Type: text/plain; charset="utf-8"\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\n\r\nPT09PT09PT09PT09PT09PT09PT0KbmdpbnjmnKrov5DooYwK6ISa5pys5bCd6K+V5bCG5YW25ZCv\r\n5YqoLi4uLgrohJrmnKzlkK/liqhuZ2lueOacquaIkOWKn++8jOivt+aJi+WKqOWQr+WKqApyZWRp\r\nc+acqui/kOihjArohJrmnKzlsJ3or5XlsIblhbblkK/liqguLi4uCuiEmuacrOWQr+WKqHJlZGlz\r\n5pyq5oiQ5Yqf77yM6K+35omL5Yqo5ZCv5YqoCgo9PT09PT09PT09PT09PT09PT09PQotLS3mnpfn\r\nuYEKLS0tMjAxNy0xMC0zMCAxNjo0Mjo0Mg==\r\n\r\n--===============4783100761138158779==\r\nContent-Type: text/base64; charset="utf-8"\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\nContent-Type: application/octet-stream\r\nContent-Disposition: attachment; filename="err_logs.txt"\r\n\r\nDQpuZ2lueDogz7XNs9XSsru1vda4tqi1xMK3vrahow0KDQpyZWRpczog\r\n\r\n--===============4783100761138158779==--\r\n.\r\n'
+reply: b'250 Ok: queued as \r\n'
+reply: retcode (250); Msg: b'Ok: queued as'
+data: (250, b'Ok: queued as')
+send: 'quit\r\n'
+reply: b'221 Bye\r\n'
+reply: retcode (221); Msg: b'Bye'

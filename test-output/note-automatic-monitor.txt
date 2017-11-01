@@ -1,0 +1,48 @@
+Python 3.5.4 (v3.5.4:3f56838, Aug  8 2017, 02:17:05) [MSC v.1900 64 bit (AMD64)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> 
+============= RESTART: D:\work\python\automatic_monitor-dev\monitor.py =============
+获取运行需要的配置数据
+读取到的----
+{'smtp_server': 'smtp.qq.com', 'email_sendaddr': 'yakult-cg@qq.com', 'servername': '116', 'ToEmail': ['1732821152@qq.com'], 'author': 'cg错过', 'logpath': 'logs', 'username': 'xx', 'tomcatpath': 'D:\\test\\tomcat', 'redispath': 'D:\\test\\redis', 'createtime': '2017-09-30', 'email_sendpasswd': 'lscgsbnjddtgdegc', 'nginxpath': 'D:\\test\\nginx'}
+需要运行的有
+{'smtp_server': 'smtp.qq.com', 'email_sendaddr': 'yakult-cg@qq.com', 'servername': '116', 'ToEmail': ['1732821152@qq.com'], 'author': 'cg错过', 'logpath': 'logs', 'username': 'xx', 'tomcatpath': 'D:\\test\\tomcat', 'redispath': 'D:\\test\\redis', 'createtime': '2017-09-30', 'email_sendpasswd': 'lscgsbnjddtgdegc', 'nginxpath': 'D:\\test\\nginx'}
+{'tomcatName': [], 'tomcatPort': [], 'tomcatPath': []}
+logs/monitor_content-20171030092935.txt
+每分钟，有错误，附件
+未重构......
+['Second', 'redis未运行\n脚本尝试将其启动....\n脚本启动redis未成功，请手动启动\nnginx未运行\n脚本尝试将其启动....\n脚本启动nginx未成功，请手动启动\n', 'logs/monitor_err-20171030092935.txt']
+已重构......
+['Second', '116今日0929时检测到异常', '====================\nredis未运行\n脚本尝试将其启动....\n脚本启动redis未成功，请手动启动\nnginx未运行\n脚本尝试将其启动....\n脚本启动nginx未成功，请手动启动\n\n====================\n---xx\n---2017-10-30 09:29:35', 'logs/monitor_err-20171030092935.txt']
+send: 'ehlo smtp.qq.com\r\n'
+reply: b'250-smtp.qq.com\r\n'
+reply: b'250-PIPELINING\r\n'
+reply: b'250-SIZE 73400320\r\n'
+reply: b'250-AUTH LOGIN PLAIN\r\n'
+reply: b'250-AUTH=LOGIN\r\n'
+reply: b'250-MAILCOMPRESS\r\n'
+reply: b'250 8BITMIME\r\n'
+reply: retcode (250); Msg: b'smtp.qq.com\nPIPELINING\nSIZE 73400320\nAUTH LOGIN PLAIN\nAUTH=LOGIN\nMAILCOMPRESS\n8BITMIME'
+send: 'AUTH PLAIN AHlha3VsdC1jZ0BxcS5jb20AbHNjZ3NibmpkZHRnZGVnYw==\r\n'
+reply: b'235 Authentication successful\r\n'
+reply: retcode (235); Msg: b'Authentication successful'
+登陆成功
+接受地址不为空
+send: 'mail FROM:<yakult-cg@qq.com> size=1077\r\n'
+reply: b'250 Ok\r\n'
+reply: retcode (250); Msg: b'Ok'
+send: 'rcpt TO:<1732821152@qq.com>\r\n'
+reply: b'250 Ok\r\n'
+reply: retcode (250); Msg: b'Ok'
+send: 'data\r\n'
+reply: b'354 End data with <CR><LF>.<CR><LF>\r\n'
+reply: retcode (354); Msg: b'End data with <CR><LF>.<CR><LF>'
+data: (354, b'End data with <CR><LF>.<CR><LF>')
+send: b'Content-Type: multipart/mixed; boundary="===============7113911009664075108=="\r\nMIME-Version: 1.0\r\nSubject: =?utf-8?b?MTE25LuK5pelMDkyOeaXtuajgOa1i+WIsOW8guW4uA==?=\r\nFrom: =?utf-8?q?monitor=3Cyakult-cg=40qq=2Ecom=3E?=\r\nTo: =?utf-8?q?monitor=2Eadmin?=\r\n\r\n--===============7113911009664075108==\r\nContent-Type: text/plain; charset="utf-8"\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\n\r\nPT09PT09PT09PT09PT09PT09PT0KcmVkaXPmnKrov5DooYwK6ISa5pys5bCd6K+V5bCG5YW25ZCv\r\n5YqoLi4uLgrohJrmnKzlkK/liqhyZWRpc+acquaIkOWKn++8jOivt+aJi+WKqOWQr+WKqApuZ2lu\r\neOacqui/kOihjArohJrmnKzlsJ3or5XlsIblhbblkK/liqguLi4uCuiEmuacrOWQr+WKqG5naW54\r\n5pyq5oiQ5Yqf77yM6K+35omL5Yqo5ZCv5YqoCgo9PT09PT09PT09PT09PT09PT09PQotLS14eAot\r\nLS0yMDE3LTEwLTMwIDA5OjI5OjM1\r\n\r\n--===============7113911009664075108==\r\nContent-Type: text/base64; charset="utf-8"\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\nContent-Type: application/octet-stream\r\nContent-Disposition: attachment; filename="err_logs.txt"\r\n\r\nDQpyZWRpczogDQpuZ2lueDogz7XNs9XSsru1vda4tqi1xMK3vrahow0K\r\n\r\n--===============7113911009664075108==--\r\n.\r\n'
+reply: b'250 Ok: queued as \r\n'
+reply: retcode (250); Msg: b'Ok: queued as'
+data: (250, b'Ok: queued as')
+send: 'quit\r\n'
+reply: b'221 Bye\r\n'
+reply: retcode (221); Msg: b'Bye'
+>>> 
