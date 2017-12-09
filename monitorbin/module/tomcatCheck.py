@@ -16,16 +16,18 @@ class TomcatOperate:
     #全检不提供脚本操作功能，例如自启。全检后不管是否正常都将发送邮件
     #部检提供自启，自启后只有检测到不正常才发送邮件
 
-    def __init__(self, strTotalPath, intDateMin, intMintHour, fileUtilObj):
+    def __init__(self, strTotalPath, intHourTime, intHourCheckAll, fileUtilObj):
         
         #strTotalPath: tomcat的安装文件根目录的上一级目录
-        #intDateMin: 当前运行脚本的分钟数
-        #intMintHour: 配置文件中设置的时间(分钟数)
+        #intHourTime: 当前运行脚本的小时数
+        #intMintHour: 配置文件中设置的时间(小时数)
         #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
 
+        #2017-12-08将分钟数改为小时，即每天大检测只执行一次
+
         self.fileUtil = fileUtilObj
-        self.intDateMin = intDateMin
-        self.intMintHour = intMintHour
+        self.intHourTime = intHourTime
+        self.intHourCheckAll = intHourCheckAll
         self.strTotalPath = strTotalPath
         #self.fileUtil.writerContent("你好")
         
@@ -53,7 +55,7 @@ class TomcatOperate:
         listTomcatPort = dictTomcatMsg.get('tomcatPort')
         listTomcatPath = dictTomcatMsg.get('tomcatPath')
         
-        if(self.intDateMin == self.intMintHour):
+        if(self.intHourTime == self.intHourCheckAll):
             for i in range(len(listTomcatPort)):
                 intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus)
                 if(intMark == 1):

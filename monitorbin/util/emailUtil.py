@@ -17,6 +17,7 @@ class EmailUtil:
     def __init__(self, dictNeedRunMsg, fileUtilObj):
 
         #dictNeedRunMsg:存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
+        #该数据仅进行了初步过滤
         #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
         #其中的key有
         #smtp_server:
@@ -26,13 +27,20 @@ class EmailUtil:
 
         self.fileUtilObj = fileUtilObj
         dictEmailMsg = self.getForEmailMsg(dictNeedRunMsg)
-        listEmailContentMsg = self.checkAndGetForEmailListMsg()
-
-        strServerName = dictEmailMsg.get('servername')
-        strUserName = dictEmailMsg.get('username')
-        listNewEmailContentMsg = self.fileUtilObj.reWriterForEmail(listEmailContentMsg, dictEmailMsg)
         
-        self.choiceSend(dictEmailMsg, listNewEmailContentMsg)
+        if((len(dictEmailMsg) == 1) and ('err' in dictEmailMsg)):
+            if(self.fileUtilObj.boolWhetherShowLog & True):
+                self.fileUtilObj.writerContent("邮件发送配置不全,发送邮件任务运行中止", 'runLog')
+        else:
+            if(self.fileUtilObj.boolWhetherShowLog & True):
+                self.fileUtilObj.writerContent("-->执行邮件服务", 'runLog')
+            listEmailContentMsg = self.checkAndGetForEmailListMsg()
+            
+            strServerName = dictEmailMsg.get('servername')
+            strUserName = dictEmailMsg.get('username')
+            listNewEmailContentMsg = self.fileUtilObj.reWriterForEmail(listEmailContentMsg, dictEmailMsg)
+            
+            self.choiceSend(dictEmailMsg, listNewEmailContentMsg)
         
     def getForEmailMsg(self, dictNeedRunMsg):
 
@@ -40,12 +48,30 @@ class EmailUtil:
         #dictNeedRunMsg: 存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
         #因为有可能并不是所有项目都配置了需要运行
 
+        #2017-12-07修改
+        #配置文件中添加了选择性
+        #选择使用email或者dingding来发送消息，在fileUtil这个类来读取到的需要运行的数据中，也
+        #会有一些email或者dingding的配置数据是空的，
+        #所以这里假如选择了email时，即email字段值为yes程序才能运行到这一步，
+        #此时我们需要对email的其他配置文件进行判断，判断所有有关email的配置是否完全，
+        #如若不完全，则无法完成email发送，同样的dingding也需要这样,
+        #所以，这里在抽取时将进行判断
+        #其判断就是,将选取用来发送email所需的数据进行值的判断，依次存放到新的dict时，一旦
+        #发现有一个字段的值为空，就跳出循环，并则将此时新的dict里的所有元素清空，
+        #存放一个err字段
+
         dictMsgForEmail = {}
         for keyItem in dictNeedRunMsg:
             if((keyItem == 'email_sendaddr') | (keyItem == 'email_sendpasswd') |
                (keyItem == 'smtp_server') | (keyItem == 'ToEmail') | (keyItem == 'logpath') |
                (keyItem == 'servername') | (keyItem == 'username')):
-                dictMsgForEmail[keyItem] = dictNeedRunMsg.get(keyItem)
+                if(dictNeedRunMsg.get(keyItem) != ''):
+                    
+                    dictMsgForEmail[keyItem] = dictNeedRunMsg.get(keyItem)
+                else:
+                    dictMsgForEmail.clear()
+                    dictMsgForEmail['err'] = "Msg Incomplete"
+                    break
     
         return dictMsgForEmail
 

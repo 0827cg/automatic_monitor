@@ -1,0 +1,11 @@
+
+============2017-12-09 14:27:16============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'next_field_value': '1', 'port': '3306', 'fieldcompare_name2': 'studentid', 'fieldcompare_name1': 'shopid', 'host': '10.9.115.174', 'email_sendpasswd': '', 'redispath': '', 'tomcatpath': '', 'email': 'no', 'email_sendaddr': '', 'nginxpath': '', 'author': 'cg错过', 'ToEmail': ['1732821152@qq.com'], 'logpath': 'logs', 'whether_check_letter': 'yes', 'when_hour_checkall': '9', 'warning_level': '70', 'time_end': '18', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560a330a79c667397c7523a0866', 'sleeptime': '70', 'run_intervals': '300', 'table_name': 'htg_weixin_history', 'passwd': 'haotuoguan123456', 'createtime': '2017-09-30', 'fieldcompare_namevalue': 'OpenID', 'dingtalk': 'yes', 'remove_log_time': '11:50', 'first_field_value': '0', 'username': '林繁', 'database': 'haotuoguan', 'time_beginning': '9', 'checkdisk': 'yes', 'field_name': 'send_state', 'savelogtofile': 'yes', 'user': 'haotuoguan', 'servername': '116', 'smtp_server': ''}
+未读取到tomcat配置参数,如需检测tomcat请修改配置文件
+未读取到nginx配置参数,如需检测nginx请修改配置文件
+未读取到redis配置参数,如需检测redis请修改配置文件
+需要运行的有: 
+{'next_field_value': '1', 'port': '3306', 'fieldcompare_name2': 'studentid', 'fieldcompare_name1': 'shopid', 'host': '10.9.115.174', 'email_sendpasswd': '', 'email': 'no', 'email_sendaddr': '', 'author': 'cg错过', 'ToEmail': ['1732821152@qq.com'], 'logpath': 'logs', 'whether_check_letter': 'yes', 'when_hour_checkall': '9', 'warning_level': '70', 'time_end': '18', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560a330a79c667397c7523a0866', 'sleeptime': '70', 'run_intervals': '300', 'table_name': 'htg_weixin_history', 'passwd': 'haotuoguan123456', 'createtime': '2017-09-30', 'fieldcompare_namevalue': 'OpenID', 'dingtalk': 'yes', 'remove_log_time': '11:50', 'first_field_value': '0', 'username': '林繁', 'database': 'haotuoguan', 'time_beginning': '9', 'checkdisk': 'yes', 'field_name': 'send_state', 'savelogtofile': 'yes', 'user': 'haotuoguan', 'servername': '116', 'smtp_server': ''}
+-->执行检测数据库字段send_state任务

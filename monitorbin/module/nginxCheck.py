@@ -10,17 +10,19 @@ class NginxOperate:
 
     #nginx检测模块
 
-    def __init__(self, strNginxPath, intDateMin, intMintHour, fileUtilObj):
+    def __init__(self, strNginxPath, intHourTime, intHourCheckAll, fileUtilObj):
         
         #strNginxPath: nginx的安装目录
-        #intDateMin: 当前运行脚本的分钟数
-        #intMintHour: 配置文件中设置的时间(分钟数)
+        #intHourTime: 当前运行脚本的小时数
+        #intHourCheckAll: 配置文件中设置的时间(小时数)
         #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
+
+        #2017-12-08将分钟数改为小时，即每天大检测只执行一次
             
         
         self.fileUtil = fileUtilObj
-        self.intDateMin = intDateMin
-        self.intMintHour = intMintHour
+        self.intHourTime = intHourTime
+        self.intHourCheckAll = intHourCheckAll
         self.strNginxPath = strNginxPath
         
         if(self.fileUtil.boolWhetherShowLog & True):
@@ -44,7 +46,7 @@ class NginxOperate:
 
         strNginxStatus = self.getNginxStatus()
 
-        if(self.intDateMin == self.intMintHour):
+        if(self.intHourTime == self.intHourCheckAll):
             self.checkNginxStatus(strNginxStatus)
         else:
              intMark = self.checkNginxStatus(strNginxStatus, 'Second')

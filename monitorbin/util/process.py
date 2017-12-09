@@ -13,7 +13,7 @@ class ProcessCL:
     def getResultAndProcess(self, strCL):
 
         #
-        #获取无持续输出的命令操作后的结果
+        #获取无持续输出的命令操作后的结果，将其分类(stdout和stderr)
         #获取正常输出和错误输出，存放到dict中返回
         #strCL: 操作的命令
         

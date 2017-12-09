@@ -11,16 +11,18 @@ class RedisOperate:
 
     #redis检测模块
     
-    def __init__(self, strRedisPath, intDateMin, intMintHour, fileUtilObj):
+    def __init__(self, strRedisPath, intHourTime, intHourCheckAll, fileUtilObj):
 
         #strRedisPath: redis的安装文件目录
-        #intDateMin: 当前运行脚本的分钟数
-        #intMintHour: 配置文件中设置的时间(分钟数)
+        #intHourTime: 当前运行脚本的小时数
+        #intHourCheckAll: 配置文件中设置的时间(小时数)
         #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
 
+        #2017-12-08将分钟数改为小时，即每天大检测只执行一次
+
         self.fileUtil = fileUtilObj
-        self.intDateMin = intDateMin
-        self.intMintHour = intMintHour
+        self.intHourTime = intHourTime
+        self.intHourCheckAll = intHourCheckAll
         self.strRedisPath = strRedisPath
         
         if(self.fileUtil.boolWhetherShowLog & True):
@@ -44,7 +46,7 @@ class RedisOperate:
 
         strRedisStatus = self.getRedisStatus()
 
-        if(self.intDateMin == self.intMintHour):
+        if(self.intHourTime == self.intHourCheckAll):
             self.checkRedisStatus(strRedisStatus)
         else:
             intMark = self.checkRedisStatus(strRedisStatus, 'Second')

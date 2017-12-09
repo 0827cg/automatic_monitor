@@ -19,13 +19,14 @@ class FileUtil:
     def __init__(self):
 
         self.strLogPath = self.getLogPath()
+        print("存放日志路径:" + self.strLogPath)
         strWhetherShowLog = self.getWhetherShowLog()
         if(strWhetherShowLog == 'yes'):
             self.boolWhetherShowLog = True
-            print("showdebuglog值为yes,将打印输出到log文件")
+            print("saveLogToFile值为yes,将打印输出到log文件")
         else:
             self.boolWhetherShowLog = False
-            print("showdebuglog值为no,将不显示输出")
+            print("saveLogToFile值为no,将不显示输出")
         #strLogPath = self.getLogPath()
         self.setAttribute()
 
@@ -44,11 +45,11 @@ class FileUtil:
 
         print(self.strDateTime)
 
-        strlogContentSecondName = "monitor_content-" + self.strNumSecondTime + ".txt"
-        strlogContentName = "monitor_content-" + self.strNumHourTime + ".txt"
-        strlogErrName = "monitor_err-" + self.strNumHourTime + ".txt"
-        strlogErrSecondName = "monitor_err-" + self.strNumSecondTime + ".txt"
-        strRunLogName = "monitor_log-" + self.strDayTime + ".txt"
+        strlogContentSecondName = "monitor_content-" + self.strNumSecondTime + ".log"
+        strlogContentName = "monitor_content-" + self.strNumHourTime + ".log"
+        strlogErrName = "monitor_err-" + self.strNumHourTime + ".log"
+        strlogErrSecondName = "monitor_err-" + self.strNumSecondTime + ".log"
+        strRunLogName = "monitor_log-" + self.strDayTime + ".log"
         
         self.strlogContentSecondName = self.strLogPath + '/' + strlogContentSecondName
         self.strlogContentName = self.strLogPath + '/' + strlogContentName
@@ -65,31 +66,25 @@ class FileUtil:
         
         if(strFileMark == 'Hour'):
             if(whetherAdd & True):
-                fileObj = open(self.strlogContentName, 'a')
-                fileObj.write(strContent + "\n")
-                fileObj.close()
+                with open(self.strlogContentName, 'a', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent + "\n")
             else:
-                fileObj = open(self.strlogContentName, 'w')
-                fileObj.write(strContent)
-                fileObj.close()
+                with open(self.strlogContentName, 'w', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent)
         elif(strFileMark == 'Second'):
             if(whetherAdd & True):
-                fileObj = open(self.strlogContentSecondName, 'a')
-                fileObj.write(strContent + "\n")
-                fileObj.close()
+                with open(self.strlogContentSecondName, 'a', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent + "\n")
             else:
-                fileObj = open(self.strlogContentSecondName, 'w')
-                fileObj.write(strContent)
-                fileObj.close()
+                with open(self.strlogContentSecondName, 'w', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent + "\n")
         else:
             if(whetherAdd & True):
-                fileObj = open(self.strRunLogPathName, 'a')
-                fileObj.write(strContent + "\n")
-                fileObj.close()
+                with open(self.strRunLogPathName, 'a', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent + "\n")
             else:
-                fileObj = open(self.strRunLogPathName, 'w')
-                fileObj.write(strContent)
-                fileObj.close()
+                with open(self.strRunLogPathName, 'w', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent)
 
     def writerErr(self, strContent, strFileMark='Hour', whetherAdd=True):
 
@@ -97,22 +92,18 @@ class FileUtil:
 
         if(strFileMark == 'Hour'):
             if(whetherAdd & True):
-                fileObj = open(self.strlogErrName, 'a')
-                fileObj.write("\n" + strContent)
-                fileObj.close()
+                with open(self.strlogErrName, 'a', encoding='utf-8') as fileObj:
+                    fileObj.write("\n" + strContent)
             else:
-                fileObj = open(self.strlogErrName, 'w')
-                fileObj.write(strContent)
-                fileObj.close()
+                with open(self.strlogErrName, 'w', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent)
         else:
             if(whetherAdd & True):
-                fileObj = open(self.strlogErrSecondName, 'a')
-                fileObj.write("\n" + strContent)
-                fileObj.close()
+                with open(self.strlogErrSecondName, 'a', encoding='utf-8') as fileObj:
+                    fileObj.write("\n" + strContent)
             else:
-                fileObj = open(self.strlogErrSecondName, 'w')
-                fileObj.write(strContent)
-                fileObj.close()
+                with open(self.strlogErrSecondName, 'w', encoding='utf-8') as fileObj:
+                    fileObj.write(strContent)
             
     
 
@@ -187,29 +178,55 @@ class FileUtil:
         
         #初始化配置文件
 
-        strTomcatPath = "/home/liying/dev/tomcat-7.0.73"
-        strNginxPath = "/usr/local/nginx"
-        strRedisPath = "/home/liying/dev/redis-2.8.24"
+        strTomcatPath = ""
+        strNginxPath = ""
+        strRedisPath = ""
 
         strServerName = "116"
         strUserName = "林繁"
 
         strLogPath = "logs"
 
-        strSmtp_server = "smtp.qq.com"
-        strEmail_sendAddr = "yakult-cg@qq.com"
-        strEmail_sendPasswd = "lscgsbnjddtgdegc"
+        strUseEmail = "no"
+        strSmtp_server = ""
+        strEmail_sendAddr = ""
+        strEmail_sendPasswd = ""
         
         strToEmail = "1732821152@qq.com"
         #strToEmail2 = "1732821152@qq.com"
 
-        strAuthor = "cg错过"
-        strCreateTime = "2017-09-30"
+        strUseDingtalk = "yes"
+        strWebhook = ("https://oapi.dingtalk.com/robot/send?access_token=793b8e66" +
+                          "16eb991b10044ec9c0a7f528f2f7b560a330a79c667397c7523a0866")
+
+        strCheckDisk = "yes"
+        strWarning_level = "70"
+
+        strCheck = "yes"
+        strTable = "htg_weixin_history"
+        strField = "send_state"
+        strFieldCompare1 = "shopid"
+        strFieldCompare2 = "studentid"
+        strFieldCompareValue = "OpenID"
+        intFirst = "0"
+        intNext = "1"
+        intSleepTime = "70"
+
+        strHost = "10.9.115.174"
+        strPort = "3306"
+        strUser = "haotuoguan"
+        strPasswd = "haotuoguan123456"
+        strDatabase = "haotuoguan"
 
         strIntervals = "300"
-        strMinute = "30"
+        strHour = "9"
         strLogTime = "11:50"
-        strShowLog = "no"
+        strShowLog = "yes"
+        strTimeB= "9"
+        strTimeE = "18"
+
+        strAuthor = "cg错过"
+        strCreateTime = "2017-09-30"
 
         if not os.path.exists(self.configurePath):
             os.mkdir(self.configurePath)
@@ -222,6 +239,10 @@ class FileUtil:
         config.add_section('LogConfigure')
         config.add_section('EmailConfigure')
         config.add_section('ToEmail')
+        config.add_section("Dingtalk")
+        config.add_section("DiskConfigure")
+        config.add_section("CheckLetterConfigure")
+        config.add_section("MysqlConfigure")
         config.add_section('RunConfigure')
         config.add_section("Message")
 
@@ -232,13 +253,15 @@ class FileUtil:
 
         config.set('UseConfigure', '# computer system nickname by youself')
         config.set('UseConfigure', 'servername', strServerName)
-        config.set('UseConfigure', '# set nickname to send email')
+        config.set('UseConfigure', '# set nickname for youself that everyone know you')
         config.set('UseConfigure', 'username', strUserName)
 
         config.set('LogConfigure', '# set file path to save log files')
         config.set('LogConfigure', 'logpath', strLogPath)
 
-        config.set('EmailConfigure', '# set smtp_server address')
+        config.set('EmailConfigure', '# whether use email to send message')
+        config.set('EmailConfigure', 'email', strUseEmail)
+        config.set('EmailConfigure', '# if use email set smtp_server address')
         config.set('EmailConfigure', 'smtp_server', strSmtp_server)
         config.set('EmailConfigure', '# set mail address to send email')
         config.set('EmailConfigure', 'email_sendAddr', strEmail_sendAddr)
@@ -249,19 +272,53 @@ class FileUtil:
         config.set('ToEmail', strToEmail)
         #config.set('ToEmail', strToEmail2)
 
+        config.set('Dingtalk', '# whether use dingtalk to send message')
+        config.set('Dingtalk', 'dingtalk', strUseDingtalk)
+        config.set('Dingtalk', '# the webhook of dingtalk url')
+        config.set('Dingtalk', 'webhook', strWebhook)
+
+        config.set('DiskConfigure', '# choice whether to check the disk, yes or no')
+        config.set('DiskConfigure', 'checkdisk', strCheckDisk)
+        config.set('DiskConfigure', '# input the number of percentage, unit percentage')
+        config.set('DiskConfigure', 'warning_level', strWarning_level)
+
+        config.set('CheckLetterConfigure', '# check the letter in database')
+        config.set('CheckLetterConfigure', 'whether_check_letter', strCheck)
+        config.set('CheckLetterConfigure', 'table_name', strTable)
+        config.set('CheckLetterConfigure', 'field_name', strField)
+        config.set('CheckLetterConfigure', 'fieldCompare_name1', strFieldCompare1)
+        config.set('CheckLetterConfigure', 'fieldCompare_name2', strFieldCompare2)
+        config.set('CheckLetterConfigure', 'fieldCompare_nameValue', strFieldCompareValue)
+        config.set('CheckLetterConfigure', 'first_field_value', intFirst)
+        config.set('CheckLetterConfigure', 'next_field_value', intNext)
+        config.set('CheckLetterConfigure', '# for twice to connect database, unit second')
+        config.set('CheckLetterConfigure', 'sleeptime', intSleepTime)
+
+        config.set('MysqlConfigure', '# input the message for connect mysql database')
+        config.set('MysqlConfigure', 'host', strHost)
+        config.set('MysqlConfigure', 'port', strPort)
+        config.set('MysqlConfigure', 'user', strUser)
+        config.set('MysqlConfigure', 'passwd', strPasswd)
+        config.set('MysqlConfigure', '# need operate database name')
+        config.set('MysqlConfigure', 'database', strDatabase)
+
         config.set('RunConfigure', '# set run progress timing, unit second')
         config.set('RunConfigure', 'run_intervals', strIntervals)
         config.set('RunConfigure', '# set when minute in every hour to check project, unit minute')
-        config.set('RunConfigure', 'when_minute_in_hour', strMinute)
+        config.set('RunConfigure', 'when_hour_checkall', strHour)
         config.set('RunConfigure', '# set time to remove log files unit 24 hour time. like HH:MM')
         config.set('RunConfigure', 'remove_log_time', strLogTime)
         config.set('RunConfigure', '# set whether show run debug logs in log files, value yes or no')
-        config.set('RunConfigure', 'showDebugLog', strShowLog)
+        config.set('RunConfigure', 'saveLogToFile', strShowLog)
+        config.set('RunConfigure', '# time beginnging to send message, unit Hour')
+        config.set('RunConfigure', 'time_beginning', strTimeB)
+        config.set('RunConfigure', '# time end to send message ,unit Hour')
+        config.set('RunConfigure', 'time_end', strTimeE)
 
         config.set('Message', 'author', strAuthor)
         config.set('Message', 'createtime', strCreateTime)
 
-        with open(configureFileNameAndPath, 'w') as configureFile:
+        with open(configureFileNameAndPath, 'w', encoding='utf-8') as configureFile:
             config.write(configureFile, space_around_delimiters=True)
 
         #print("done")
@@ -270,8 +327,11 @@ class FileUtil:
     def getNeedRunMsg(self):
 
         #根据配置文件的配置内容来选择代码执行
+        #该方法就是单纯的过滤掉未配置值的参数
         #即从存放的字典中去除不需要检测运行的项目(未配置值的参数)，之后返回
+        
         if(self.boolWhetherShowLog & True):
+            self.writerContent("", 'runLog')
             self.writerContent(("============" + self.strDateTime + "============"), 'runLog')
             self.writerContent("获取运行需要的配置数据", 'runLog')
         
@@ -304,18 +364,22 @@ class FileUtil:
     def readConfigureFile(self):
 
         #读取脚本配置文件
+        #print("readConfigureFile读取配置文件")
         dictConfMsgTotal = {}
         configureFileNameAndPath = self.configurePath + '/' + self.configureFileName
         self.checkAndInitConfigure(configureFileNameAndPath)
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
         dictConfMsg = self.getConfFileValue(config, configureFileNameAndPath)
         dictConfMsgTotal.update(dictConfMsg)
+        #print("dictConfMsgTotal如下")
+        #print(dictConfMsgTotal)
         if(len(dictConfMsgTotal)  == 0):
             if(self.boolWhetherShowLog & True):
                 self.writerContent("未获取到配置文件内容", 'runLog')
-        if(self.boolWhetherShowLog & True):
-            self.writerContent("读取到的配置文件信息如下: ", 'runLog')
-            self.writerContent(str(dictConfMsgTotal), 'runLog')
+        else:
+            if(self.boolWhetherShowLog & True):
+                self.writerContent("读取到的配置文件信息如下: ", 'runLog')
+                self.writerContent(str(dictConfMsgTotal), 'runLog')
 
         return dictConfMsgTotal
 
@@ -325,18 +389,19 @@ class FileUtil:
         #其中日志路径和email值必须存在
         #所以这里只检查logpath和email
         #email仅包括smtp_server, email_sendaddr, email_sendpasswd
+        #参数dictConfMsg:表示从配置文件中读取到的为进行过滤的数据，字典类型
 
-        #2017-10-30添加了run_intervals, when_minute_in_hour, remove_log_time
+        #2017-10-30添加了run_intervals, when_hour_checkall, remove_log_time
+        #2017-12-07: 删除了smtp_server,email_sendaddr,email_sendpasswd的验证
         
         intMark = -1
         if(len(dictConfMsg) != 0):
             for keyItem in dictConfMsg:
-                if((keyItem == 'logpath') | (keyItem == 'smtp_server') | (keyItem == 'email_sendaddr')
-                  | (keyItem == 'email_sendpasswd') | (keyItem == 'run_intervals')
-                   | (keyItem == 'when_minute_in_hour') | (keyItem == 'remove_log_time')):
+                if((keyItem == 'logpath') | (keyItem == 'run_intervals')
+                   | (keyItem == 'when_hour_checkall') | (keyItem == 'remove_log_time')):
                     if(dictConfMsg.get(keyItem) == ''):
                         strErr = ("未读取到%s配置参数的值，请修改配置文件" %(keyItem))
-                        self.writerContent(strErr, 'runErr')
+                        self.writerContent(strErr, 'runLog')
                         intMark = 0
                         break
                     else:
@@ -363,12 +428,13 @@ class FileUtil:
         return intMark
 
 
-    def checkFileExists(self, configureFileNameAndPath):
+    def checkFileExists(self, fileNameAndPath):
 
-        #检测配置文件是否存在，不存在则返回-1
+        #检测文件是否存在，不存在则返回-1
+        #这里用到的有检测配置文件是否存在
 
         intMark = -1
-        if(os.path.exists(configureFileNameAndPath)):
+        if(os.path.exists(fileNameAndPath)):
             intMark = 1
 
         return intMark
@@ -379,34 +445,39 @@ class FileUtil:
 
         intMark = self.checkFileExists(configureFileNameAndPath)
         if(intMark != 1):
-            print("配置文件monitor.conf不存在,脚本自动创建并初始化")
-            print("配置文件monitor.conf路径为" + self.configurePath + "/"
+            str1 = ("配置文件monitor.conf不存在,脚本自动创建并初始化")
+            str2 = ("配置文件monitor.conf路径为" + self.configurePath + "/"
                                    + self.configureFileName)
-            #self.writerContent("配置文件monitor.conf不存在,脚本自动创建并初始化", 'runErr')
+            print(str1)
+            print(str2)
+            #self.writerContent(str1, 'runLog')
+            #self.writerContent(str2, 'runLog')
+            #self.writerContent("配置文件monitor.conf不存在,脚本自动创建并初始化", 'runLog')
             #strErr = ("配置文件monitor.conf路径为" + self.configurePath + "/" + self.configureFileName)
             #self.writerContent(strErr, 'runErr')
             self.initConfigureFile()
 
     def checkAndCreate(self, FileNameAndPath):
 
-        #检测并创建日志文件路径
+        #检测并创建文件路径
 
         intMark = self.checkFileExists(FileNameAndPath)
         if(intMark != 1):
             if(self.boolWhetherShowLog & True):
-                self.writerContent("配置的日志文件夹路径不存在，脚本执行自动创建", 'runLog')
+                self.writerContent("文件夹路径不存在，脚本执行自动创建", 'runLog')
             #self.writerContent("配置的日志文件夹路径不存在，脚本执行自动创建", 'runErr')
             os.mkdir(FileNameAndPath)
 
     def getLogPath(self):
         
         #获取配置文件中存放日志文件路径
+        #self.writerContent(("============开始运行============"), 'runLog')
 
         strLogPath = ''
         configureFileNameAndPath = self.configurePath + '/' + self.configureFileName
         self.checkAndInitConfigure(configureFileNameAndPath)
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
-        config.read(configureFileNameAndPath)
+        config.read(configureFileNameAndPath, encoding='utf-8')
         if(config.has_section('LogConfigure')):
             strLogPath = config['LogConfigure']['logpath']
             self.checkAndCreate(strLogPath)
@@ -419,7 +490,7 @@ class FileUtil:
     def getWhetherShowLog(self):
 
         #获取配置文件中是否打开debug输出到log文件中
-        #如果配置文件中的showdebuglog值为空或者不等于'yes','no',则都将起设置为'no'
+        #如果配置文件中的saveLogToFile值为空或者不等于'yes','no',则都将起设置为'no'
         #也就是默认为no
 
         strWhetherShowLog = ''
@@ -428,9 +499,9 @@ class FileUtil:
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
         config.read(configureFileNameAndPath)
         if(config.has_section('RunConfigure')):
-            strWhetherShowLog = config['RunConfigure']['showdebuglog']
+            strWhetherShowLog = config['RunConfigure']['saveLogToFile']
         else:
-            self.writerContent("配置文件内容缺少showdebuglog配置参数", 'runLog')
+            self.writerContent("配置文件内容缺少saveLogToFile配置参数", 'runLog')
             #self.writerContent("配置文件内容缺少日志配置参数", 'runErr')
         if((strWhetherShowLog != 'yes') & (strWhetherShowLog != 'no')):
             strWhetherShowLog = 'no'
