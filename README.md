@@ -2,7 +2,7 @@
 
 #### 描述
 
-一个监控linux服务器的python脚本
+一个监控linux服务器的python脚本,使用python3.5
 
 
 #### 功能
@@ -15,6 +15,7 @@
     * 数据库某个字段的变化(只是现在接触的项目需求，索性就作为模块加在这个工具中)
 
 以上的服务如若有不需要检测的，可以在配置文件中进行注释该项，即可不被检测.就如检测数据库某个字段的变化，这个功能一直觉得不适合放到这里，所以在配置文件中添加了一项配置，是否启用去检测该项。下面会有说明
+后期该是会打算将这个模块删除
 
 	
 2. 监控后消息提醒方式现在有两种:
@@ -67,7 +68,7 @@
     * fieldcompare_namevalue: 用来查询条件的字段名
     * first_field_value: 该字段的第一个值
     * next_field_value: 该字段的第二个变化的值
-    * sleeptime
+    * sleeptime: 查询数据时休眠时间,单位秒
 
 * [MysqlConfigure]
     * host: 数据库服务器地址
@@ -84,7 +85,18 @@
 	* savelogtofile: 是否将脚本打印的日志存放到日志文件中，默认是不存放到日志文件中，值：yes/no
     * time_beginning: ×
     * time_end: × time_beginning和time_end表示一个时间段，用来发送消息
-	
+
+#### 使用到的模块
+
+* pymysql
+
+#### 运行实例
+
+1. 如果没安装pymysql，需要先安装这个模块
+    运行命令`pip3 install pymysql`
+
+2. 进入这个目录，使用命令`python3 monitor.py`即可运行
+
 	
 第一次运行或者没有配置文件，脚本将会自动初始化配置文件
 
