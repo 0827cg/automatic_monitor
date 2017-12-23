@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 from monitorbin.util.process import ProcessCL
 
@@ -8,9 +7,12 @@ from monitorbin.util.process import ProcessCL
 
 class DiskSizeCheck:
 
+    intOverAllCheckNum = 0
+
     #服务器硬盘容量检测模块
 
-    def __init__(self, fileUtilObj, dataTempObj, intHourTime, intHourCheckAll, intWarningLevel):
+    def __init__(self, fileUtilObj, dataTempObj, dictNeedRunMsg, intHourTime, intHourCheckAll, intWarningLevel,
+                 allModuleRunAllObj):
 
         self.fileUtil = fileUtilObj
         self.processCL = ProcessCL()
@@ -18,13 +20,19 @@ class DiskSizeCheck:
         self.intHourCheckAll = intHourCheckAll
         self.intWarningLevel = intWarningLevel
         self.dataTempObj = dataTempObj
+        self.allModuleRunAllObj = allModuleRunAllObj
+
+        if('servername' in dictNeedRunMsg):
+            self.strServerName = dictNeedRunMsg.get('servername')
+        else:
+            self.strServerName = ""
 
         self.checkDisk()
 
     def checkDisk(self):
 
         #检测disk
-        #分时间执行,每个小时出一个磁盘概况，其余监控磁盘，出现超过的时候就提醒
+        #分时间执行,每天出一个磁盘概况，其余监控磁盘，出现超过的时候就提醒
 
         strAllMsgForLog = str(self.getAllMsg())
         if(self.fileUtil.boolWhetherShowLog & True):
@@ -32,19 +40,39 @@ class DiskSizeCheck:
             self.fileUtil.writerContent("得到的信息如下:", 'runLog')
             self.fileUtil.writerContent(strAllMsgForLog, 'runLog')
         
-        if(self.intHourTime == self.intHourCheckAll):
+        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
             
             #strAllMsg = self.getAllMsg()
             #print(strAllMsg)
-            
-            intMountPointsNum = self.getMountPointsNum()
-            listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
-            listCutMountPointsMsg = self.formatCutMsgForSendAll(listMountPointsMsg)
-            strCutAllMsg = self.formatCutMsgForSendAllToStr(listCutMountPointsMsg)
-            
-            self.dataTempObj.dataAll += ("> - 系统各节点空间使用量如下: \n" + "> " + strCutAllMsg)
+            if(self.allModuleRunAllObj.intOverAllCheckDiskNum == 0):
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent("将检测磁盘全部节点信息", 'runLog')
+                
+                intMountPointsNum = self.getMountPointsNum()
+                listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
+                listCutMountPointsMsg = self.formatCutMsgForSendAll(listMountPointsMsg)
+                strCutAllMsg = self.formatCutMsgForSendAllToStr(listCutMountPointsMsg)
+                
+                self.dataTempObj.dataAll += ("> - " + self.strServerName +
+                                             "系统各节点空间使用量如下: \n" + "\n> " + strCutAllMsg)
+
+                self.allModuleRunAllObj.intOverAllCheckDiskNum = 1
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("今日检测磁盘次数已标记为" +
+                                                 str(self.allModuleRunAllObj.intOverAllCheckDiskNum)), 'runLog')
+                
+            else:
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
+                                                "内已检测硬盘,今日将不再检测\n" +
+                                                 "将进行错误监控任务"), 'runLog')
+                self.checkTog()
             
         else:
+
+            self.checkTog()
+
+            '''
             intMountPointsNum = self.getMountPointsNum()
             listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
             listOutMsg = self.checkUse(listMountPointsMsg)
@@ -56,7 +84,23 @@ class DiskSizeCheck:
             else:
                 if(self.fileUtil.boolWhetherShowLog & True):
                     self.fileUtil.writerContent(("无超过" + str(self.intWarningLevel) + "%的挂载点"), 'runLog')
-                
+            '''
+
+
+    def checkTog(self):
+
+        intMountPointsNum = self.getMountPointsNum()
+        listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
+        listOutMsg = self.checkUse(listMountPointsMsg)
+        if(len(listOutMsg) > 0):
+            if(self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent(("超过" + str(self.intWarningLevel) + "%的挂载点如下:"), 'runLog')
+                self.fileUtil.writerContent(str(listOutMsg), 'runLog')
+            self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + listOutMsg
+        else:
+            if(self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent(("无超过" + str(self.intWarningLevel) + "%的挂载点"), 'runLog')
+
 
 
     def getMountPointsNum(self):
@@ -159,6 +203,13 @@ class DiskSizeCheck:
             listCutMountPointsMsgValue.append(dictMountPointsMsgItem.get('use'))
             listCutMountPointsMsg.append(listCutMountPointsMsgValue)
 
+        if(self.fileUtil.boolWhetherShowLog & True):
+            self.fileUtil.writerContent("抽取出来的磁盘概况如下:", 'runLog')
+
+        for listCutMountPointMsgItem in listCutMountPointsMsg:
+            if(self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent((str(listCutMountPointMsgItem) + "\n"), 'runLog')
+
         return listCutMountPointsMsg
 
 
@@ -171,20 +222,12 @@ class DiskSizeCheck:
         strMsgForSendAll = ""
 
         for listCutMountPointsMsgItem in listCutMountPointsMsg:
-            strMsgForSendAll += "\t - "
+            strMsgForSendAll += "\t\t "
             for index in range(3):
                 strMsgForSendAllLine = listCutMountPointsMsgItem[index]
-                strMsgForSendAll += strMsgForSendAllLine + "\t"
+                strMsgForSendAll += strMsgForSendAllLine + "\t\t"
             strMsgForSendAll += "\n"
 
         return strMsgForSendAll
-        
-            
-            
-
-        
-
-        
-        
 
         

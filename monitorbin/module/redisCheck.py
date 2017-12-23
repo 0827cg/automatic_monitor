@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 import os
 from monitorbin.util.process import ProcessCL
@@ -9,9 +8,11 @@ from monitorbin.util.process import ProcessCL
 
 class RedisOperate:
 
+    intOverAllCheckNum = 0
+
     #redis检测模块
     
-    def __init__(self, strRedisPath, intHourTime, intHourCheckAll, fileUtilObj):
+    def __init__(self, strRedisPath, intHourTime, intHourCheckAll, fileUtilObj, allModuleRunAllObj):
 
         #strRedisPath: redis的安装文件目录
         #intHourTime: 当前运行脚本的小时数
@@ -24,6 +25,7 @@ class RedisOperate:
         self.intHourTime = intHourTime
         self.intHourCheckAll = intHourCheckAll
         self.strRedisPath = strRedisPath
+        self.allModuleRunAllObj = allModuleRunAllObj
         
         if(self.fileUtil.boolWhetherShowLog & True):
             self.fileUtil.writerContent("-->准备检测redis", 'runLog')
@@ -46,12 +48,37 @@ class RedisOperate:
 
         strRedisStatus = self.getRedisStatus()
 
-        if(self.intHourTime == self.intHourCheckAll):
-            self.checkRedisStatus(strRedisStatus)
+        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
+
+            if(self.allModuleRunAllObj.intOverAllCheckRedisNum == 0):
+                
+                self.checkRedisStatus(strRedisStatus)
+
+                self.allModuleRunAllObj.intOverAllCheckRedisNum = 1
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("今日检测redis次数已标记为" +
+                                                str(self.allModuleRunAllObj.intOverAllCheckRedisNum)), 'runLog')
+
+            else:
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
+                                                "内已检测redis,今日将不再检测\n" +
+                                                 "将进行错误监控任务"), 'runLog')
+                self.checkTog(strRedisStatus)
+                
         else:
+            self.checkTog(strRedisStatus)
+            '''
             intMark = self.checkRedisStatus(strRedisStatus, 'Second')
             if(intMark == -1):
                 self.tryStartRedis(self.strRedisPath)
+            '''
+
+    def checkTog(self, strRedisStatus):
+        
+        intMark = self.checkRedisStatus(strRedisStatus, 'Second')
+        if(intMark == -1):
+            self.tryStartRedis(self.strRedisPath)
 
 
     def getRedisStatus(self):

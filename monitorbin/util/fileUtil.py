@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 import os
 import xml.dom.minidom
@@ -23,10 +22,10 @@ class FileUtil:
         strWhetherShowLog = self.getWhetherShowLog()
         if(strWhetherShowLog == 'yes'):
             self.boolWhetherShowLog = True
-            print("saveLogToFile值为yes,将打印输出到log文件")
+            print("savelog_to_file值为yes,将打印输出到log文件")
         else:
             self.boolWhetherShowLog = False
-            print("saveLogToFile值为no,将不显示输出")
+            print("savelog_to_file值为no,将不显示输出")
         #strLogPath = self.getLogPath()
         self.setAttribute()
 
@@ -166,10 +165,18 @@ class FileUtil:
     def readFileContent(self, inputFileName):
 
         #读取普通文件内容并返回
+        #每次只读取1000字节
         
-        fileObj = open(inputFileName, 'r')
-        strFileContent = fileObj.read()
-        fileObj.close()
+        strFileContent = ''
+
+        with open(inputFileName, 'r', encoding='utf-8') as fileObj:
+
+            while fileObj.readable():
+                strFileContentItem = fileObj.read(1000)
+                if(strFileContentItem != ''):
+                    strFileContent += strFileContentItem
+                else:
+                    break
         
         return strFileContent
 
@@ -181,6 +188,8 @@ class FileUtil:
         strTomcatPath = ""
         strNginxPath = ""
         strRedisPath = ""
+
+        strCheckPm2 = "yes"
 
         strServerName = "116"
         strUserName = "林繁"
@@ -207,16 +216,23 @@ class FileUtil:
         strField = "send_state"
         strFieldCompare1 = "shopid"
         strFieldCompare2 = "studentid"
+        strFieldCompare3 = "id"
+        strFieldCompare4 = "appendtime"
         strFieldCompareValue = "OpenID"
         intFirst = "0"
         intNext = "1"
         intSleepTime = "70"
+        intPastDays = "3"
 
         strHost = "10.9.115.174"
         strPort = "3306"
         strUser = "haotuoguan"
         strPasswd = "haotuoguan123456"
         strDatabase = "haotuoguan"
+
+        strCheckPicArrivals = "yes"
+        strSqlFilePath = "sql/pic_Arrivals-test.sql"
+        intAccuracy = "2"
 
         strIntervals = "300"
         strHour = "9"
@@ -235,6 +251,7 @@ class FileUtil:
 
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
         config.add_section('ProjectConfigure')
+        config.add_section("Pm2")
         config.add_section('UseConfigure')
         config.add_section('LogConfigure')
         config.add_section('EmailConfigure')
@@ -243,6 +260,7 @@ class FileUtil:
         config.add_section("DiskConfigure")
         config.add_section("CheckLetterConfigure")
         config.add_section("MysqlConfigure")
+        config.add_section("Pic_Arrivals")
         config.add_section('RunConfigure')
         config.add_section("Message")
 
@@ -250,6 +268,8 @@ class FileUtil:
         config.set('ProjectConfigure', 'tomcatpath', strTomcatPath)
         config.set('ProjectConfigure', 'nginxpath', strNginxPath)
         config.set('ProjectConfigure', 'redispath', strRedisPath)
+
+        config.set('Pm2', 'whether_check_pm2', strCheckPm2)
 
         config.set('UseConfigure', '# computer system nickname by youself')
         config.set('UseConfigure', 'servername', strServerName)
@@ -286,13 +306,16 @@ class FileUtil:
         config.set('CheckLetterConfigure', 'whether_check_letter', strCheck)
         config.set('CheckLetterConfigure', 'table_name', strTable)
         config.set('CheckLetterConfigure', 'field_name', strField)
-        config.set('CheckLetterConfigure', 'fieldCompare_name1', strFieldCompare1)
-        config.set('CheckLetterConfigure', 'fieldCompare_name2', strFieldCompare2)
-        config.set('CheckLetterConfigure', 'fieldCompare_nameValue', strFieldCompareValue)
+        config.set('CheckLetterConfigure', 'fieldcompare_name1', strFieldCompare1)
+        config.set('CheckLetterConfigure', 'fieldcompare_name2', strFieldCompare2)
+        config.set('CheckLetterConfigure', 'fieldcompare_name3', strFieldCompare3)
+        config.set('CheckLetterConfigure', 'fieldcompare_name4', strFieldCompare4)
+        config.set('CheckLetterConfigure', 'fieldcompare_nameValue', strFieldCompareValue)
         config.set('CheckLetterConfigure', 'first_field_value', intFirst)
         config.set('CheckLetterConfigure', 'next_field_value', intNext)
         config.set('CheckLetterConfigure', '# for twice to connect database, unit second')
         config.set('CheckLetterConfigure', 'sleeptime', intSleepTime)
+        config.set('CheckLetterConfigure', 'past_days_num', intPastDays)
 
         config.set('MysqlConfigure', '# input the message for connect mysql database')
         config.set('MysqlConfigure', 'host', strHost)
@@ -302,6 +325,10 @@ class FileUtil:
         config.set('MysqlConfigure', '# need operate database name')
         config.set('MysqlConfigure', 'database', strDatabase)
 
+        config.set('Pic_Arrivals', 'whether_check_pic', strCheckPicArrivals)
+        config.set('Pic_Arrivals', 'sql_path', strSqlFilePath)
+        config.set('Pic_Arrivals', 'number_accuracy', intAccuracy)
+
         config.set('RunConfigure', '# set run progress timing, unit second')
         config.set('RunConfigure', 'run_intervals', strIntervals)
         config.set('RunConfigure', '# set when minute in every hour to check project, unit minute')
@@ -309,7 +336,7 @@ class FileUtil:
         config.set('RunConfigure', '# set time to remove log files unit 24 hour time. like HH:MM')
         config.set('RunConfigure', 'remove_log_time', strLogTime)
         config.set('RunConfigure', '# set whether show run debug logs in log files, value yes or no')
-        config.set('RunConfigure', 'saveLogToFile', strShowLog)
+        config.set('RunConfigure', 'savelog_to_file', strShowLog)
         config.set('RunConfigure', '# time beginnging to send message, unit Hour')
         config.set('RunConfigure', 'time_beginning', strTimeB)
         config.set('RunConfigure', '# time end to send message ,unit Hour')
@@ -393,12 +420,16 @@ class FileUtil:
 
         #2017-10-30添加了run_intervals, when_hour_checkall, remove_log_time
         #2017-12-07: 删除了smtp_server,email_sendaddr,email_sendpasswd的验证
+
+        #2017-12-11: 添加了time_beginning, time_end, past_days_num, savelogtofile的验证
         
         intMark = -1
         if(len(dictConfMsg) != 0):
             for keyItem in dictConfMsg:
                 if((keyItem == 'logpath') | (keyItem == 'run_intervals')
-                   | (keyItem == 'when_hour_checkall') | (keyItem == 'remove_log_time')):
+                   | (keyItem == 'when_hour_checkall') | (keyItem == 'remove_log_time') |
+                   (keyItem == 'time_beginning') | (keyItem == 'time_end') |
+                   (keyItem == 'past_days_num') | (keyItem == 'savelogtofile')):
                     if(dictConfMsg.get(keyItem) == ''):
                         strErr = ("未读取到%s配置参数的值，请修改配置文件" %(keyItem))
                         self.writerContent(strErr, 'runLog')
@@ -490,7 +521,7 @@ class FileUtil:
     def getWhetherShowLog(self):
 
         #获取配置文件中是否打开debug输出到log文件中
-        #如果配置文件中的saveLogToFile值为空或者不等于'yes','no',则都将起设置为'no'
+        #如果配置文件中的savelog_to_file值为空或者不等于'yes','no',则都将起设置为'no'
         #也就是默认为no
 
         strWhetherShowLog = ''
@@ -499,9 +530,9 @@ class FileUtil:
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
         config.read(configureFileNameAndPath)
         if(config.has_section('RunConfigure')):
-            strWhetherShowLog = config['RunConfigure']['saveLogToFile']
+            strWhetherShowLog = config['RunConfigure']['savelog_to_file']
         else:
-            self.writerContent("配置文件内容缺少saveLogToFile配置参数", 'runLog')
+            self.writerContent("配置文件内容缺少savelog_to_file配置参数", 'runLog')
             #self.writerContent("配置文件内容缺少日志配置参数", 'runErr')
         if((strWhetherShowLog != 'yes') & (strWhetherShowLog != 'no')):
             strWhetherShowLog = 'no'
@@ -552,6 +583,4 @@ class FileUtil:
             self.writerContent("数据已重构, 如下", 'runLog')
             self.writerContent(str(listSendContent), 'runLog')
         return listSendContent
-
-        
 

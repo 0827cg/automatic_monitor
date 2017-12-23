@@ -1,11 +1,10 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 import subprocess
 import os
 from monitorbin.util.process import ProcessCL
 
-#author: cg错过
+#author: cg
 #time: 2017-09-30
 
 class TomcatOperate:
@@ -16,7 +15,7 @@ class TomcatOperate:
     #全检不提供脚本操作功能，例如自启。全检后不管是否正常都将发送邮件
     #部检提供自启，自启后只有检测到不正常才发送邮件
 
-    def __init__(self, strTotalPath, intHourTime, intHourCheckAll, fileUtilObj):
+    def __init__(self, strTotalPath, intHourTime, intHourCheckAll, fileUtilObj, allModuleRunAllObj):
         
         #strTotalPath: tomcat的安装文件根目录的上一级目录
         #intHourTime: 当前运行脚本的小时数
@@ -29,6 +28,7 @@ class TomcatOperate:
         self.intHourTime = intHourTime
         self.intHourCheckAll = intHourCheckAll
         self.strTotalPath = strTotalPath
+        self.allModuleRunAllObj = allModuleRunAllObj
         #self.fileUtil.writerContent("你好")
         
         if(self.fileUtil.boolWhetherShowLog & True):
@@ -55,21 +55,49 @@ class TomcatOperate:
         listTomcatPort = dictTomcatMsg.get('tomcatPort')
         listTomcatPath = dictTomcatMsg.get('tomcatPath')
         
-        if(self.intHourTime == self.intHourCheckAll):
-            for i in range(len(listTomcatPort)):
-                intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus)
-                if(intMark == 1):
-                    #print("查看日志")
-                    #self.fileUtil.writerContent("查看日志")
-                    self.checkTomcatLogStatusByTomcatName(i, listTomcatName, listTomcatPort)
+        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
+
+            if(self.allModuleRunAllObj.intOverAllCheckTomcatNum == 0):
+                
+                for i in range(len(listTomcatPort)):
+                    intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus)
+                    if(intMark == 1):
+                        #print("查看日志")
+                        #self.fileUtil.writerContent("查看日志")
+                        self.checkTomcatLogStatusByTomcatName(i, listTomcatName, listTomcatPort)
+
+                self.allModuleRunAllObj.intOverAllCheckTomcatNum = 1
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("今日检测tomcat次数已标记为" +
+                                                str(self.allModuleRunAllObj.intOverAllCheckTomcatNum)), 'runLog')
+
+            else:
+                if(self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
+                                                "内已检测tomcat,今日将不再检测\n" +
+                                                 "将进行错误监控任务"), 'runLog')
+                self.checkTog(listTomcatPort, listTomcatName, listTomcatPath, strTomcatStatus)
+                
         else:
+
+            self.checkTog(listTomcatPort, listTomcatName, listTomcatPath, strTomcatStatus)
+
+            '''
             for i in range(len(listTomcatPort)):
-                #print(i)
                 intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort,
                                                        strTomcatStatus, 'Second')
                 if(intMark != 1):
                     #print("重启")
                     self.tryStartTomcat(i, listTomcatPath, listTomcatName)
+            '''
+
+    def checkTog(self, listTomcatPort, listTomcatName, listTomcatPath, strTomcatStatus):
+
+        for i in range(len(listTomcatPort)):
+            intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus, 'Second')
+            if(intMark != 1):
+	#print("重启")
+                self.tryStartTomcat(i, listTomcatPath, listTomcatName)
 
                     
     def getTomcatStatus(self):

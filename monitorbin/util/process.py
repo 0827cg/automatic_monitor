@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 import subprocess
 
@@ -28,8 +27,8 @@ class ProcessCL:
             returnCode = subObj.poll()
             strOut += stdout
             strErr += stderr
-        dictResult['stdout'] = stdout
-        dictResult['stderr'] = stderr
+        dictResult['stdout'] = strOut
+        dictResult['stderr'] = strErr
         
         return dictResult
 

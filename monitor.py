@@ -1,9 +1,8 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 from monitorbin.operate import Operate
 
-#author: cg错过
+#author: cg
 #time: 2017-10-10
 
 def main():

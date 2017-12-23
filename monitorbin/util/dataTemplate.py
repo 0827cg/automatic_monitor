@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#coding=utf-8
+# -*- coding: utf-8 -*-
 
 #author: cg错过
 #time: 2017-12-08
