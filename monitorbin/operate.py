@@ -94,7 +94,7 @@ class Operate:
 
             time.sleep(intRunIntervals)
             
-            if(str(self.fileUtil.strHourTime) == "24"):
+            if(str(self.fileUtil.strHourTime) == "00"):
                 intIndex = self.allModuleRunAll.initAllNum()
                 if(intIndex == 1):
                     if(self.fileUtil.boolWhetherShowLog & True):
