@@ -13,9 +13,11 @@
     * redis
     * 磁盘
     * 数据库某个字段的变化(只是现在接触的项目需求，索性就作为模块加在这个工具中)
+    * pm2
 
 以上的服务如若有不需要检测的，可以在配置文件中进行注释该项，即可不被检测.就如检测数据库某个字段的变化，这个功能一直觉得不适合放到这里，所以在配置文件中添加了一项配置，是否启用去检测该项。下面会有说明
 后期该是会打算将这个模块删除
+关于数据库字段和图片到达率这两块，后期将删除
 
 	
 2. 监控后消息提醒方式现在有两种:
@@ -34,6 +36,9 @@
 	* tomcatpath: tomcat安装文件的跟目录，例如有两个tomcat安装文件分别tomcat8080和tomcat8081。tomcat8080全路径为/home/dev/tomcat/tomcat8080，tomcat8081全路径为/home/dev/tomcat/tomcat8081。则此处填写/home/dev/tomcat
 	* nginxpath: nginx安装路径
 	* redispath: redis安装路径
+
+* [Pm2]
+    * whether_check_pm2 : 是否检测pm2,yes/no
 	
 * [UseConfigure]
 	* servername: 填写服务器的别名，以此来辨别是哪台服务器
@@ -69,6 +74,7 @@
     * first_field_value: 该字段的第一个值
     * next_field_value: 该字段的第二个变化的值
     * sleeptime: 查询数据时休眠时间,单位秒
+    * past_days_num : 检测多少天前的，例如3天即3
 
 * [MysqlConfigure]
     * host: 数据库服务器地址
@@ -77,12 +83,17 @@
     * passwd: 密码
     * database: 库名字
 
+* [Pic_Arrivals]
+    * whether_check_pic: 是否检测图片到达率
+    * sql_path: 存放该sql查询语句的的文件路径
+    * number_accuracy: 保留的小数点个数
+
 	
 * [RunConfigure]
 	* run_intervals: 定时器间隔时间，表示脚本间隔多少秒检测一次，单位为秒
     * when_hour_checkall: 每天的哪个小时进行概括性的检测
 	* remove_log_time: 每天开始删除日志的时间点，清除时间太久远的日志，日志包括tomcat日志，nginx切割日志，自身日志(后期会添加删除多久以后的日志)，这里格式24小时制，比如: 23:50
-	* savelogtofile: 是否将脚本打印的日志存放到日志文件中，默认是不存放到日志文件中，值：yes/no
+	* savelog_to_file: 是否将脚本打印的日志存放到日志文件中，默认是不存放到日志文件中，值：yes/no
     * time_beginning: ×
     * time_end: × time_beginning和time_end表示一个时间段，用来发送消息
 
@@ -99,6 +110,10 @@
 
 	
 第一次运行如果没有配置文件，脚本将会自动初始化配置文件
+
+#### 不足
+
+后期有空将实现数据的表格化，提高数据的可读性。虽然有个PrettyTable模块，但感觉并不全面，打算自己写个模块
 
 
 注: 个人项目，不定期维护更新
