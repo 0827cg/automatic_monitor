@@ -9,7 +9,7 @@ class DiskSizeCheck:
 
     intOverAllCheckNum = 0
 
-    #服务器硬盘容量检测模块
+    # 服务器硬盘容量检测模块
 
     def __init__(self, fileUtilObj, dataTempObj, dictNeedRunMsg, intHourTime, intHourCheckAll, intWarningLevel,
                  allModuleRunAllObj):
@@ -31,8 +31,8 @@ class DiskSizeCheck:
 
     def checkDisk(self):
 
-        #检测disk
-        #分时间执行,每天出一个磁盘概况，其余监控磁盘，出现超过的时候就提醒
+        # 检测disk
+        # 分时间执行,每天出一个磁盘概况，其余监控磁盘，出现超过的时候就提醒
 
         strAllMsgForLog = str(self.getAllMsg())
         if(self.fileUtil.boolWhetherShowLog & True):
@@ -109,8 +109,8 @@ class DiskSizeCheck:
 
     def getMountPointsNum(self):
 
-        #获取节点个数，根据df -Th命令后的输出，统计行数
-        #返回一个int类型数值
+        # 获取节点个数，根据df -Th命令后的输出，统计行数
+        # 返回一个int类型数值
 
         strGetMountPointsNumCL = ("df -Th | wc -l")
         dictResult = self.processCL.getResultAndProcess(strGetMountPointsNumCL)
@@ -125,14 +125,14 @@ class DiskSizeCheck:
     def getMountPointsMsg(self, intMountPointsNum):
 
         # 获取各节点的信息
-        #intMountPointsNum: 总的节点个数
-        #返回一个元素为dict的list集合
-        #去除了列名
+        # intMountPointsNum: 总的节点个数
+        # 返回一个元素为dict的list集合
+        # 去除了列名
 
         listMountPointsMsg = []
         listMsgName = ['filesystem', 'type', 'size', 'used', 'avail', 'use', 'mountedon']
 
-        #上面的数值来自
+        # 上面的数值来自
         '''
         [root@10-9-144-237 ~]# df -Th
         Filesystem     Type   Size  Used Avail Use% Mounted on
@@ -141,6 +141,7 @@ class DiskSizeCheck:
         /dev/vdb       ext4    99G   39G   55G  42% /data
         /dev/vdc1      ext4   493G   61G  408G  13% /data0
         '''
+
         for pointsNum in range(intMountPointsNum):
             dictOneMountPointsMsg = {}
             for columnNum in range(len(listMsgName)):
@@ -166,20 +167,22 @@ class DiskSizeCheck:
 
     def checkUse(self, listMountPointsMsg):
 
-        #检测各个节点空间使用量是否超过指定值
-        #并将超过指定值的节点信息添加到listOutMsg,并返回
+        # 检测各个节点空间使用量是否超过指定值
+        # 并将超过指定值的节点信息添加到listOutMsg,并返回
 
-        #2018.02.05添加对dicoMountItem.get('use')的值的判断
-        #因为在2018.02.03 06:49:31时运行的时候出现个问题,部分日志如下
+        # 2018.02.05添加对dicoMountItem.get('use')的值的判断
+        # 因为在2018.02.03 06:49:31时运行的时候出现个问题,部分日志如下
+
         '''
         7条挂载点信息的dict类型显示如下
         {'used': '12G', 'mountedon': '/', 'use': '56%',...} 
         {'used': '0', 'mountedon': '/dev', 'use': '', ....}
         {'used': '0', 'mountedon': '/dev/shm', 'use': ....}
         '''
-        #由上可知，在获取到挂载点为/dev下的use得到的值为空，一直没找出bug所在，
-        #所以就添加的这个判断，暂时性的解决这个问题
-        #现在发现，目前打印出来的日志并不详细，打算添加日志打印--2018.02.05
+
+        # 由上可知，在获取到挂载点为/dev下的use得到的值为空，一直没找出bug所在，
+        # 所以就添加的这个判断，暂时性的解决这个问题
+        # 现在发现，目前打印出来的日志并不详细，打算添加日志打印--2018.02.05
 
 
 
@@ -199,7 +202,7 @@ class DiskSizeCheck:
 
     def getAllMsg(self):
 
-        #为每隔一大段时间，检测得到各个节点的所有概况信息
+        # 为每隔一大段时间，检测得到各个节点的所有概况信息
 
         strGetAllMsgCL = ("df -Th")
         dictAllMsg = self.processCL.getResultAndProcess(strGetAllMsgCL)
@@ -210,11 +213,11 @@ class DiskSizeCheck:
 
     def formatCutMsgForSendAll(self, listMountPointsMsg):
 
-        #格式化并切割出部分数据，用提供给钉钉发送
-        #返回一个存放元素未list的list集合
-        #例如
-        #[['mounton', 'used', 'use'], ['/', '11G', '51%'], ['/dev', '0', '0%'], ['/dev/shm', '0', '0%'],,,,]
-        #listMountPointsMsg: 表示
+        # 格式化并切割出部分数据，用提供给钉钉发送
+        # 返回一个存放元素未list的list集合
+        # 例如
+        # [['mounton', 'used', 'use'], ['/', '11G', '51%'], ['/dev', '0', '0%'], ['/dev/shm', '0', '0%'],,,,]
+        # listMountPointsMsg: 表示
 
         listCutMountPointsMsgName = ['mounton', 'used', 'use']
         listCutMountPointsMsg = []
@@ -238,9 +241,9 @@ class DiskSizeCheck:
 
     def formatCutMsgForSendAllToStr(self, listCutMountPointsMsg):
 
-        #同样时格式话，不过参数时经过切割后的数据
-        #listCutMountPointsMsg: 表示切割出的部分数据,由formatCutMsgForSendAll()方法获得
-        #返回一个带有部分格式的字符串类型数据
+        # 同样时格式话，不过参数时经过切割后的数据
+        # listCutMountPointsMsg: 表示切割出的部分数据,由formatCutMsgForSendAll()方法获得
+        # 返回一个带有部分格式的字符串类型数据
 
         strMsgForSendAll = ""
 

@@ -2,23 +2,23 @@
 
 from monitorbin.util.process import ProcessCL
 
-#author: cg错过
-#time: 2017-09-30
+# author: cg错过
+# time: 2017-09-30
 
 class NginxOperate:
 
     intOverAllCheckNum = 0
 
-    #nginx检测模块
+    # nginx检测模块
 
     def __init__(self, strNginxPath, intHourTime, intHourCheckAll, fileUtilObj, allModuleRunAllObj):
         
-        #strNginxPath: nginx的安装目录
-        #intHourTime: 当前运行脚本的小时数
-        #intHourCheckAll: 配置文件中设置的时间(小时数)
-        #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
+        # strNginxPath: nginx的安装目录
+        # intHourTime: 当前运行脚本的小时数
+        # intHourCheckAll: 配置文件中设置的时间(小时数)
+        # fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
 
-        #2017-12-08将分钟数改为小时，即每天大检测只执行一次
+        # 2017-12-08将分钟数改为小时，即每天大检测只执行一次
             
         
         self.fileUtil = fileUtilObj
@@ -43,8 +43,8 @@ class NginxOperate:
 
     def checkNginx(self):
 
-        #每个小时检测一遍，不做操作
-        #其他时候，当检测到未运行时，脚本尝试自启一次
+        # 每个小时检测一遍，不做操作
+        # 其他时候，当检测到未运行时，脚本尝试自启一次
 
         strNginxStatus = self.getNginxStatus()
 
@@ -83,7 +83,7 @@ class NginxOperate:
 
     def getNginxStatus(self):
         
-        #获取进程中的nginx
+        # 获取进程中的nginx
         
         nginxStatusCL = "ps -ef | grep nginx"
         processCL = ProcessCL()
@@ -94,7 +94,7 @@ class NginxOperate:
 
     def checkNginxStatus(self, strNginxStatus, strFileMark='Hour'):
 
-        #判断nginx是否运行
+        # 判断nginx是否运行
 
         intMark = -1
         strNginx = "nginx:"
@@ -121,7 +121,7 @@ class NginxOperate:
 
     def tryStartNginx(self, strNginxPath):
 
-        #脚本启动nginx
+        # 脚本启动nginx
 
         intMark = -1
         self.fileUtil.writerContent("脚本尝试将其启动...", 'Second')

@@ -128,7 +128,8 @@ class FileUtil:
 
         documentElementObj = confObj.documentElement
         listElementItem = documentElementObj.getElementsByTagName(strTagName)
-        #按照顺序存放，文件内容中第一个出现该标签名字的就放在集合的下标为0的位置
+
+        # 按照顺序存放，文件内容中第一个出现该标签名字的就放在集合的下标为0的位置
         tagElement = listElementItem[intTagIndex]
         strTagElementValue = tagElement.getAttribute(strTagElementName)
         if(self.boolWhetherShowLog & True):

@@ -4,25 +4,25 @@ import subprocess
 import os
 from monitorbin.util.process import ProcessCL
 
-#author: cg
-#time: 2017-09-30
+# author: cg
+# time: 2017-09-30
 
 class TomcatOperate:
 
-    #tomcat检测模块
-    #需要配合前面分时间段来运行
-    #即至少要有个对tomcat进行所有全部的检测和部分检测两种功能
-    #全检不提供脚本操作功能，例如自启。全检后不管是否正常都将发送邮件
-    #部检提供自启，自启后只有检测到不正常才发送邮件
+    # tomcat检测模块
+    # 需要配合前面分时间段来运行
+    # 即至少要有个对tomcat进行所有全部的检测和部分检测两种功能
+    # 全检不提供脚本操作功能，例如自启。全检后不管是否正常都将发送邮件
+    # 部检提供自启，自启后只有检测到不正常才发送邮件
 
     def __init__(self, strTotalPath, intHourTime, intHourCheckAll, fileUtilObj, allModuleRunAllObj):
         
-        #strTotalPath: tomcat的安装文件根目录的上一级目录
-        #intHourTime: 当前运行脚本的小时数
-        #intMintHour: 配置文件中设置的时间(小时数)
-        #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
+        # strTotalPath: tomcat的安装文件根目录的上一级目录
+        # intHourTime: 当前运行脚本的小时数
+        # intMintHour: 配置文件中设置的时间(小时数)
+        # fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
 
-        #2017-12-08将分钟数改为小时，即每天大检测只执行一次
+        # 2017-12-08将分钟数改为小时，即每天大检测只执行一次
 
         self.fileUtil = fileUtilObj
         self.intHourTime = intHourTime
@@ -47,7 +47,7 @@ class TomcatOperate:
     
     def checkTomcat(self):
 
-        #检测tomcat
+        # 检测tomcat
 
         strTomcatStatus = self.getTomcatStatus()
         dictTomcatMsg = self.getTomcatMsg(self.strTotalPath)
@@ -96,13 +96,13 @@ class TomcatOperate:
         for i in range(len(listTomcatPort)):
             intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus, 'Second')
             if(intMark != 1):
-	#print("重启")
+	            #print("重启")
                 self.tryStartTomcat(i, listTomcatPath, listTomcatName)
 
                     
     def getTomcatStatus(self):
         
-        #获取进程中的tomcat
+        # 获取进程中的tomcat
         tomcatStatusCL = "ps -ef | grep tomcat"
         processCL = ProcessCL()
         dictResult = processCL.getResultAndProcess(tomcatStatusCL)
@@ -113,9 +113,9 @@ class TomcatOperate:
     def checkTomcatStatusByPort(self, intIndex, listTomcatName, listTomcatPort, strTomcatStatus,
                                 strFileMark='Hour'):
 
-        #检测tomcat是否运行，在运行返回1
-        #intIndex: 要检测的tomcat所在dictTomcatMsg中tomcatName的下标
-        #dictTomcatMsg: 存放tomcat文件名,端口号和对应路径,为字典类型包含列表
+        # 检测tomcat是否运行，在运行返回1
+        # intIndex: 要检测的tomcat所在dictTomcatMsg中tomcatName的下标
+        # dictTomcatMsg: 存放tomcat文件名,端口号和对应路径,为字典类型包含列表
 
         intMark = -1
         
@@ -146,15 +146,15 @@ class TomcatOperate:
 
     def checkTomcatLogStatusByTomcatName(self, intIndex, listTomcatName, listTomcatPort):
 
-        #检测tomcat日志输出是否正常，正常返回1
-        #intIndex: tomcat所在dictTomcatMsg中tomcatName的下标，一般检测在运行的tomcat
-        #dictTomcatMsg: 存放tomcat文件名,端口号和对应路径,为字典类型包含列表
+        # 检测tomcat日志输出是否正常，正常返回1
+        # intIndex: tomcat所在dictTomcatMsg中tomcatName的下标，一般检测在运行的tomcat
+        # dictTomcatMsg: 存放tomcat文件名,端口号和对应路径,为字典类型包含列表
 
         intMark = 1
 
         #listTomcatName = dictTomcatMsg.get('tomcatName')
         #listTomcatPort = dictTomcatMsg.get('tomcatPort')
-        strOperateTomcatPath = listTomcatPath[intIndex]
+        strOperateTomcatPath = listTomcatName[intIndex]
 
         checkLogCL = "tail -n 200 " + strOperateTomcatPath + "/logs/catalina.out"
         processCL = ProcessCL()
@@ -179,9 +179,9 @@ class TomcatOperate:
 
     def tryStartTomcat(self, intIndex, listTomcatPath, listTomcatName):
 
-        #启动未运行的tomcat，启动成功返回1
-        #intIndex: 未运行的tomcat所在dictTomcatMsg中tomcatName的下标
-        #dictTomcatMsg: 存放tomcat文件名,端口号和对应路径，为字典类型包含列表
+        # 启动未运行的tomcat，启动成功返回1
+        # intIndex: 未运行的tomcat所在dictTomcatMsg中tomcatName的下标
+        # dictTomcatMsg: 存放tomcat文件名,端口号和对应路径，为字典类型包含列表
 
         intMark = -1
 
@@ -228,10 +228,10 @@ class TomcatOperate:
 
     def getTomcatMsg(self, strTotalPath):
         
-        #根据存放多个tomcat的文件路径来查找多少个tomcat
-        #获取tomcat安装文件的名称和对应的端口
-        #通过读取tomcat配置文件，以此来获得端口号
-        #返回一个字典，存放tomcat安装文件名和对应端口号
+        # 根据存放多个tomcat的文件路径来查找多少个tomcat
+        # 获取tomcat安装文件的名称和对应的端口
+        # 通过读取tomcat配置文件，以此来获得端口号
+        # 返回一个字典，存放tomcat安装文件名和对应端口号
         
         dictTomcatMsg = {}
         listTomcatName = []

@@ -183,10 +183,10 @@ class PicArrivalCompare:
 
     def judgeMentChange(self, listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY):
 
-        #listTotalExist
+        # listTotalExist
         # listDataOnlyExistForBY: 存放数据的list
-        #listDataOnlyExistForY
-        #返回一个dict，内容为字符串
+        # listDataOnlyExistForY
+        # 返回一个dict，内容为字符串
 
         dictContentResult = {}
         intTotalChange = (len(listDataOnlyExistForY) - len(listDataOnlyExistForBY))
@@ -213,10 +213,10 @@ class PicArrivalCompare:
 
     def judgeMentChangeForNew(self, listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY):
 
-        #listTotalExist
+        # listTotalExist
         # listDataOnlyExistForBY: 存放数据的list
-        #listDataOnlyExistForY
-        #返回一个dict，内容为字符串
+        # listDataOnlyExistForY
+        # 返回一个dict，内容为字符串
 
         # 添加对比昨天和今天的方法
         # 需求改变 --添加于2018-03-14
@@ -246,7 +246,7 @@ class PicArrivalCompare:
 
     def getListBeforeYesterdayTotal(self):
 
-        #从缓存文件中读取文件内容，并转换成list集合
+        # 从缓存文件中读取文件内容，并转换成list集合
         if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent("准备从缓存文件中读取之前的数据...", 'runLog')
 

@@ -9,9 +9,9 @@ class Pm2Operate:
 
     def __init__(self, fileUtilObj, dataTempObj, intHourTime, intHourCheckAll, allModuleRunAllObj):
 
-        #intDateMin: 当前运行脚本的分钟数
-        #intMintHour: 配置文件中设置的时间(分钟数)
-        #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
+        # intDateMin: 当前运行脚本的分钟数
+        # intMintHour: 配置文件中设置的时间(分钟数)
+        # fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
 
         self.intHourTime = intHourTime
         self.intHourCheckAll = intHourCheckAll
@@ -63,9 +63,9 @@ class Pm2Operate:
 
     def getPm2List(self):
 
-        #获取pm2 已搭载的项目的状态
-        #运行命令"pm2 list"
-        #返回一个字符串类型的结果
+        # 获取pm2 已搭载的项目的状态
+        # 运行命令"pm2 list"
+        # 返回一个字符串类型的结果
 
         strPm2List = "pm2 list"
         processCL = ProcessCL()

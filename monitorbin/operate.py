@@ -21,7 +21,7 @@ import time
 
 class Operate:
 
-    #选择执行操作类
+    # 选择执行操作类
 
     def __init__(self):
 

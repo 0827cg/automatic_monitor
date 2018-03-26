@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-#author: cg错过
-#time: 2017-12-07
+# author: cg错过
+# time: 2017-12-07
 
 import urllib.request
 import json
 
 class ResponseDD:
 
-    #将结果发送到钉钉
+    # 将结果发送到钉钉
 
     def __init__(self, fileUtilObj, dataTemplateObj, dictNeedRunMsg):
 
@@ -44,10 +44,10 @@ class ResponseDD:
 
     def getForDDMsg(self, dictNeedRunMsg):
 
-        #从所有数据中提取出仅用来发送钉钉所需要的数据,并返回
-        #dictNeedRunMsg: 存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
-        #该数据仅进行了初步过滤
-        #初步这里只需要'webhook'这个数据
+        # 从所有数据中提取出仅用来发送钉钉所需要的数据,并返回
+        # dictNeedRunMsg: 存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
+        # 该数据仅进行了初步过滤
+        # 初步这里只需要'webhook'这个数据
 
         dictMsgForDD = {}
         if('webhook' in dictNeedRunMsg):
@@ -62,7 +62,7 @@ class ResponseDD:
 
     def sendData(self, dictData):
 
-        #用来发送消息到钉钉的
+        # 用来发送消息到钉钉的
 
         headers = {'Content-Type': 'application/json'}
 

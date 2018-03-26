@@ -11,8 +11,8 @@ import time
 
 class CheckLetter:
 
-    #检测数据库表中某个字段
-    #检测是否推送
+    # 检测数据库表中某个字段
+    # 检测是否推送
 
     def __init__(self, fileUtilObj, dataTemplateObj, dictNeedRunMsg,  intHourTime, intHourCheckAll,
                  allModuleRunAllObj):
@@ -63,12 +63,12 @@ class CheckLetter:
 
     def checkRun(self, dictMsgForMysql):
 
-        #执行检测
-        #这个检测数据库字段并未分时间段
-        #其他的项目检测就分了大任务和小任务检测，即按时和按分检测
-        #这个就没有，因为数据库中的字段都是时刻在变化
+        # 执行检测
+        # 这个检测数据库字段并未分时间段
+        # 其他的项目检测就分了大任务和小任务检测，即按时和按分检测
+        # 这个就没有，因为数据库中的字段都是时刻在变化
 
-        #2017-12-12添加大小任务，大任务统计前一天已推送和未推送的数据
+        # 2017-12-12添加大小任务，大任务统计前一天已推送和未推送的数据
         
         if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
 
@@ -90,7 +90,7 @@ class CheckLetter:
 
                 if(intNoSendNum != 0):
 
-                    #不将为推送详情发送出去
+                    # 不将为推送详情发送出去
                     #self.dataTemplate.dataAll += ("> \t\t 其未推送的信息如下:\n")
 
                     if(self.fileUtil.boolWhetherShowLog & True):
@@ -112,7 +112,7 @@ class CheckLetter:
                                                 "内已检测数据库字段,今日将不再全面检测\n" +
                                                  "将进行错误监控任务"), 'runLog')
 
-                #配置文件中的when_hour_checkall时内进行错误监控,和下面else内一样
+                # 配置文件中的when_hour_checkall时内进行错误监控,和下面else内一样
                 self.checkTog(dictMsgForMysql)
                         
         else:
@@ -133,16 +133,16 @@ class CheckLetter:
 
     def findTheField(self, objConnection):
 
-        #查找设定表中的设定字段的值
-        #若发现该字段的值为intFirst值，则进行时间性的间隔判断
-        #将查找到的shopid和studentId值存放到一个字典中
-        #objConnection: 数据库的一条连接
-        #strTable: 表名
-        #strField: 字段名
-        #intFirst: 字段名的值(第一次的值，该值在规定时间秒后会发生更改)
-        #intNext: 字段名更改后的值
-        #获取之后将其返回，类型为list集合
-        #方法内的sql是统计获取多少天内未推送出去的信息个数,获取其id，studentId,shopId,并存放到集合中，供给70秒后的第二次的确定
+        # 查找设定表中的设定字段的值
+        # 若发现该字段的值为intFirst值，则进行时间性的间隔判断
+        # 将查找到的shopid和studentId值存放到一个字典中
+        # objConnection: 数据库的一条连接
+        # strTable: 表名
+        # strField: 字段名
+        # intFirst: 字段名的值(第一次的值，该值在规定时间秒后会发生更改)
+        # intNext: 字段名更改后的值
+        # 获取之后将其返回，类型为list集合
+        # 方法内的sql是统计获取多少天内未推送出去的信息个数,获取其id，studentId,shopId,并存放到集合中，供给70秒后的第二次的确定
 
         listResult = []
 
@@ -195,13 +195,13 @@ class CheckLetter:
 
     def findWhetherTheField(self, listResult, intTime, dictMsgForMysql):
 
-        #这个方法里，需要与数据库建立一条新的连接
-        #strTable: 表名
-        #strField: 字段名
-        #intNext: 字段名更改后的值
-        #listResult: 字段名的值为第一次更改前的集合，集合中包括shopid,studentId
-        #将结果存放到对象self.dataTemplate中
-        #最后，返回一个过了规定时间还未更改strField的值的字段集合
+        # 这个方法里，需要与数据库建立一条新的连接
+        # strTable: 表名
+        # strField: 字段名
+        # intNext: 字段名更改后的值
+        # listResult: 字段名的值为第一次更改前的集合，集合中包括shopid,studentId
+        # 将结果存放到对象self.dataTemplate中
+        # 最后，返回一个过了规定时间还未更改strField的值的字段集合
 
         listNewResultFind = []
 
@@ -297,17 +297,17 @@ class CheckLetter:
 
     def getMsgForCheckLetter(self, dictNeedRunMsg):
 
-        #获取检测数据库字段所需的数据，并判断是否完全
-        #返回一个dict类型的数据
-        #存放的字段有
-        #table_name
-        #field_name
-        #fieldcompare_name1
-        #fieldcompare_name2
-        #fieldcompare_name_value
-        #first_field_value
-        #next_field_value
-        #sleeptime
+        # 获取检测数据库字段所需的数据，并判断是否完全
+        # 返回一个dict类型的数据
+        # 存放的字段有
+        # table_name
+        # field_name
+        # fieldcompare_name1
+        # fieldcompare_name2
+        # fieldcompare_name_value
+        # first_field_value
+        # next_field_value
+        # sleeptime
 
         dictMsgForCheckLetter = {}
 
@@ -331,9 +331,9 @@ class CheckLetter:
 
     def getNoSendMsgYesterday(self, dictMsgForMysql):
 
-        #从数据库中获取前一天未发送消息的字段,存放到一个list集合
-        #dictMsgForMysql: 连接数据库所需的信息
-        #返回一个list集合
+        # 从数据库中获取前一天未发送消息的字段,存放到一个list集合
+        # dictMsgForMysql: 连接数据库所需的信息
+        # 返回一个list集合
 
         listNoSend = []
 
@@ -389,9 +389,9 @@ class CheckLetter:
 
     def getAlreadySendNumYesterday(self, dictMsgForMysql):
 
-        #获取前一天已经发送推送的个数
-        #dictMsgForMysql: 连接数据库所需的信息
-        #返回一个int类型
+        # 获取前一天已经发送推送的个数
+        # dictMsgForMysql: 连接数据库所需的信息
+        # 返回一个int类型
 
         listAlreadySend = []
         intAlreadySendNum = 0
@@ -570,14 +570,14 @@ class CheckLetter:
 
     def getMsgForMysql(self, dictNeedRunMsg):
 
-        #获取连接mysql数据库所需要的数据，并判断是否完全
-        #返回一个dict类型的数据
-        #存放的字段
-        #host
-        #port
-        #user
-        #passwd
-        #database
+        # 获取连接mysql数据库所需要的数据，并判断是否完全
+        # 返回一个dict类型的数据
+        # 存放的字段
+        # host
+        # port
+        # user
+        # passwd
+        # database
 
         dictMsgForMysql = {}
 
