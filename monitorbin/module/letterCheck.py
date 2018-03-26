@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 
-#author: cg错过
-#time: 2017-12-08
+# author: cg错过
+# time: 2017-12-08
 
 from monitorbin.util.mysqlConnect import DoMysql
 from monitorbin.util.sysTime import RunTime
+from monitorbin.module.pm2ProjectCheck import ProjectCheck
 import time
 
 
 class CheckLetter:
 
     #检测数据库表中某个字段
+    #检测是否推送
 
     def __init__(self, fileUtilObj, dataTemplateObj, dictNeedRunMsg,  intHourTime, intHourCheckAll,
                  allModuleRunAllObj):
@@ -27,7 +29,11 @@ class CheckLetter:
         strPastDay = str(self.runTime.getPastDataDay(intPastDaysNum))
         self.intPastTimeStamp = self.runTime.getTimeStamp(strPastDay, "%Y-%m-%d")
 
-        self.dataYesterday = self.runTime.getPastDataDay(1)
+        # 这里也更改为当前日期
+        # self.dataYesterday = self.runTime.getPastDataDay(1)
+        self.dataDay = self.runTime.getTime("%Y-%m-%d")
+
+        self.proNameForLetter = dictNeedRunMsg.get('pro_for_letter')
         
         if(self.fileUtil.boolWhetherShowLog & True):
             self.fileUtil.writerContent(("-->执行检测数据库字段任务"), 'runLog')
@@ -47,7 +53,7 @@ class CheckLetter:
             self.strFieldCompare2 = dictMsgForCheckLetter.get('fieldcompare_name2')
             self.strFieldCompare3 = dictMsgForCheckLetter.get('fieldcompare_name3')
             self.strFieldCompare4 = dictMsgForCheckLetter.get('fieldcompare_name4')
-            self.strFieldCompareValue = dictMsgForCheckLetter.get('fieldcompare_namevalue')
+            self.strFieldCompareValue = dictMsgForCheckLetter.get('fieldcompare_name_value')
             self.intFirst = int(dictMsgForCheckLetter.get('first_field_value'))
             self.intNext = int(dictMsgForCheckLetter.get('next_field_value'))
             self.intSleepTime = int(dictMsgForCheckLetter.get('sleeptime'))
@@ -69,27 +75,31 @@ class CheckLetter:
             if(self.allModuleRunAllObj.intOverAllCheckLetterNum == 0):
 
                 if(self.fileUtil.boolWhetherShowLog & True):
-                    self.fileUtil.writerContent(("执行检测" + str(self.dataYesterday) + "的推送情况"), 'runLog')
+                    self.fileUtil.writerContent(("执行检测" + str(self.dataDay) + "的推送情况"), 'runLog')
 
                 
 
-                listNoSendMsg = self.getNoSendMsgYesterday(dictMsgForMysql)
+                listNoSendMsg = self.getNoSendMsgToday(dictMsgForMysql)
                 intNoSendNum = len(listNoSendMsg)
                 
-                intAlreadySendNum = self.getAlreadySendNumYesterday(dictMsgForMysql)
+                intAlreadySendNum = self.getAlreadySendNumToday(dictMsgForMysql)
 
-                self.dataTemplate.dataAll += ("> - " + str(self.dataYesterday) + "已推送" +
-                                              str(intAlreadySendNum) + "条,未推送总数为" + str(intNoSendNum) +
-                                              "条\n")
+                self.dataTemplate.dataAll += ("> - " + str(self.dataDay) + "已推送 **" +
+                                              str(intAlreadySendNum) + "** 条,未推送总数为 **" + str(intNoSendNum) +
+                                              "** 条\n")
 
                 if(intNoSendNum != 0):
-                    self.dataTemplate.dataAll += ("> \t\t 其未推送的信息如下:\n")
+
+                    #不将为推送详情发送出去
+                    #self.dataTemplate.dataAll += ("> \t\t 其未推送的信息如下:\n")
+
                     if(self.fileUtil.boolWhetherShowLog & True):
-                        self.fileUtil.writerContent("未推送的信息如下:", 'runLog')
+                        self.fileUtil.writerContent(str(len(listNoSendMsg)) + "条未推送的信息如下:", 'runLog')
                     for listNoSendMsgItem in listNoSendMsg:
                         if(self.fileUtil.boolWhetherShowLog & True):
                             self.fileUtil.writerContent((str(listNoSendMsgItem) + "\n"), 'runLog')
-                        self.dataTemplate.dataAll += ("> \t\t " + str(listNoSendMsgItem) + "\n")
+
+                        #self.dataTemplate.dataAll += ("> \t\t " + str(listNoSendMsgItem) + "\n")
 
                 self.allModuleRunAllObj.intOverAllCheckLetterNum = 1
                 if(self.fileUtil.boolWhetherShowLog & True):
@@ -132,6 +142,7 @@ class CheckLetter:
         #intFirst: 字段名的值(第一次的值，该值在规定时间秒后会发生更改)
         #intNext: 字段名更改后的值
         #获取之后将其返回，类型为list集合
+        #方法内的sql是统计获取多少天内未推送出去的信息个数,获取其id，studentId,shopId,并存放到集合中，供给70秒后的第二次的确定
 
         listResult = []
 
@@ -152,7 +163,7 @@ class CheckLetter:
                                     self.strFieldCompareValue + " != " + "'" + "'" + " AND " +
                                     self.strFieldCompareValue + " IS NOT NULL" + " AND " +
                                     self.strFieldCompareValue + " != " + "'" + "null" + "'" + " AND " +
-                                    self.strFieldCompare4 + " >= %d")
+                                    " send_count != 6 AND " + self.strFieldCompare4 + " >= %d")
                     
                     cursor.execute(strSearchSql %(self.intFirst, self.intPastTimeStamp))
                     listResult = cursor.fetchall()
@@ -256,19 +267,30 @@ class CheckLetter:
                     self.fileUtil.writerContent((("所有" + self.strField + "的值已经更改为%d") %(self.intNext)),
                                                 'runLog')
             else:
-                strContent = ((doMySql.strDatabase + "数据库中,  " + str(intTime) +
+                strLogContent = ((doMySql.strDatabase + "数据库中,  " + str(intTime) +
                                "秒后，还有如下" + str(len(listNewResultFind)) + "条字段的" + self.strField +
                                "值依然是%d") %(self.intFirst))
-                
+
+                strContentEnd = ''
+
                 for listNewResultItem in listNewResultFind:
                     strResultItem += str(listNewResultItem) + "\n"
                 
                 if(self.fileUtil.boolWhetherShowLog & True):
-                    self.fileUtil.writerContent(strContent, 'runLog')
+                    self.fileUtil.writerContent(strLogContent, 'runLog')
                     self.fileUtil.writerContent(strResultItem, 'runLog')
 
+                    self.fileUtil.writerContent(("尝试重启推送服务" + self.proNameForLetter), 'runLog')
+
+                projectCheck = ProjectCheck(self.fileUtil)
+                intResult = projectCheck.restartProByStrName(self.proNameForLetter)
+                if intResult == 1:
+                    strContentEnd = "推送服务已重启"
+                else:
+                    strContentEnd = "推送服务重启失败"
+
                 intNoSendNum = len(listNewResultFind)
-                strContent = "> - 未推送总数: " + str(intNoSendNum) + "条\n"
+                strContent = "> - 未推送总数有 **" + str(intNoSendNum) + "** 条(" + strContentEnd + ")\n\n"
                 self.dataTemplate.dataAll += strContent
             
         return listNewResultFind
@@ -282,7 +304,7 @@ class CheckLetter:
         #field_name
         #fieldcompare_name1
         #fieldcompare_name2
-        #fieldcompare_namevalue
+        #fieldcompare_name_value
         #first_field_value
         #next_field_value
         #sleeptime
@@ -293,7 +315,7 @@ class CheckLetter:
             if((keyItem == 'table_name') | (keyItem == 'field_name') |
                (keyItem == 'fieldcompare_name1') | (keyItem == 'fieldcompare_name2') |
                (keyItem == 'fieldcompare_name3') | (keyItem == 'fieldcompare_name4') |
-               (keyItem == 'fieldcompare_namevalue') | (keyItem == 'first_field_value') |
+               (keyItem == 'fieldcompare_name_value') | (keyItem == 'first_field_value') |
                (keyItem == 'next_field_value') | (keyItem == 'sleeptime') |
                (keyItem == 'fieldcompare_name3')):
                 if(dictNeedRunMsg.get(keyItem) != ''):
@@ -332,9 +354,13 @@ class CheckLetter:
             try:
                 with objConnection3.cursor() as cursor:
                     strSearchNoSend = (("SELECT " + self.strFieldCompare1 + " , " + self.strFieldCompare2 +
-                    " , " + self.strFieldCompare3 + " FROM " + self.strTable + " WHERE " + self.strField +
-                    " = %d " + " AND " + self.strFieldCompare4 + " >= %d AND " +
-                    self.strFieldCompare4 + " <= %d") %(self.intFirst, intYesterdayStamp, intTodayStamp))
+                                        " , " + self.strFieldCompare3 + " FROM " + self.strTable + " WHERE " +
+                                        self.strField + " = %d " + " AND " + self.strFieldCompareValue +
+                                        " != " + "'" + "'" + " AND " + self.strFieldCompareValue +
+                                        " IS NOT NULL" + " AND " + self.strFieldCompareValue +
+                                        " != " + "'" + "null" + "'" + " AND " + " send_count != 6 AND " +
+                                        self.strFieldCompare4 + " >= %d AND " + self.strFieldCompare4 +
+                                        " <= %d") %(self.intFirst, intYesterdayStamp, intTodayStamp))
 
                     cursor.execute(strSearchNoSend)
                     listNoSend = cursor.fetchall()
@@ -418,6 +444,129 @@ class CheckLetter:
 
         return intAlreadySendNum
 
+    def getNoSendMsgToday(self, dictMsgForMysql):
+
+        # 从数据库中获取今天(从零点截止至当前运行此方法的时刻)未发送消息的字段,存放到一个list集合
+        # dictMsgForMysql: 连接数据库所需的信息
+        # 返回一个list集合
+
+        # 此方法与getNoSendMsgYesterday()方法的实现是一样的，不过就是查找的时间不同。
+        # 添加此方法的原因是需求变了，即获取当天的数据。--添加于2018-03-14
+
+        listNoSend = []
+
+        dateTodayBegin = self.runTime.getTime("%Y-%m-%d")
+        intTodayBeginStamp = self.runTime.getTimeStamp(str(dateTodayBegin), "%Y-%m-%d")
+
+        dateTodayEnd = self.runTime.getDateTime()
+        intTodayEndStamp = self.runTime.getTimeStamp(dateTodayEnd, "%Y-%m-%d %H:%M:%S")
+
+        doMySql = DoMysql(dictMsgForMysql)
+        objConnection3 = doMySql.connectionMySQL()
+
+        if objConnection3 is None:
+            if (self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent("数据库查询未推送连接失败", 'runLog')
+        else:
+            if (self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent("数据库查询未推送连接成功", 'runLog')
+                self.fileUtil.writerContent("查找" + str(dateTodayBegin) + "未推送的字段信息", 'runLog')
+            try:
+                with objConnection3.cursor() as cursor:
+                    strSearchNoSend = (("SELECT " + self.strFieldCompare1 + " , " + self.strFieldCompare2 +
+                                        " , " + self.strFieldCompare3 + " FROM " + self.strTable + " WHERE " +
+                                        self.strField + " = %d " + " AND " + self.strFieldCompareValue +
+                                        " != " + "'" + "'" + " AND " + self.strFieldCompareValue +
+                                        " IS NOT NULL" + " AND " + self.strFieldCompareValue +
+                                        " != " + "'" + "null" + "'" + " AND " + " send_count != 6 AND " +
+                                        self.strFieldCompare4 + " >= %d AND " + self.strFieldCompare4 +
+                                        " <= %d") % (self.intFirst, intTodayBeginStamp, intTodayEndStamp))
+
+                    cursor.execute(strSearchNoSend)
+                    listNoSend = cursor.fetchall()
+
+                    cursor.close()
+
+            finally:
+
+                if objConnection3._closed:
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("查询未推送数据连接意外关闭", 'runLog')
+                else:
+                    objConnection3.close()
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("查询未推送数据连接已正常关闭", 'runLog')
+
+            if (len(listNoSend) == 0):
+                if (self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("未查找到" + str(dateTodayBegin) + "未推送的字段信息"), 'runLog')
+            else:
+                if (self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("查找到%d条数据未发送" % (len(listNoSend))), 'runLog')
+
+        return listNoSend
+
+    def getAlreadySendNumToday(self, dictMsgForMysql):
+
+        # 获取今天(从零点截止至当前运行此方法的时刻)已经发送推送的个数
+        # dictMsgForMysql: 连接数据库所需的信息
+        # 返回一个int类型
+
+        # 此方法与getAlreadySendNumYesterday()方法的实现是一样的，不过就是查找的时间不同。
+        # 添加此方法的原因是需求变了，即获取当天的数据。--添加于2018-03-14
+
+        listAlreadySend = []
+        intAlreadySendNum = 0
+
+        dateTodayBegin = self.runTime.getTime("%Y-%m-%d")
+        intTodayBeginStamp = self.runTime.getTimeStamp(str(dateTodayBegin), "%Y-%m-%d")
+
+        dateTodayEnd = self.runTime.getDateTime()
+        intTodayEndStamp = self.runTime.getTimeStamp(dateTodayEnd, "%Y-%m-%d %H:%M:%S")
+
+        doMySql = DoMysql(dictMsgForMysql)
+        objConnection4 = doMySql.connectionMySQL()
+
+        if objConnection4 is None:
+            if (self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent("数据库查询已推送连接失败", 'runLog')
+        else:
+            if (self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent("数据库查询已推送连接成功", 'runLog')
+                self.fileUtil.writerContent("查找" + str(dateTodayBegin) + "已推送的字段信息", 'runLog')
+            try:
+                with objConnection4.cursor() as cursor:
+
+                    strSearchAlreadySend = (("SELECT COUNT(" + self.strField + ") FROM " + self.strTable +
+                                             " WHERE " + self.strField + " = %d AND " + self.strFieldCompare4 + " >= %d AND " +
+                                             self.strFieldCompare4 + " <= %d") % (
+                                            self.intNext, intTodayBeginStamp, intTodayEndStamp))
+
+                    cursor.execute(strSearchAlreadySend)
+
+                    listAlreadySend = cursor.fetchall()
+                    cursor.close()
+            finally:
+
+                if objConnection4._closed:
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("查询已推送数据连接意外关闭", 'runLog')
+                else:
+                    objConnection4.close()
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("查询已推送数据连接已正常关闭", 'runLog')
+
+            if (len(listAlreadySend) == 0):
+                if (self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("未查找到" + str(dateTodayBegin) + "已推送的字段信息"), 'runLog')
+            else:
+
+                dictItem = listAlreadySend[0]
+                intAlreadySendNum = int(dictItem.get("COUNT(" + self.strField + ")"))
+                if (self.fileUtil.boolWhetherShowLog & True):
+                    self.fileUtil.writerContent(("查找到%d条数据已发送" % (intAlreadySendNum)), 'runLog')
+
+        return intAlreadySendNum
 
     def getMsgForMysql(self, dictNeedRunMsg):
 

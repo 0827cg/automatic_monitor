@@ -5,12 +5,12 @@ import xml.dom.minidom
 import configparser
 from monitorbin.util.sysTime import RunTime
 
-#author: cg错过
-#time: 2017-09-30
+# author: cg错过
+# time: 2017-09-30
 
 class FileUtil:
 
-    #文件及部分数据处理类
+    # 文件及部分数据处理类
 
     configurePath = 'conf'
     configureFileName = 'monitor.conf'
@@ -31,7 +31,7 @@ class FileUtil:
 
     def setAttribute(self):
 
-        #设置一些属性
+        # 设置一些属性
         
         runTime = RunTime()
         self.strDateTime = runTime.getDateTime()
@@ -59,9 +59,9 @@ class FileUtil:
 
     def writerContent(self, strContent, strFileMark='Hour', whetherAdd=True):
         
-        #strFileMark: 区分写入小时执行的文件还是分钟执行的文件
-        #strContent: 写入文件的内容
-        #whetherAdd: 是否在文件后面换行追加，默认True
+        # strFileMark: 区分写入小时执行的文件还是分钟执行的文件
+        # strContent: 写入文件的内容
+        # whetherAdd: 是否在文件后面换行追加，默认True
         
         if(strFileMark == 'Hour'):
             if(whetherAdd & True):
@@ -87,7 +87,7 @@ class FileUtil:
 
     def writerErr(self, strContent, strFileMark='Hour', whetherAdd=True):
 
-        #编写附件，即将操作异常的输出写入到monitor_err...txt文件中
+        # 编写附件，即将操作异常的输出写入到monitor_err...txt文件中
 
         if(strFileMark == 'Hour'):
             if(whetherAdd & True):
@@ -103,16 +103,26 @@ class FileUtil:
             else:
                 with open(self.strlogErrSecondName, 'w', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
-            
+
+    def writerToFile(self, strContent, strFileNameAndPath, whetherAdd=True):
+
+        # 写入内容到指定文件
+
+        if(whetherAdd & True):
+            with open(strFileNameAndPath, 'a', encoding='utf-8') as fileObj:
+                fileObj.write("\n" + strContent)
+        else:
+            with open(strFileNameAndPath, 'w', encoding='utf-8') as fileObj:
+                fileObj.write(strContent)
     
 
     def getXMLTagElementValue(self, strFilePath, strTagName, strTagElementName, intTagIndex):
 
-        #获取xml文件指定标签的内容，返回一个字符串值
-        #self: 对象本身
-        #strTagName: 标签名字
-        #strTagElementName: 标签中的元素名字
-        #intTagIndex: 文件中出现该标签的序列号(即第几个，从0开始)
+        # 获取xml文件指定标签的内容，返回一个字符串值
+        # self: 对象本身
+        # strTagName: 标签名字
+        # strTagElementName: 标签中的元素名字
+        # intTagIndex: 文件中出现该标签的序列号(即第几个，从0开始)
         
         confObj = xml.dom.minidom.parse(strFilePath)
 
@@ -128,11 +138,11 @@ class FileUtil:
 
     def getConfFileValue(self, configParserObj, configureFileNameAndPath):
 
-        #获取conf后缀的配置文件内容，返回一个字典
-        #注释了不读取，值为空会读取
-        #configParserObj: 读取配置文件的对象
-        #configureFileNameAndPath: 配置文件路径
-        #读取写入的key名字全部小写
+        # 获取conf后缀的配置文件内容，返回一个字典
+        # 注释了不读取，值为空会读取
+        # configParserObj: 读取配置文件的对象
+        # configureFileNameAndPath: 配置文件路径
+        # 读取写入的key名字全部小写
 
         dictConfMsg = {}
         intMark = self.checkFileExists(configureFileNameAndPath)
@@ -164,8 +174,8 @@ class FileUtil:
 
     def readFileContent(self, inputFileName):
 
-        #读取普通文件内容并返回
-        #每次只读取1000字节
+        # 读取普通文件内容并返回
+        # 每次只读取1000字节
         
         strFileContent = ''
 
@@ -183,7 +193,7 @@ class FileUtil:
 
     def initConfigureFile(self):
         
-        #初始化配置文件
+        # 初始化配置文件
 
         strTomcatPath = ""
         strNginxPath = ""
@@ -191,10 +201,15 @@ class FileUtil:
 
         strCheckPm2 = "yes"
 
+        strPro_for_letterName = "htgTimedTask"
+
         strServerName = "116"
         strUserName = "林繁"
 
         strLogPath = "logs"
+        strWhetherRMlog = "yes"
+        intRMLogPassDay = "7"
+        strLogTime = "23"
 
         strUseEmail = "no"
         strSmtp_server = ""
@@ -232,11 +247,11 @@ class FileUtil:
 
         strCheckPicArrivals = "yes"
         strSqlFilePath = "sql/pic_Arrivals-test.sql"
+        intStandardArrivals = "80"
         intAccuracy = "2"
 
         strIntervals = "300"
         strHour = "9"
-        strLogTime = "11:50"
         strShowLog = "yes"
         strTimeB= "9"
         strTimeE = "18"
@@ -269,7 +284,10 @@ class FileUtil:
         config.set('ProjectConfigure', 'nginxpath', strNginxPath)
         config.set('ProjectConfigure', 'redispath', strRedisPath)
 
+        config.set('Pm2', '# whether check pm2')
         config.set('Pm2', 'whether_check_pm2', strCheckPm2)
+        config.set('Pm2', '# add pm2 project to restart and check')
+        config.set('Pm2', 'pro_for_letter', strPro_for_letterName)
 
         config.set('UseConfigure', '# computer system nickname by youself')
         config.set('UseConfigure', 'servername', strServerName)
@@ -278,6 +296,12 @@ class FileUtil:
 
         config.set('LogConfigure', '# set file path to save log files')
         config.set('LogConfigure', 'logpath', strLogPath)
+        config.set('LogConfigure', '# whether to remove the log file')
+        config.set('LogConfigure', 'whether_rm_log', strWhetherRMlog)
+        config.set('LogConfigure', '# how long passed day to remove')
+        config.set('LogConfigure', 'rm_log_passday', intRMLogPassDay)
+        config.set('LogConfigure', '# set time to remove log files unit 24 hour time')
+        config.set('LogConfigure', 'when_time_rm', strLogTime)
 
         config.set('EmailConfigure', '# whether use email to send message')
         config.set('EmailConfigure', 'email', strUseEmail)
@@ -310,7 +334,7 @@ class FileUtil:
         config.set('CheckLetterConfigure', 'fieldcompare_name2', strFieldCompare2)
         config.set('CheckLetterConfigure', 'fieldcompare_name3', strFieldCompare3)
         config.set('CheckLetterConfigure', 'fieldcompare_name4', strFieldCompare4)
-        config.set('CheckLetterConfigure', 'fieldcompare_nameValue', strFieldCompareValue)
+        config.set('CheckLetterConfigure', 'fieldcompare_name_value', strFieldCompareValue)
         config.set('CheckLetterConfigure', 'first_field_value', intFirst)
         config.set('CheckLetterConfigure', 'next_field_value', intNext)
         config.set('CheckLetterConfigure', '# for twice to connect database, unit second')
@@ -325,16 +349,19 @@ class FileUtil:
         config.set('MysqlConfigure', '# need operate database name')
         config.set('MysqlConfigure', 'database', strDatabase)
 
+        config.set('Pic_Arrivals', '# check the pic arrivals')
         config.set('Pic_Arrivals', 'whether_check_pic', strCheckPicArrivals)
+        config.set('Pic_Arrivals', "# the sql file that save the sql to search pic_arrivals")
         config.set('Pic_Arrivals', 'sql_path', strSqlFilePath)
+        config.set('Pic_Arrivals', '# the standard number of pic_arrivals to cut the message, unit percentage')
+        config.set('Pic_Arrivals', 'arrivals_standard', intStandardArrivals)
+        config.set('Pic_Arrivals', '# after the decimal point number')
         config.set('Pic_Arrivals', 'number_accuracy', intAccuracy)
 
         config.set('RunConfigure', '# set run progress timing, unit second')
         config.set('RunConfigure', 'run_intervals', strIntervals)
         config.set('RunConfigure', '# set when minute in every hour to check project, unit minute')
         config.set('RunConfigure', 'when_hour_checkall', strHour)
-        config.set('RunConfigure', '# set time to remove log files unit 24 hour time. like HH:MM')
-        config.set('RunConfigure', 'remove_log_time', strLogTime)
         config.set('RunConfigure', '# set whether show run debug logs in log files, value yes or no')
         config.set('RunConfigure', 'savelog_to_file', strShowLog)
         config.set('RunConfigure', '# time beginnging to send message, unit Hour')
@@ -353,9 +380,9 @@ class FileUtil:
 
     def getNeedRunMsg(self):
 
-        #根据配置文件的配置内容来选择代码执行
-        #该方法就是单纯的过滤掉未配置值的参数
-        #即从存放的字典中去除不需要检测运行的项目(未配置值的参数)，之后返回
+        # 根据配置文件的配置内容来选择代码执行
+        # 该方法就是单纯的过滤掉未配置值的参数
+        # 即从存放的字典中去除不需要检测运行的项目(未配置值的参数)，之后返回
         
         if(self.boolWhetherShowLog & True):
             self.writerContent("", 'runLog')
@@ -390,7 +417,7 @@ class FileUtil:
 
     def readConfigureFile(self):
 
-        #读取脚本配置文件
+        # 读取脚本配置文件
         #print("readConfigureFile读取配置文件")
         dictConfMsgTotal = {}
         configureFileNameAndPath = self.configurePath + '/' + self.configureFileName
@@ -412,16 +439,16 @@ class FileUtil:
 
     def checkConfMsg(self, dictConfMsg):
 
-        #检测配置文件是否完全
-        #其中日志路径和email值必须存在
-        #所以这里只检查logpath和email
-        #email仅包括smtp_server, email_sendaddr, email_sendpasswd
-        #参数dictConfMsg:表示从配置文件中读取到的为进行过滤的数据，字典类型
+        # 检测配置文件是否完全
+        # 其中日志路径和email值必须存在
+        # 所以这里只检查logpath和email
+        # email仅包括smtp_server, email_sendaddr, email_sendpasswd
+        # 参数dictConfMsg:表示从配置文件中读取到的为进行过滤的数据，字典类型
 
-        #2017-10-30添加了run_intervals, when_hour_checkall, remove_log_time
-        #2017-12-07: 删除了smtp_server,email_sendaddr,email_sendpasswd的验证
+        # 2017-10-30添加了run_intervals, when_hour_checkall, remove_log_time
+        # 2017-12-07: 删除了smtp_server,email_sendaddr,email_sendpasswd的验证
 
-        #2017-12-11: 添加了time_beginning, time_end, past_days_num, savelogtofile的验证
+        # 2017-12-11: 添加了time_beginning, time_end, past_days_num, savelogtofile的验证
         
         intMark = -1
         if(len(dictConfMsg) != 0):
@@ -445,8 +472,8 @@ class FileUtil:
 
     def checkRunProject(self, projectName, strKey, dictConfMsg):
 
-        #根据配置文件的配置，判断并选择代码块来执行
-        #如果返回值为1，则表示返回允许执行检测projectName这个项目
+        # 根据配置文件的配置，判断并选择代码块来执行
+        # 如果返回值为1，则表示返回允许执行检测projectName这个项目
 
         intMark = -1
         if(strKey in dictConfMsg):
@@ -461,8 +488,8 @@ class FileUtil:
 
     def checkFileExists(self, fileNameAndPath):
 
-        #检测文件是否存在，不存在则返回-1
-        #这里用到的有检测配置文件是否存在
+        # 检测文件是否存在，不存在则返回-1
+        # 这里用到的有检测配置文件是否存在
 
         intMark = -1
         if(os.path.exists(fileNameAndPath)):
@@ -472,7 +499,7 @@ class FileUtil:
 
     def checkAndInitConfigure(self, configureFileNameAndPath):
 
-        #检测并初始化配置文件
+        # 检测并初始化配置文件
 
         intMark = self.checkFileExists(configureFileNameAndPath)
         if(intMark != 1):
@@ -488,21 +515,21 @@ class FileUtil:
             #self.writerContent(strErr, 'runErr')
             self.initConfigureFile()
 
-    def checkAndCreate(self, FileNameAndPath):
+    def checkAndCreate(self, strFilePath):
 
-        #检测并创建文件路径
+        # 检测并创建文件路径
 
-        intMark = self.checkFileExists(FileNameAndPath)
+        intMark = self.checkFileExists(strFilePath)
         if(intMark != 1):
             if(self.boolWhetherShowLog & True):
-                self.writerContent("文件夹路径不存在，脚本执行自动创建", 'runLog')
+                self.writerContent("文件" + strFilePath + "夹路径不存在，脚本执行自动创建", 'runLog')
             #self.writerContent("配置的日志文件夹路径不存在，脚本执行自动创建", 'runErr')
-            os.mkdir(FileNameAndPath)
+            os.mkdir(strFilePath)
 
     def getLogPath(self):
         
-        #获取配置文件中存放日志文件路径
-        #self.writerContent(("============开始运行============"), 'runLog')
+        # 获取配置文件中存放日志文件路径
+        # self.writerContent(("============开始运行============"), 'runLog')
 
         strLogPath = ''
         configureFileNameAndPath = self.configurePath + '/' + self.configureFileName
@@ -520,9 +547,9 @@ class FileUtil:
 
     def getWhetherShowLog(self):
 
-        #获取配置文件中是否打开debug输出到log文件中
-        #如果配置文件中的savelog_to_file值为空或者不等于'yes','no',则都将起设置为'no'
-        #也就是默认为no
+        # 获取配置文件中是否打开debug输出到log文件中
+        # 如果配置文件中的savelog_to_file值为空或者不等于'yes','no',则都将起设置为'no'
+        # 也就是默认为no
 
         strWhetherShowLog = ''
         configureFileNameAndPath = self.configurePath + '/' + self.configureFileName
@@ -537,16 +564,30 @@ class FileUtil:
         if((strWhetherShowLog != 'yes') & (strWhetherShowLog != 'no')):
             strWhetherShowLog = 'no'
         return strWhetherShowLog
+
+
+    def getFileNameFromPath(self, strPath):
+
+        # 只获取目录下的所有文件名(不包括文件夹)
+
+        listItem = os.listdir(strPath)
+        listFileName = []
+        for strListItem in listItem:
+            if os.path.isfile(strPath + "/" + strListItem):
+                listFileName.append(strListItem)
+
+        return listFileName
+        
         
 
     def reWriterForEmail(self, listSendContent, dictEmailMsg):
 
-        #重构需要邮件发送的内容，并设置对应主题，并返回list
-        #重构后的list数据集合格式：无错误日志list长度为3，有错误日志list长度为4
-        #list[0]: Hour或者Second或者no
-        #list[1]: 邮件主题
-        #list[2]: 需要发送的邮件内容(已重构的内容)
-        #list[3]: 错误日志的相对路径地址
+        # 重构需要邮件发送的内容，并设置对应主题，并返回list
+        # 重构后的list数据集合格式：无错误日志list长度为3，有错误日志list长度为4
+        # list[0]: Hour或者Second或者no
+        # list[1]: 邮件主题
+        # list[2]: 需要发送的邮件内容(已重构的内容)
+        # list[3]: 错误日志的相对路径地址
 
         strNewContent = ''
         strContent = listSendContent[1]

@@ -8,6 +8,7 @@ from monitorbin.module.diskCheck import DiskSizeCheck
 from monitorbin.module.letterCheck import CheckLetter
 from monitorbin.module.pm2Check import Pm2Operate
 from monitorbin.otherModule.picArrivals import PicArrivals
+from monitorbin.otherModule.rmLog import RMlog
 from monitorbin.util.emailUtil import EmailUtil
 from monitorbin.util.dingTalk import ResponseDD
 from monitorbin.util.dataTemplate import DataTemplate
@@ -15,8 +16,8 @@ from monitorbin.util.allRunNum import AllModuleRunAll
 from threading import Timer
 import time
 
-#author: cg错过
-#time: 2017-09-30
+# author: cg错过
+# time: 2017-09-30
 
 class Operate:
 
@@ -46,14 +47,14 @@ class Operate:
 
     def timingRun(self):
 
-        #这个属于定时器
-        #即定时执行，代码中每个多少秒来执行此方法中的代码
-        #现在代码中实现的是，每间隔相应秒数就会重新实例化一个FileUtil对象，
-        #也就是每间隔相应秒数后将重新读取配置，并写读取系统时间
-        #这一点不足的就是每次执行检测都需要重新读取检测配置文件，这固然好点
-        #但也有不足就是读取浪费，
-        #现在有个想法就是将读取系统时间和读取检测配置文件这两个功能分开来实现
-        #即做到每间隔相应秒数后就读取系统时间，而做到只读取一次配置文件
+        # 这个属于定时器
+        # 即定时执行，代码中每个多少秒来执行此方法中的代码
+        # 现在代码中实现的是，每间隔相应秒数就会重新实例化一个FileUtil对象，
+        # 也就是每间隔相应秒数后将重新读取配置，并写读取系统时间
+        # 这一点不足的就是每次执行检测都需要重新读取检测配置文件，这固然好点
+        # 但也有不足就是读取浪费，
+        # 现在有个想法就是将读取系统时间和读取检测配置文件这两个功能分开来实现
+        # 即做到每间隔相应秒数后就读取系统时间，而做到只读取一次配置文件
 
         self.allModuleRunAll = AllModuleRunAll()
 
@@ -72,7 +73,8 @@ class Operate:
             
             if(len(dictNeedRunMsg) > 1):
                 
-                #脚本执行检测需要监控的项目
+                # 脚本执行检测需要监控的项目
+
                 self.runProcess(dictNeedRunMsg)
                 
                 #emailUtil = EmailUtil(dictNeedRunMsg, self.fileUtil)
@@ -110,8 +112,8 @@ class Operate:
 
     def runProcess(self, dictNeedRunMsg):
 
-        #运行检测各个项目
-        #dictNeedRunMsg: 需要运行的数据项目
+        # 运行检测各个项目
+        # dictNeedRunMsg: 需要运行的数据项目
         
         listKeys = dictNeedRunMsg.keys()
         for keyItem in listKeys:
@@ -151,12 +153,17 @@ class Operate:
                 if(strCheckPm2 == 'yes'):
                     pm2Operate = Pm2Operate(self.fileUtil, self.dataTemplate, self.fileUtil.strHourTime,
                                             self.intHourCheckAll, self.allModuleRunAll)
+            if(keyItem.find('whether_rm_log') != -1):
+                strRMlog = dictNeedRunMsg.get(keyItem)
+                if(strRMlog == 'yes'):
+                    rmLog = RMlog(self.fileUtil, dictNeedRunMsg)
+                    
                     
 
 
     def choiceSendMsgMethod(self, dictNeedRunMsg):
 
-        #根据配置文件来选择使用email或者dingtalk来发送消息
+        # 根据配置文件来选择使用email或者dingtalk来发送消息
 
         if('email' in dictNeedRunMsg):
             if(dictNeedRunMsg.get('email') == 'yes'):

@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-#author: cg错过
-#time: 2017-12-12
+# author: cg错过
+# time: 2017-12-12
 
 class AllModuleRunAll:
 
-    #为实现在规定之间内只执行一次，
-    #例如在小时数为9的时候，这个小时内只执行一次检测
-    #这个类只是提供一个判断条件
-    #当然也可以利用此条件来执行几次，就看后面调用时的代码怎么写了
+    # 为实现在规定之间内只执行一次，
+    # 例如在小时数为9的时候，这个小时内只执行一次检测
+    # 这个类只是提供一个判断条件
+    # 当然也可以利用此条件来执行几次，就看后面调用时的代码怎么写了
 
-    #2017-12-14添加intOverAllCheckPicArrivals,intOverAllCheckPm2
+    # 2017-12-14添加intOverAllCheckPicArrivals,intOverAllCheckPm2
 
     intOverAllCheckTomcatNum = 0
     intOverAllCheckNginxNum = 0
@@ -46,7 +46,7 @@ class AllModuleRunAll:
 
     def initAllNum(self):
 
-        #重置所有项目一天执行状态为0，即表示未执行,新一天将继续执行
+        # 重置所有项目一天执行状态为0，即表示未执行,新一天将继续执行
 
         intIndex = 0
 

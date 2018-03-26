@@ -24,3 +24,27 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+'''
+======================
+### 发现的问题与计划
+
+* 2018.02.05: 记入在/monitorbin/module/diskCheck.py中checkUse()方法中
+* 2018.02.05: 日志打印元素为dict的list集合时，计划添加表格来格式化打印输出
+
+* 2018.03.01: 添加重启pm2搭载的项目功能,主要是放在当检测有未推送消息时，来进行重启
+
+* 2018-03-02:
+*有个bug，在/monitorbin/module/diskCheck.py文件下
+*代码: intMountPointsNum = int(intTotalNum) - 1
+*出错: ValueError: invalid literal for int() with base 10: ''
+*尝试修改成: intMountPointsNum = int(float(intTotalNum)) - 1
+
+* 2018-03-26: 有个bug,在/monitorbin/module/diskCheck.py中的代码
+* self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + listOutMsg,
+* 有两处没有进行对list的类型转换，转string类型.现已经添加类型转换str(listOutMsg)
+
+======================
+'''

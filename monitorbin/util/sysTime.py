@@ -88,4 +88,20 @@ class RunTime:
 
         return int(timeStamp)
 
+
+    def doCutHorizontalLine(self, strData):
+
+        #用来将日期中存在的'-'删除,返回一个没有'-'的日期字符串
+        #strData: 存在’-‘的日期字符串
+        
+        listNewStrData = []
+        listStrData = list(strData)
+        for listStrDataItem in listStrData:
+            if(listStrDataItem == '-'):
+                pass
+            else:
+                listNewStrData.append(listStrDataItem)
+        return ''.join(listNewStrData)
+            
+
     

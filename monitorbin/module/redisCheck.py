@@ -3,23 +3,23 @@
 import os
 from monitorbin.util.process import ProcessCL
 
-#author: cg错过
-#time: 2017-09-30
+# author: cg错过
+# time: 2017-09-30
 
 class RedisOperate:
 
     intOverAllCheckNum = 0
 
-    #redis检测模块
+    # redis检测模块
     
     def __init__(self, strRedisPath, intHourTime, intHourCheckAll, fileUtilObj, allModuleRunAllObj):
 
-        #strRedisPath: redis的安装文件目录
-        #intHourTime: 当前运行脚本的小时数
-        #intHourCheckAll: 配置文件中设置的时间(小时数)
-        #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
+        # strRedisPath: redis的安装文件目录
+        # intHourTime: 当前运行脚本的小时数
+        # intHourCheckAll: 配置文件中设置的时间(小时数)
+        # fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
 
-        #2017-12-08将分钟数改为小时，即每天大检测只执行一次
+        # 2017-12-08将分钟数改为小时，即每天大检测只执行一次
 
         self.fileUtil = fileUtilObj
         self.intHourTime = intHourTime
@@ -43,8 +43,8 @@ class RedisOperate:
 
     def checkRedis(self):
 
-        #每个小时检测一遍，不做操作
-        #其他时候，当检测到未运行时，脚本尝试自启一次
+        # 每个小时检测一遍，不做操作
+        # 其他时候，当检测到未运行时，脚本尝试自启一次
 
         strRedisStatus = self.getRedisStatus()
 
@@ -83,7 +83,7 @@ class RedisOperate:
 
     def getRedisStatus(self):
 
-        #获取进程中的redis
+        # 获取进程中的redis
 
         redisStatusCL = "ps -ef | grep redis"
         processCL = ProcessCL()
@@ -94,7 +94,7 @@ class RedisOperate:
 
     def checkRedisStatus(self, strRedisStatus, strFileMark='Hour'):
 
-        #判断redis是否运行
+        # 判断redis是否运行
 
         intMark = -1
         strRedis = "redis-server"
@@ -121,7 +121,7 @@ class RedisOperate:
 
     def tryStartRedis(self, strRedisPath):
 
-        #脚本启动redis
+        # 脚本启动redis
 
         intMark = -1
         #print("脚本尝试将其启动....")

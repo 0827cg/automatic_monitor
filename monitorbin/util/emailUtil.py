@@ -6,23 +6,23 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 
-#author: cg错过
-#time: 2017-09-30
+# author: cg错过
+# time: 2017-09-30
 
 class EmailUtil:
 
-    #发送邮件模块
+    # 发送邮件模块
 
     def __init__(self, dictNeedRunMsg, fileUtilObj):
 
-        #dictNeedRunMsg:存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
-        #该数据仅进行了初步过滤
-        #fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
-        #其中的key有
-        #smtp_server:
-        #mail_sendAddr:
-        #mail_sendPasswd:
-        #mail_toAddr:
+        # dictNeedRunMsg:存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
+        # 该数据仅进行了初步过滤
+        # fileUtilObj: FileUtil的对象(脚本从运行到结束都只有这一个FileUtil对象)
+        # 其中的key有
+        # smtp_server:
+        # mail_sendAddr:
+        # mail_sendPasswd:
+        # mail_toAddr:
 
         self.fileUtilObj = fileUtilObj
         dictEmailMsg = self.getForEmailMsg(dictNeedRunMsg)
@@ -43,21 +43,21 @@ class EmailUtil:
         
     def getForEmailMsg(self, dictNeedRunMsg):
 
-        #将从配置文件的完全读取到的数据中，抽取出发送邮件需要的数据，存放为dict类型并返回
-        #dictNeedRunMsg: 存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
-        #因为有可能并不是所有项目都配置了需要运行
+        # 将从配置文件的完全读取到的数据中，抽取出发送邮件需要的数据，存放为dict类型并返回
+        # dictNeedRunMsg: 存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
+        # 因为有可能并不是所有项目都配置了需要运行
 
-        #2017-12-07修改
-        #配置文件中添加了选择性
-        #选择使用email或者dingding来发送消息，在fileUtil这个类来读取到的需要运行的数据中，也
-        #会有一些email或者dingding的配置数据是空的，
-        #所以这里假如选择了email时，即email字段值为yes程序才能运行到这一步，
-        #此时我们需要对email的其他配置文件进行判断，判断所有有关email的配置是否完全，
-        #如若不完全，则无法完成email发送，同样的dingding也需要这样,
-        #所以，这里在抽取时将进行判断
-        #其判断就是,将选取用来发送email所需的数据进行值的判断，依次存放到新的dict时，一旦
-        #发现有一个字段的值为空，就跳出循环，并则将此时新的dict里的所有元素清空，
-        #存放一个err字段
+        # 2017-12-07修改
+        # 配置文件中添加了选择性
+        # 选择使用email或者dingding来发送消息，在fileUtil这个类来读取到的需要运行的数据中，也
+        # 会有一些email或者dingding的配置数据是空的，
+        # 所以这里假如选择了email时，即email字段值为yes程序才能运行到这一步，
+        # 此时我们需要对email的其他配置文件进行判断，判断所有有关email的配置是否完全，
+        # 如若不完全，则无法完成email发送，同样的dingding也需要这样,
+        # 所以，这里在抽取时将进行判断
+        # 其判断就是,将选取用来发送email所需的数据进行值的判断，依次存放到新的dict时，一旦
+        # 发现有一个字段的值为空，就跳出循环，并则将此时新的dict里的所有元素清空，
+        # 存放一个err字段
 
         dictMsgForEmail = {}
         for keyItem in dictNeedRunMsg:
@@ -76,14 +76,14 @@ class EmailUtil:
 
     def checkAndGetForEmailListMsg(self):
 
-        #检查是否存在日志，并读取该日志进行返回
-        #返回格式:如无错误日志list长度为2，有错误日志list长度为3
-        #list[0]: Hour或者Second或者no
-        #list[1]: 需要发送的邮件内容(仅运行日志)
-        #list[2]: 错误日志的相对路径地址
+        # 检查是否存在日志，并读取该日志进行返回
+        # 返回格式:如无错误日志list长度为2，有错误日志list长度为3
+        # list[0]: Hour或者Second或者no
+        # list[1]: 需要发送的邮件内容(仅运行日志)
+        # list[2]: 错误日志的相对路径地址
         
-        #产生的日志文件中，在每分钟和每小时的两种情况中，只会运行一种情况
-        #也就是只会产生一个日志
+        # 产生的日志文件中，在每分钟和每小时的两种情况中，只会运行一种情况
+        # 也就是只会产生一个日志
         
         listSendContent = []
         intExistsContent = self.fileUtilObj.checkFileExists(self.fileUtilObj.strlogContentName)
@@ -131,9 +131,9 @@ class EmailUtil:
 
     def choiceSend(self, dictEmailMsg, listEmailContent):
 
-        #选择发送类型(有无附件)
-        #dictEmailMsg: 发送和接受邮件账户，及smtp服务器地址
-        #listEmailContent: 发送的邮件内容，主题，附件
+        # 选择发送类型(有无附件)
+        # dictEmailMsg: 发送和接受邮件账户，及smtp服务器地址
+        # listEmailContent: 发送的邮件内容，主题，附件
 
         strSmtpServer = dictEmailMsg.get('smtp_server')
         strSendAddr = dictEmailMsg.get('email_sendaddr')
@@ -159,15 +159,15 @@ class EmailUtil:
     def sendEmailByString(self, strSmtpServer, strSendAddr, strPasswd,
                           listToAddr, strSubject, strContent):
 
-        #用字符串来发送邮件
-        #strSmtpServer: smtp服务器地址
-        #strSendAddr: 邮件发送地址
-        #strPasswd: 发送地址的登陆授权码
-        #listToAddr: 接受邮件的地址，为list集合
-        #strSubject: 邮件主题
-        #strContent: 邮件内容字符串类型
+        # 用字符串来发送邮件
+        # strSmtpServer: smtp服务器地址
+        # strSendAddr: 邮件发送地址
+        # strPasswd: 发送地址的登陆授权码
+        # listToAddr: 接受邮件的地址，为list集合
+        # strSubject: 邮件主题
+        # strContent: 邮件内容字符串类型
         
-        #mail_port = '465'
+        # mail_port = '465'
         
         message = MIMEText(strContent, "plain", "utf-8")
         message['Subject'] = Header(strSubject, 'utf-8')
@@ -199,15 +199,15 @@ class EmailUtil:
     def sendEmailByStringAndFile(self, strSmtpServer, strSendAddr, strPasswd,
                           listToAddr, strSubject, strContent, strErrFilePath):
 
-        #发送有附件的邮件
-        #strSmtpServer: smtp服务器地址
-        #strSendAddr: 邮件发送地址
-        #strPasswd: 发送地址的登陆授权码
-        #listToAddr: 接受邮件的地址，为list集合
-        #strSubject: 邮件主题
-        #strContent: 邮件内容字符串类型
+        # 发送有附件的邮件
+        # strSmtpServer: smtp服务器地址
+        # strSendAddr: 邮件发送地址
+        # strPasswd: 发送地址的登陆授权码
+        # listToAddr: 接受邮件的地址，为list集合
+        # strSubject: 邮件主题
+        # strContent: 邮件内容字符串类型
         
-        #mail_port = '465'
+        # mail_port = '465'
 
         message = MIMEMultipart()
         message['Subject'] = Header(strSubject, 'utf-8')

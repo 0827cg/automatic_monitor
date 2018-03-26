@@ -2,8 +2,8 @@
 
 from monitorbin.util.process import ProcessCL
 
-#author: cg错过
-#time: 2017-12-07
+# author: cg错过
+# time: 2017-12-07
 
 class DiskSizeCheck:
 
@@ -52,9 +52,11 @@ class DiskSizeCheck:
                 listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
                 listCutMountPointsMsg = self.formatCutMsgForSendAll(listMountPointsMsg)
                 strCutAllMsg = self.formatCutMsgForSendAllToStr(listCutMountPointsMsg)
-                
+
+                '''
                 self.dataTempObj.dataAll += ("> - " + self.strServerName +
                                              "系统各节点空间使用量如下: \n" + "\n> " + strCutAllMsg)
+                '''
 
                 self.allModuleRunAllObj.intOverAllCheckDiskNum = 1
                 if(self.fileUtil.boolWhetherShowLog & True):
@@ -73,6 +75,8 @@ class DiskSizeCheck:
             self.checkTog()
 
             '''
+            # 无用此段代码
+            
             intMountPointsNum = self.getMountPointsNum()
             listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
             listOutMsg = self.checkUse(listMountPointsMsg)
@@ -80,7 +84,7 @@ class DiskSizeCheck:
                 if(self.fileUtil.boolWhetherShowLog & True):
                     self.fileUtil.writerContent(("超过" + str(self.intWarningLevel) + "%的挂载点如下:"), 'runLog')
                     self.fileUtil.writerContent(str(listOutMsg), 'runLog')
-                self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + listOutMsg
+                self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + str(listOutMsg)
             else:
                 if(self.fileUtil.boolWhetherShowLog & True):
                     self.fileUtil.writerContent(("无超过" + str(self.intWarningLevel) + "%的挂载点"), 'runLog')
@@ -96,7 +100,7 @@ class DiskSizeCheck:
             if(self.fileUtil.boolWhetherShowLog & True):
                 self.fileUtil.writerContent(("超过" + str(self.intWarningLevel) + "%的挂载点如下:"), 'runLog')
                 self.fileUtil.writerContent(str(listOutMsg), 'runLog')
-            self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + listOutMsg
+            self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + str(listOutMsg)
         else:
             if(self.fileUtil.boolWhetherShowLog & True):
                 self.fileUtil.writerContent(("无超过" + str(self.intWarningLevel) + "%的挂载点"), 'runLog')
@@ -112,7 +116,7 @@ class DiskSizeCheck:
         dictResult = self.processCL.getResultAndProcess(strGetMountPointsNumCL)
         intTotalNum = dictResult.get('stdout')
         #print(intTotalNum)
-        intMountPointsNum = int(intTotalNum) - 1
+        intMountPointsNum = int(float(intTotalNum)) - 1
         
         return intMountPointsNum
 
@@ -165,9 +169,28 @@ class DiskSizeCheck:
         #检测各个节点空间使用量是否超过指定值
         #并将超过指定值的节点信息添加到listOutMsg,并返回
 
+        #2018.02.05添加对dicoMountItem.get('use')的值的判断
+        #因为在2018.02.03 06:49:31时运行的时候出现个问题,部分日志如下
+        '''
+        7条挂载点信息的dict类型显示如下
+        {'used': '12G', 'mountedon': '/', 'use': '56%',...} 
+        {'used': '0', 'mountedon': '/dev', 'use': '', ....}
+        {'used': '0', 'mountedon': '/dev/shm', 'use': ....}
+        '''
+        #由上可知，在获取到挂载点为/dev下的use得到的值为空，一直没找出bug所在，
+        #所以就添加的这个判断，暂时性的解决这个问题
+        #现在发现，目前打印出来的日志并不详细，打算添加日志打印--2018.02.05
+
+
+
         listOutMsg = []
         for dictMountItem in listMountPointsMsg:
-            intUse = int(dictMountItem.get('use').strip('%'))
+
+            strUse = dictMountItem.get('use')
+            if strUse == '':
+                strUse = '0%'
+
+            intUse = int(strUse.strip('%'))
             if(intUse >= int(self.intWarningLevel)):
                 listOutMsg.append(dictMountItem)
 
