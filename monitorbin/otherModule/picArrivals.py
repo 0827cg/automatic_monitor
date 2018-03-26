@@ -47,7 +47,7 @@ class PicArrivals:
 
     def checkTog(self, dictMsgForMysql, dictMsgForCheckPic):
 
-        #检测
+        # 检测
 
         self.runTime = RunTime()
 
@@ -230,8 +230,8 @@ class PicArrivals:
 
     def doSearchSql(self, strSearchSql, dictMsgForMysql):
 
-        #执行sql语句,这里用来做查找
-        #strSql: 要执行的sql语句
+        # 执行sql语句,这里用来做查找
+        # strSql: 要执行的sql语句
 
         listResult = []
         doMySql = DoMysql(dictMsgForMysql)
@@ -267,7 +267,7 @@ class PicArrivals:
 
     def rmoveDecimal(self, listResult):
 
-        #去除decimal
+        # 去除decimal
 
         listNewResult = []
         for listResultItem in listResult:
@@ -284,9 +284,9 @@ class PicArrivals:
 
     def getSomeMsg(self, listResult, intRate):
 
-        #listResult:搜索到的全部数据 
-        #intRate: 参数，这里例如为80
-        #提起出到达率为达到80的机构
+        # listResult:搜索到的全部数据
+        # intRate: 参数，这里例如为80
+        # 提起出到达率为达到80的机构
 
         listNewResult = []
 
@@ -299,8 +299,8 @@ class PicArrivals:
 
     def getSomeForLog(self, listResult):
 
-        #获取机构的部分数据，为显示在log文件上
-        #listResult: 查找到的全部数据
+        # 获取机构的部分数据，为显示在log文件上
+        # listResult: 查找到的全部数据
 
         listTitle = ["机构名", "校区名", "机构id", "校区id", "图片到达率"]
         listSomeForLog = []
@@ -330,14 +330,14 @@ class PicArrivals:
 
     def getMsgForMysql(self, dictNeedRunMsg):
 
-        #获取连接mysql数据库所需要的数据，并判断是否完全
-        #返回一个dict类型的数据
-        #存放的字段
-        #host
-        #port
-        #user
-        #passwd
-        #database
+        # 获取连接mysql数据库所需要的数据，并判断是否完全
+        # 返回一个dict类型的数据
+        # 存放的字段
+        # host
+        # port
+        # user
+        # passwd
+        # database
 
         dictMsgForMysql = {}
 
@@ -357,11 +357,11 @@ class PicArrivals:
 
     def getMsgForCheckPic(self, dictNeedRunMsg):
 
-        #获取检测图片到达率所需的数据,并判断数据是否完全
-        #返回一个dict类型的数据
-        #sql_path: 存放sql语句的文件路径及文件名
-        #number_accuracy: 保留的小数的个数,精度范围
-        #arrivals_standard: 到达率的一个标准
+        # 获取检测图片到达率所需的数据,并判断数据是否完全
+        # 返回一个dict类型的数据
+        # sql_path: 存放sql语句的文件路径及文件名
+        # number_accuracy: 保留的小数的个数,精度范围
+        # arrivals_standard: 到达率的一个标准
 
         dictMsgForCheckPic = {}
         for keyItem in dictNeedRunMsg:
