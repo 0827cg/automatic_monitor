@@ -221,7 +221,7 @@ class FileUtil:
 
         strUseDingtalk = "yes"
         strWebhook = ("https://oapi.dingtalk.com/robot/send?access_token=793b8e66" +
-                          "16eb991b10044ec9c0a7f528f2f7b560a330a79c667397c7523a0866")
+                          "16eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866")
 
         strCheckDisk = "yes"
         strWarning_level = "70"
@@ -239,11 +239,11 @@ class FileUtil:
         intSleepTime = "70"
         intPastDays = "3"
 
-        strHost = "10.9.115.174"
+        strHost = "xxx"
         strPort = "3306"
-        strUser = "haotuoguan"
-        strPasswd = "haotuoguan123456"
-        strDatabase = "haotuoguan"
+        strUser = "xxx"
+        strPasswd = "xxx"
+        strDatabase = "xxx"
 
         strCheckPicArrivals = "yes"
         strSqlFilePath = "sql/pic_Arrivals-test.sql"
