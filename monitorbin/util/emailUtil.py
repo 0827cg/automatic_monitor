@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 
 # author: cg错过
-# time: 2017-09-30
+# time  : 2017-09-30
 
 class EmailUtil:
 

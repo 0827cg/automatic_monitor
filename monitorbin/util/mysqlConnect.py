@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # author: cg
-# time: 2017-12-04
+# time  : 2017-12-04
 
 import pymysql.cursors
 

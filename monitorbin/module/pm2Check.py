@@ -4,7 +4,7 @@
 from monitorbin.util.process import ProcessCL
 
 # author: cg错过
-# time: 2017-12-06
+# time  : 2017-12-06
 
 class Pm2Operate:
 

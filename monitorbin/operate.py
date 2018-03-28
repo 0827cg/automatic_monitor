@@ -18,7 +18,7 @@ from threading import Timer
 import time
 
 # author: cg错过
-# time: 2017-09-30
+# time  : 2017-09-30
 
 class Operate:
 

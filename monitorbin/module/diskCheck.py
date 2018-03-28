@@ -4,7 +4,7 @@
 from monitorbin.util.process import ProcessCL
 
 # author: cg错过
-# time: 2017-12-07
+# time  : 2017-12-07
 
 class DiskSizeCheck:
 

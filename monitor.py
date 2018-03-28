@@ -4,7 +4,7 @@
 from monitorbin.operate import Operate
 
 # author: cg
-# time: 2017-10-10
+# time  : 2017-10-10
 
 def main():
 

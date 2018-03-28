@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # author: cg错过
-# time: 2017-12-08
+# time  : 2017-12-08
 
 class DataTemplate:
 

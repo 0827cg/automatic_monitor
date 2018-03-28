@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # author: cg错过
-# time: 2018-01-11
+# time  : 2018-01-11
 
 import decimal
 
@@ -153,26 +153,45 @@ class PicArrivalCompare:
 
         # dictNewResult: 存放数据的dict
 
+        # 添加新需求-->将减少的机构发送显示到dingTalk中
+        # 添加判断，若增加或减少的机构为0，则日志中不打印
+        # add --2018-03-28
+
         listTotalExist = dictNewResult['listTotalExist']
         listDataOnlyExistForBY = dictNewResult['listDataOnlyExistForBY']
         listDataOnlyExistForY = dictNewResult['listDataOnlyExistForY']
 
-        dictContentResult = self.judgeMentChange(listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY)
+        dictContentResult = self.judgeMentChangeForNew(listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY)
+        strTotalReduceContent = ''
 
         if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent(((str(dictContentResult.get('strTotalExistContent'))) + "详情如下"), 'runLog')
         for listTotalExistItem in listTotalExist:
             self.fileUtilObj.writerContent(str(listTotalExistItem), 'runLog')
 
-        if self.fileUtilObj.boolWhetherShowLog & True:
-            self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyAddContent'))) + "增加详情如下"), 'runLog')
-        for listDataOnlyExistForYItem in listDataOnlyExistForY:
-            self.fileUtilObj.writerContent(str(listDataOnlyExistForYItem), 'runLog')
+        if len(listDataOnlyExistForY) != 0:
 
-        if self.fileUtilObj.boolWhetherShowLog & True:
-            self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyReduceContent'))) + "减少详情如下"), 'runLog')
-        for listDataOnlyExistForBYItem in listDataOnlyExistForBY:
-            self.fileUtilObj.writerContent(str(listDataOnlyExistForBYItem), 'runLog')
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyAddContent'))) + "增加详情如下"), 'runLog')
+            for listDataOnlyExistForYItem in listDataOnlyExistForY:
+                self.fileUtilObj.writerContent(str(listDataOnlyExistForYItem), 'runLog')
+        else:
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent("无增加的机构", 'runLog')
+
+        if len(listDataOnlyExistForBY) != 0:
+
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyReduceContent'))) + "减少详情如下"), 'runLog')
+            for listDataOnlyExistForBYItem in listDataOnlyExistForBY:
+                self.fileUtilObj.writerContent(str(listDataOnlyExistForBYItem), 'runLog')
+
+                strTotalReduceContent += (listDataOnlyExistForBYItem.get('org_name') + " - " +
+                                      listDataOnlyExistForBYItem.get('shop_name') + "\n\n")
+
+        else:
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent("无减少的机构", 'runLog')
 
         if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent((str(dictContentResult.get('strTotalChangeContent'))), 'runLog')
@@ -180,6 +199,9 @@ class PicArrivalCompare:
         self.dataTemplateObj.dataAll += ("[" + str(dictContentResult.get('strOnlyAddContent') +
                                                    dictContentResult.get('strOnlyReduceContent') +
                                                    dictContentResult.get('strTotalChangeContent')) + "]\n\n")
+
+        if len(listDataOnlyExistForBY) != 0:
+            self.dataTemplateObj.dataAll += "减少机构如下: \n\n" + strTotalReduceContent + "\n\n"
 
 
     def judgeMentChange(self, listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY):

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # author: cg错过
-# time: 2017-12-27
+# time  : 2017-12-27
 
 from monitorbin.util.sysTime import RunTime
 from monitorbin.util.process import ProcessCL

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # author: cg错过
-# time: 2017-12-12
+# time  : 2017-12-12
 
 class AllModuleRunAll:
 
