@@ -1,0 +1,603 @@
+
+============2018-04-02 11:49:07============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'username': '鏋楃箒', 'redispath': '', 'logpath': 'logs', 'sql_path': 'sql/pic_Arrivals-test.sql', 'next_field_value': '1', 'author': 'cg閿欒繃', 'whether_check_pic': 'yes', 'user': 'xxx', 'servername': '116', 'whether_check_pm2': 'yes', 'createtime': '2017-09-30', 'fieldcompare_name1': 'shopid', 'checkdisk': 'yes', 'host': 'xxx', 'fieldcompare_name2': 'studentid', 'tomcatpath': '', 'need_not_send_dateweek': '6 7', 'passwd': 'xxx', 'arrivals_standard': '80', 'port': '3306', 'warning_level': '70', 'ToEmail': ['1732821152@qq.com'], 'nginxpath': '', 'dingtalk': 'yes', 'time_beginning': '9', 'database': 'xxx', 'past_days_num': '3', 'savelog_to_file': 'yes', 'whether_check_letter': 'yes', 'rm_log_passday': '7', 'fieldcompare_name4': 'appendtime', 'pro_for_letter': 'htgTimedTask', 'table_name': 'htg_weixin_history', 'when_time_rm': '23', 'field_name': 'send_state', 'when_hour_checkall': '9', 'first_field_value': '0', 'email_sendpasswd': '', 'whether_rm_log': 'yes', 'sleeptime': '70', 'fieldcompare_name3': 'id', 'fieldcompare_name_value': 'OpenID', 'email': 'no', 'smtp_server': '', 'email_sendaddr': '', 'number_accuracy': '2', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'run_intervals': '300', 'time_end': '18'}
+未读取到tomcat配置参数,如需检测tomcat请修改配置文件
+未读取到nginx配置参数,如需检测nginx请修改配置文件
+未读取到redis配置参数,如需检测redis请修改配置文件
+需要运行的有: 
+{'username': '鏋楃箒', 'logpath': 'logs', 'sql_path': 'sql/pic_Arrivals-test.sql', 'next_field_value': '1', 'author': 'cg閿欒繃', 'whether_check_pic': 'yes', 'user': 'xxx', 'servername': '116', 'whether_check_pm2': 'yes', 'createtime': '2017-09-30', 'fieldcompare_name1': 'shopid', 'checkdisk': 'yes', 'host': 'xxx', 'fieldcompare_name2': 'studentid', 'need_not_send_dateweek': '6 7', 'passwd': 'xxx', 'arrivals_standard': '80', 'port': '3306', 'warning_level': '70', 'ToEmail': ['1732821152@qq.com'], 'dingtalk': 'yes', 'time_beginning': '9', 'database': 'xxx', 'past_days_num': '3', 'savelog_to_file': 'yes', 'whether_check_letter': 'yes', 'rm_log_passday': '7', 'fieldcompare_name4': 'appendtime', 'pro_for_letter': 'htgTimedTask', 'table_name': 'htg_weixin_history', 'when_time_rm': '23', 'field_name': 'send_state', 'when_hour_checkall': '9', 'first_field_value': '0', 'email_sendpasswd': '', 'whether_rm_log': 'yes', 'sleeptime': '70', 'fieldcompare_name3': 'id', 'fieldcompare_name_value': 'OpenID', 'email': 'no', 'smtp_server': '', 'email_sendaddr': '', 'number_accuracy': '2', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'run_intervals': '300', 'time_end': '18'}
+-->开始检测磁盘空间
+得到的信息如下:
+
+0条挂载点信息的dict类型显示如下
+无超过70%的挂载点
+-->执行检测数据库字段任务
+
+============2018-04-02 11:51:31============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'smtp_server': '', 'when_hour_checkall': '9', 'createtime': '2017-09-30', 'checkdisk': 'no', 'dingtalk': 'no', 'whether_check_pm2': 'no', 'email': 'no', 'whether_check_letter': 'yes', 'warning_level': '70', 'time_beginning': '9', 'port': '3306', 'sleeptime': '70', 'username': '鏋楃箒', 'field_name': 'send_state', 'passwd': 'xxx', 'logpath': 'logs', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'pro_for_letter': 'htgTimedTask', 'user': 'haotuoguan', 'servername': '197', 'sql_path': 'sql/pic_Arrivals-test.sql', 'whether_check_pic': 'yes', 'first_field_value': '0', 'ToEmail': ['1732821152@qq.com'], 'rm_log_passday': '7', 'need_not_send_dateweek': '6 7', 'past_days_num': '3', 'savelog_to_file': 'yes', 'fieldcompare_name2': 'studentid', 'arrivals_standard': '80', 'database': 'xxx', 'table_name': 'htg_weixin_history', 'author': 'cg閿欒繃', 'host': '10.9.115.174', 'fieldcompare_name_value': 'OpenID', 'fieldcompare_name4': 'appendtime', 'email_sendpasswd': '', 'whether_rm_log': 'no', 'fieldcompare_name3': 'id', 'time_end': '18', 'email_sendaddr': '', 'run_intervals': '300', 'next_field_value': '1', 'when_time_rm': '23', 'number_accuracy': '2', 'fieldcompare_name1': 'shopid', 'ProjectConfigure': ''}
+需要运行的有: 
+{'smtp_server': '', 'when_hour_checkall': '9', 'createtime': '2017-09-30', 'checkdisk': 'no', 'dingtalk': 'no', 'whether_check_pm2': 'no', 'email': 'no', 'whether_check_letter': 'yes', 'warning_level': '70', 'time_beginning': '9', 'port': '3306', 'sleeptime': '70', 'username': '鏋楃箒', 'field_name': 'send_state', 'passwd': 'xxx', 'logpath': 'logs', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'pro_for_letter': 'htgTimedTask', 'user': 'haotuoguan', 'servername': '197', 'sql_path': 'sql/pic_Arrivals-test.sql', 'whether_check_pic': 'yes', 'first_field_value': '0', 'ToEmail': ['1732821152@qq.com'], 'rm_log_passday': '7', 'need_not_send_dateweek': '6 7', 'past_days_num': '3', 'savelog_to_file': 'yes', 'fieldcompare_name2': 'studentid', 'arrivals_standard': '80', 'database': 'xxx', 'table_name': 'htg_weixin_history', 'author': 'cg閿欒繃', 'host': '10.9.115.174', 'fieldcompare_name_value': 'OpenID', 'fieldcompare_name4': 'appendtime', 'email_sendpasswd': '', 'whether_rm_log': 'no', 'fieldcompare_name3': 'id', 'time_end': '18', 'email_sendaddr': '', 'run_intervals': '300', 'next_field_value': '1', 'when_time_rm': '23', 'number_accuracy': '2', 'fieldcompare_name1': 'shopid', 'ProjectConfigure': ''}
+-->执行检测数据库字段任务
+
+============2018-04-02 11:58:31============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'email_sendpasswd': '', 'username': '鏋楃箒', 'ToEmail': ['1732821152@qq.com'], 'whether_rm_log': 'no', 'email_sendaddr': '', 'fieldcompare_name_value': 'OpenID', 'dingtalk': 'no', 'host': '10.9.115.174', 'number_accuracy': '2', 'field_name': 'send_state', 'sleeptime': '70', 'fieldcompare_name1': 'shopid', 'next_field_value': '1', 'need_not_send_dateweek': '6 7', 'createtime': '2017-09-30', 'checkdisk': 'no', 'email': 'no', 'ProjectConfigure': '', 'when_hour_checkall': '9', 'smtp_server': '', 'whether_check_letter': 'yes', 'database': 'xxx', 'rm_log_passday': '7', 'servername': '197', 'port': '3306', 'first_field_value': '0', 'whether_check_pm2': 'no', 'whether_check_pic': 'yes', 'when_time_rm': '23', 'passwd': 'xxx', 'fieldcompare_name4': 'appendtime', 'pro_for_letter': 'htgTimedTask', 'fieldcompare_name2': 'studentid', 'sql_path': 'sql/pic_Arrivals-test.sql', 'time_end': '18', 'fieldcompare_name3': 'id', 'savelog_to_file': 'yes', 'past_days_num': '3', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'logpath': 'logs', 'arrivals_standard': '80', 'warning_level': '70', 'time_beginning': '9', 'author': 'cg閿欒繃', 'table_name': 'htg_weixin_history', 'run_intervals': '300', 'user': 'haotuoguan'}
+需要运行的有: 
+{'email_sendpasswd': '', 'username': '鏋楃箒', 'ToEmail': ['1732821152@qq.com'], 'whether_rm_log': 'no', 'email_sendaddr': '', 'fieldcompare_name_value': 'OpenID', 'dingtalk': 'no', 'host': '10.9.115.174', 'number_accuracy': '2', 'field_name': 'send_state', 'sleeptime': '70', 'fieldcompare_name1': 'shopid', 'next_field_value': '1', 'need_not_send_dateweek': '6 7', 'createtime': '2017-09-30', 'checkdisk': 'no', 'email': 'no', 'ProjectConfigure': '', 'when_hour_checkall': '9', 'smtp_server': '', 'whether_check_letter': 'yes', 'database': 'xxx', 'rm_log_passday': '7', 'servername': '197', 'port': '3306', 'first_field_value': '0', 'whether_check_pm2': 'no', 'whether_check_pic': 'yes', 'when_time_rm': '23', 'passwd': 'xxx', 'fieldcompare_name4': 'appendtime', 'pro_for_letter': 'htgTimedTask', 'fieldcompare_name2': 'studentid', 'sql_path': 'sql/pic_Arrivals-test.sql', 'time_end': '18', 'fieldcompare_name3': 'id', 'savelog_to_file': 'yes', 'past_days_num': '3', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'logpath': 'logs', 'arrivals_standard': '80', 'warning_level': '70', 'time_beginning': '9', 'author': 'cg閿欒繃', 'table_name': 'htg_weixin_history', 'run_intervals': '300', 'user': 'haotuoguan'}
+-->执行检测数据库字段任务
+数据库连接失败
+无数据需要处理
+检测已完成
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-02 11:59:21============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'ProjectConfigure': '', 'next_field_value': '1', 'warning_level': '70', 'host': '10.9.115.174', 'fieldcompare_name_value': 'OpenID', 'whether_rm_log': 'no', 'email_sendaddr': '', 'when_hour_checkall': '9', 'fieldcompare_name1': 'shopid', 'ToEmail': ['1732821152@qq.com'], 'port': '3306', 'fieldcompare_name3': 'id', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'run_intervals': '300', 'rm_log_passday': '7', 'logpath': 'logs', 'whether_check_pic': 'yes', 'createtime': '2017-09-30', 'sleeptime': '70', 'time_end': '18', 'email': 'no', 'fieldcompare_name4': 'appendtime', 'savelog_to_file': 'yes', 'smtp_server': '', 'passwd': 'haotuoguan123456', 'field_name': 'send_state', 'table_name': 'htg_weixin_history', 'username': '鏋楃箒', 'time_beginning': '9', 'email_sendpasswd': '', 'dingtalk': 'no', 'whether_check_letter': 'yes', 'need_not_send_dateweek': '6 7', 'arrivals_standard': '80', 'pro_for_letter': 'htgTimedTask', 'author': 'cg閿欒繃', 'checkdisk': 'no', 'past_days_num': '3', 'first_field_value': '0', 'number_accuracy': '2', 'fieldcompare_name2': 'studentid', 'user': 'haotuoguan', 'sql_path': 'sql/pic_Arrivals-test.sql', 'database': 'haotuoguan', 'when_time_rm': '23', 'whether_check_pm2': 'no', 'servername': '197'}
+需要运行的有: 
+{'ProjectConfigure': '', 'next_field_value': '1', 'warning_level': '70', 'host': '10.9.115.174', 'fieldcompare_name_value': 'OpenID', 'whether_rm_log': 'no', 'email_sendaddr': '', 'when_hour_checkall': '9', 'fieldcompare_name1': 'shopid', 'ToEmail': ['1732821152@qq.com'], 'port': '3306', 'fieldcompare_name3': 'id', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'run_intervals': '300', 'rm_log_passday': '7', 'logpath': 'logs', 'whether_check_pic': 'yes', 'createtime': '2017-09-30', 'sleeptime': '70', 'time_end': '18', 'email': 'no', 'fieldcompare_name4': 'appendtime', 'savelog_to_file': 'yes', 'smtp_server': '', 'passwd': 'haotuoguan123456', 'field_name': 'send_state', 'table_name': 'htg_weixin_history', 'username': '鏋楃箒', 'time_beginning': '9', 'email_sendpasswd': '', 'dingtalk': 'no', 'whether_check_letter': 'yes', 'need_not_send_dateweek': '6 7', 'arrivals_standard': '80', 'pro_for_letter': 'htgTimedTask', 'author': 'cg閿欒繃', 'checkdisk': 'no', 'past_days_num': '3', 'first_field_value': '0', 'number_accuracy': '2', 'fieldcompare_name2': 'studentid', 'user': 'haotuoguan', 'sql_path': 'sql/pic_Arrivals-test.sql', 'database': 'haotuoguan', 'when_time_rm': '23', 'whether_check_pm2': 'no', 'servername': '197'}
+-->执行检测数据库字段任务
+数据库连接成功
+查找send_state值为0的数据
+已查找到19条数据
+{'id': 1401136, 'studentid': 5322, 'shopid': 461}
+{'id': 1401137, 'studentid': 45864, 'shopid': 1944}
+{'id': 1401138, 'studentid': 11511, 'shopid': 890}
+{'id': 1401139, 'studentid': 10759, 'shopid': 893}
+{'id': 1401140, 'studentid': 7372, 'shopid': 461}
+{'id': 1401141, 'studentid': 9414, 'shopid': 474}
+{'id': 1401142, 'studentid': 25123, 'shopid': 1538}
+{'id': 1401143, 'studentid': 36625, 'shopid': 1538}
+{'id': 1401144, 'studentid': 36625, 'shopid': 1538}
+{'id': 1401145, 'studentid': 25728, 'shopid': 1538}
+{'id': 1401146, 'studentid': 32364, 'shopid': 1538}
+{'id': 1401147, 'studentid': 41783, 'shopid': 1538}
+{'id': 1401148, 'studentid': 22139, 'shopid': 1538}
+{'id': 1401149, 'studentid': 30704, 'shopid': 1538}
+{'id': 1401150, 'studentid': 43372, 'shopid': 1230}
+{'id': 1401151, 'studentid': 7455, 'shopid': 461}
+{'id': 1401152, 'studentid': 29221, 'shopid': 1218}
+{'id': 1401153, 'studentid': 21669, 'shopid': 1218}
+{'id': 1401154, 'studentid': 42767, 'shopid': 1218}
+第一次查询连接已正常关闭
+休眠70秒~
+...
+
+============2018-04-02 11:59:57============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'smtp_server': '', 'createtime': '2017-09-30', 'when_hour_checkall': '9', 'email': 'no', 'savelog_to_file': 'yes', 'host': '10.9.115.174', 'warning_level': '70', 'fieldcompare_name2': 'studentid', 'field_name': 'send_state', 'dingtalk': 'no', 'next_field_value': '1', 'number_accuracy': '2', 'rm_log_passday': '7', 'passwd': 'haotuoguan123456', 'database': 'haotuoguan', 'fieldcompare_name1': 'shopid', 'run_intervals': '300', 'whether_check_letter': 'yes', 'author': 'cg閿欒繃', 'table_name': 'htg_weixin_history', 'port': '3306', 'fieldcompare_name3': 'id', 'first_field_value': '0', 'ProjectConfigure': '', 'past_days_num': '3', 'arrivals_standard': '80', 'pro_for_letter': 'htgTimedTask', 'need_not_send_dateweek': '6 7', 'whether_check_pm2': 'no', 'logpath': 'logs', 'fieldcompare_name4': 'appendtime', 'sleeptime': '70', 'email_sendaddr': '', 'time_end': '18', 'whether_check_pic': 'yes', 'time_beginning': '9', 'checkdisk': 'no', 'ToEmail': ['1732821152@qq.com'], 'user': 'haotuoguan', 'whether_rm_log': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'username': '鏋楃箒', 'servername': '197', 'email_sendpasswd': '', 'when_time_rm': '23', 'fieldcompare_name_value': 'OpenID', 'sql_path': 'sql/pic_Arrivals-test.sql'}
+需要运行的有: 
+{'smtp_server': '', 'createtime': '2017-09-30', 'when_hour_checkall': '9', 'email': 'no', 'savelog_to_file': 'yes', 'host': '10.9.115.174', 'warning_level': '70', 'fieldcompare_name2': 'studentid', 'field_name': 'send_state', 'dingtalk': 'no', 'next_field_value': '1', 'number_accuracy': '2', 'rm_log_passday': '7', 'passwd': 'haotuoguan123456', 'database': 'haotuoguan', 'fieldcompare_name1': 'shopid', 'run_intervals': '300', 'whether_check_letter': 'yes', 'author': 'cg閿欒繃', 'table_name': 'htg_weixin_history', 'port': '3306', 'fieldcompare_name3': 'id', 'first_field_value': '0', 'ProjectConfigure': '', 'past_days_num': '3', 'arrivals_standard': '80', 'pro_for_letter': 'htgTimedTask', 'need_not_send_dateweek': '6 7', 'whether_check_pm2': 'no', 'logpath': 'logs', 'fieldcompare_name4': 'appendtime', 'sleeptime': '70', 'email_sendaddr': '', 'time_end': '18', 'whether_check_pic': 'yes', 'time_beginning': '9', 'checkdisk': 'no', 'ToEmail': ['1732821152@qq.com'], 'user': 'haotuoguan', 'whether_rm_log': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'username': '鏋楃箒', 'servername': '197', 'email_sendpasswd': '', 'when_time_rm': '23', 'fieldcompare_name_value': 'OpenID', 'sql_path': 'sql/pic_Arrivals-test.sql'}
+-->执行检测数据库字段任务
+数据库连接成功
+查找send_state值为0的数据
+已查找到0条数据
+第一次查询连接已正常关闭
+无数据需要处理
+检测已完成
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-02 12:00:47============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'passwd': 'haotuoguan123456', 'createtime': '2017-09-30', 'time_end': '18', 'field_name': 'send_state', 'checkdisk': 'no', 'savelog_to_file': 'yes', 'next_field_value': '1', 'whether_rm_log': 'no', 'email_sendaddr': '', 'whether_check_pic': 'yes', 'email_sendpasswd': '', 'smtp_server': '', 'past_days_num': '3', 'when_time_rm': '23', 'fieldcompare_name_value': 'OpenID', 'whether_check_letter': 'yes', 'database': 'haotuoguan', 'whether_check_pm2': 'no', 'warning_level': '70', 'rm_log_passday': '7', 'arrivals_standard': '80', 'need_not_send_dateweek': '6 7', 'fieldcompare_name4': 'appendtime', 'logpath': 'logs', 'author': 'cg閿欒繃', 'port': '3306', 'email': 'no', 'time_beginning': '9', 'fieldcompare_name2': 'studentid', 'pro_for_letter': 'htgTimedTask', 'number_accuracy': '2', 'table_name': 'htg_weixin_history', 'sql_path': 'sql/pic_Arrivals-test.sql', 'ToEmail': ['1732821152@qq.com'], 'fieldcompare_name1': 'shopid', 'fieldcompare_name3': 'id', 'run_intervals': '300', 'first_field_value': '0', 'host': '10.9.115.174', 'dingtalk': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'when_hour_checkall': '12', 'servername': '197', 'ProjectConfigure': '', 'sleeptime': '70', 'username': '鏋楃箒', 'user': 'haotuoguan'}
+需要运行的有: 
+{'passwd': 'haotuoguan123456', 'createtime': '2017-09-30', 'time_end': '18', 'field_name': 'send_state', 'checkdisk': 'no', 'savelog_to_file': 'yes', 'next_field_value': '1', 'whether_rm_log': 'no', 'email_sendaddr': '', 'whether_check_pic': 'yes', 'email_sendpasswd': '', 'smtp_server': '', 'past_days_num': '3', 'when_time_rm': '23', 'fieldcompare_name_value': 'OpenID', 'whether_check_letter': 'yes', 'database': 'haotuoguan', 'whether_check_pm2': 'no', 'warning_level': '70', 'rm_log_passday': '7', 'arrivals_standard': '80', 'need_not_send_dateweek': '6 7', 'fieldcompare_name4': 'appendtime', 'logpath': 'logs', 'author': 'cg閿欒繃', 'port': '3306', 'email': 'no', 'time_beginning': '9', 'fieldcompare_name2': 'studentid', 'pro_for_letter': 'htgTimedTask', 'number_accuracy': '2', 'table_name': 'htg_weixin_history', 'sql_path': 'sql/pic_Arrivals-test.sql', 'ToEmail': ['1732821152@qq.com'], 'fieldcompare_name1': 'shopid', 'fieldcompare_name3': 'id', 'run_intervals': '300', 'first_field_value': '0', 'host': '10.9.115.174', 'dingtalk': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'when_hour_checkall': '12', 'servername': '197', 'ProjectConfigure': '', 'sleeptime': '70', 'username': '鏋楃箒', 'user': 'haotuoguan'}
+-->检测2018-04-02图片到达率
+数据库查询图片到达率已连接
+数据库查询图片连接已关闭
+准备从缓存文件中读取之前的数据...
+查找到的机构信息如下:
+['机构名', '校区名', '机构id', '校区id', '图片到达率']
+['向日葵教育', '向日葵教育', 451, 336, 0.0]
+['童年托管', '童年托管', 1872, 1220, 0.0]
+['博智学苑', '博智学苑', 264, 146, 0.0]
+['菁华园托管', '菁华园托管', 1912, 1260, 53.125]
+['三人行托辅', '三人行托辅', 1544, 890, 55.5556]
+['晨光教育_13696928419', '晨光教育', 1392, 792, 58.3333]
+['彩鑫艺恒教育', '新源校区', 1547, 893, 72.0]
+['福州市尚学巨人教育服务有限公司', '巨人教育', 1541, 887, 77.2727]
+['哈托教育_15710665983', '哈托教育', 1380, 779, 83.3333]
+['育鹰教育', '海滨小学', 1804, 1152, 83.3333]
+['知新教育', '知新教育', 2417, 1782, 83.3333]
+['启明教育', '厦门启明教育', 589, 461, 90.2439]
+['闰润雨学苑光华校区', '润润雨学苑', 1888, 1236, 91.6667]
+['心苗教育', '心苗教育', 1690, 1037, 93.3333]
+['漳州优嘉托辅中心', '漳州江滨小学优嘉托辅中心', 2479, 1844, 97.5]
+['菁英教育', '菁英教育', 1938, 1287, 97.9167]
+['天天托管', '天天托管', 1942, 1291, 98.2906]
+['新星托教_18965106386', '新星托教', 1222, 696, 100.0]
+['好托管虎邱小太阳教育', '安溪虎邱小太阳托管', 1552, 898, 100.0]
+['卓越教育', '卓越教育', 1836, 1184, 100.0]
+['助成教育', '助成教育思明分校', 1941, 1290, 100.0]
+['惠州陈江纽思达教育培训中心', '惠州陈江纽思达教育培训中心', 2049, 1400, 100.0]
+['长汀县新梦想教育', '长汀县新梦想教育汀州校区', 2133, 1486, 100.0]
+['漳州品读教育', '漳州品读教育', 2206, 1559, 100.0]
+['九华教育梧塘校点', '九华教育梧塘校点', 2290, 1653, 100.0]
+['向日葵托教', '向日葵托教', 2471, 1836, 100.0]
+['小蜡笔教育', '小蜡笔教育', 2581, 1948, 100.0]
+['星火教育_17759629506', '星火教育石厝校区', 496, 1922, 100.0]
+['厦门倍安心教育咨询有限公司_13959296637', '厦门倍安心教育咨询有限公司', 1361, 765, 100.0]
+['优爱托教培训中心', '优爱托教培训中心', 1840, 1188, 100.0]
+['助成教育', '助成教育灌口总部', 1941, 1292, 100.0]
+['好托管温莎教育', '好托管温莎教育', 2063, 1414, 100.0]
+['仓山进附一小', '仓山进附一小', 2150, 1503, 100.0]
+['雅韵教育', '雅韵教育', 2207, 1560, 100.0]
+['雅学教育培训中心', '雅学教育', 2293, 1656, 100.0]
+['启志教育', '启志教育腾龙校区', 246, 342, 100.0]
+['习成教育', '习成教育', 1717, 1064, 100.0]
+['新中星教育', '新中星全托辅导中心', 2078, 1429, 100.0]
+['轻松一百教育', '轻松一百', 2157, 1510, 100.0]
+['龙岩星火教育', '龙岩星火教育', 2209, 1562, 100.0]
+['好托管金太阳教育', '好托管金太阳教育', 2308, 1671, 100.0]
+['翰林学堂', '翰林学堂', 2480, 1845, 100.0]
+['金麦田教育_15959204589', '金麦田教育', 676, 518, 100.0]
+['快乐成长教育中心', '快乐成长教育中心', 1720, 1067, 100.0]
+['福建省泉州市辰星教育咨询有限公司', '福建省泉州市辰星教育咨询有限公司', 1882, 1230, 100.0]
+['嘉荷托辅中心', '嘉荷托辅中心', 1964, 1315, 100.0]
+['新之博教育', '新之博教育', 2107, 1459, 100.0]
+['李林托管辅导班', '李林托管辅导班', 2180, 1533, 100.0]
+['格林学苑', '格林学苑', 2214, 1567, 100.0]
+['安心学后托管', '安心学后托管', 2347, 1710, 100.0]
+['创艺园教育', '创艺园教育', 2496, 1861, 100.0]
+['语堂辅导中心', '语堂辅导中心西塘校区', 268, 150, 100.0]
+['优加教育_13959240272', '优加教育顶许校区', 774, 535, 100.0]
+['品学教育', '品学教育', 1535, 881, 100.0]
+['宝贝e家托管中心', '宝贝e家托管中心', 1722, 1069, 100.0]
+['领星教育', '领星教育', 2016, 1367, 100.0]
+['优越教育', '优越教育', 2111, 1463, 100.0]
+['乐星托教', '乐星托教', 2185, 1538, 100.0]
+['临沂市红领巾托辅中心', '临沂市红领巾托辅中心', 2247, 1602, 100.0]
+['智慧树教育', '智慧树教育', 2370, 1733, 100.0]
+['扬帆教育', '扬帆教育', 2498, 1863, 100.0]
+['红英福', '红英福', 320, 243, 100.0]
+['优加教育_13959240272', '优加教育乐海校区', 774, 1605, 100.0]
+['小天地教育', '小天地教育', 1769, 1117, 100.0]
+['领星教育', '领星教育体育中心校区', 2016, 1866, 100.0]
+['晨阳教育', '晨阳教育', 2113, 1465, 100.0]
+['书乐教育苹果校区', '书乐教育苹果校区', 2189, 1542, 100.0]
+['卓圣堂托教中心', '卓圣堂托教中心长庆校区', 2262, 1619, 100.0]
+['星辰教育', '星辰教育', 2405, 1770, 100.0]
+['福州书与路教育', '福州书与路教育日出校区', 2500, 1865, 100.0]
+['北魏教育', '北魏教育', 345, 259, 100.0]
+['厦门市星光教育连锁机构', '厦门市星光教育连锁机构新村校区', 1183, 674, 100.0]
+['乐邦托教', '乐邦托教', 1937, 1286, 100.0]
+['文侩教育', '文侩教育', 2041, 1392, 100.0]
+['爱心托辅鼓一点', '爱心托辅鼓一点', 2117, 1469, 100.0]
+['爱童辅导中心', '爱童辅导中心', 2197, 1550, 100.0]
+['七色花托教工作室', '漳州七色花托教工作室', 2266, 1625, 100.0]
+['天天彩虹教育', '天天彩虹教育', 2519, 1885, 100.0]
+['给力教育_13950172765', '给力教育', 444, 330, 100.0]
+['厦门市星光教育连锁机构', '集美区星光教育东边校区', 1183, 1447, 100.0]
+['易学堂托辅中心', '厦门思明第二实验小学', 1823, 1171, 100.0]
+['漳州伯乐教育', '漳州伯乐教育', 2047, 1398, 100.0]
+['纯臻学堂（台三小分校）', '纯臻学堂', 2121, 1473, 100.0]
+['梦航教育', '梦航教育', 2200, 1553, 100.0]
+['九华教育溪白校点', '九华教育溪白校点', 2289, 1652, 100.0]
+['鳌头2校区', '乐毅思教育2', 2438, 1803, 100.0]
+['指南针教育', '指南针教育', 2577, 1944, 100.0]
+查找到87家机构有使用签到,并于2018-04-02一天内总共的图片平均到达率为93.51%,其中到达率低于80%的有8家机构
+昨天和今天都有签到的机构有 **76** 家,详情如下
+{'org_name': '向日葵教育', 'shop_name': '向日葵教育', 'shop_id': 336, 'rate': 0.0, 'org_id': 451}
+{'org_name': '童年托管', 'shop_name': '童年托管', 'shop_id': 1220, 'rate': 0.0, 'org_id': 1872}
+{'org_name': '博智学苑', 'shop_name': '博智学苑', 'shop_id': 146, 'rate': 0.0, 'org_id': 264}
+{'org_name': '菁华园托管', 'shop_name': '菁华园托管', 'shop_id': 1260, 'rate': 53.125, 'org_id': 1912}
+{'org_name': '三人行托辅', 'shop_name': '三人行托辅', 'shop_id': 890, 'rate': 55.5556, 'org_id': 1544}
+{'org_name': '晨光教育_13696928419', 'shop_name': '晨光教育', 'shop_id': 792, 'rate': 58.3333, 'org_id': 1392}
+{'org_name': '彩鑫艺恒教育', 'shop_name': '新源校区', 'shop_id': 893, 'rate': 72.0, 'org_id': 1547}
+{'org_name': '福州市尚学巨人教育服务有限公司', 'shop_name': '巨人教育', 'shop_id': 887, 'rate': 77.2727, 'org_id': 1541}
+{'org_name': '哈托教育_15710665983', 'shop_name': '哈托教育', 'shop_id': 779, 'rate': 83.3333, 'org_id': 1380}
+{'org_name': '育鹰教育', 'shop_name': '海滨小学', 'shop_id': 1152, 'rate': 83.3333, 'org_id': 1804}
+{'org_name': '知新教育', 'shop_name': '知新教育', 'shop_id': 1782, 'rate': 83.3333, 'org_id': 2417}
+{'org_name': '启明教育', 'shop_name': '厦门启明教育', 'shop_id': 461, 'rate': 90.2439, 'org_id': 589}
+{'org_name': '闰润雨学苑光华校区', 'shop_name': '润润雨学苑', 'shop_id': 1236, 'rate': 91.6667, 'org_id': 1888}
+{'org_name': '心苗教育', 'shop_name': '心苗教育', 'shop_id': 1037, 'rate': 93.3333, 'org_id': 1690}
+{'org_name': '漳州优嘉托辅中心', 'shop_name': '漳州江滨小学优嘉托辅中心', 'shop_id': 1844, 'rate': 97.5, 'org_id': 2479}
+{'org_name': '菁英教育', 'shop_name': '菁英教育', 'shop_id': 1287, 'rate': 97.9167, 'org_id': 1938}
+{'org_name': '天天托管', 'shop_name': '天天托管', 'shop_id': 1291, 'rate': 98.2906, 'org_id': 1942}
+{'org_name': '新星托教_18965106386', 'shop_name': '新星托教', 'shop_id': 696, 'rate': 100.0, 'org_id': 1222}
+{'org_name': '好托管虎邱小太阳教育', 'shop_name': '安溪虎邱小太阳托管', 'shop_id': 898, 'rate': 100.0, 'org_id': 1552}
+{'org_name': '卓越教育', 'shop_name': '卓越教育', 'shop_id': 1184, 'rate': 100.0, 'org_id': 1836}
+{'org_name': '助成教育', 'shop_name': '助成教育思明分校', 'shop_id': 1290, 'rate': 100.0, 'org_id': 1941}
+{'org_name': '惠州陈江纽思达教育培训中心', 'shop_name': '惠州陈江纽思达教育培训中心', 'shop_id': 1400, 'rate': 100.0, 'org_id': 2049}
+{'org_name': '长汀县新梦想教育', 'shop_name': '长汀县新梦想教育汀州校区', 'shop_id': 1486, 'rate': 100.0, 'org_id': 2133}
+{'org_name': '九华教育梧塘校点', 'shop_name': '九华教育梧塘校点', 'shop_id': 1653, 'rate': 100.0, 'org_id': 2290}
+{'org_name': '厦门倍安心教育咨询有限公司_13959296637', 'shop_name': '厦门倍安心教育咨询有限公司', 'shop_id': 765, 'rate': 100.0, 'org_id': 1361}
+{'org_name': '优爱托教培训中心', 'shop_name': '优爱托教培训中心', 'shop_id': 1188, 'rate': 100.0, 'org_id': 1840}
+{'org_name': '助成教育', 'shop_name': '助成教育灌口总部', 'shop_id': 1292, 'rate': 100.0, 'org_id': 1941}
+{'org_name': '仓山进附一小', 'shop_name': '仓山进附一小', 'shop_id': 1503, 'rate': 100.0, 'org_id': 2150}
+{'org_name': '雅韵教育', 'shop_name': '雅韵教育', 'shop_id': 1560, 'rate': 100.0, 'org_id': 2207}
+{'org_name': '雅学教育培训中心', 'shop_name': '雅学教育', 'shop_id': 1656, 'rate': 100.0, 'org_id': 2293}
+{'org_name': '启志教育', 'shop_name': '启志教育腾龙校区', 'shop_id': 342, 'rate': 100.0, 'org_id': 246}
+{'org_name': '习成教育', 'shop_name': '习成教育', 'shop_id': 1064, 'rate': 100.0, 'org_id': 1717}
+{'org_name': '新中星教育', 'shop_name': '新中星全托辅导中心', 'shop_id': 1429, 'rate': 100.0, 'org_id': 2078}
+{'org_name': '轻松一百教育', 'shop_name': '轻松一百', 'shop_id': 1510, 'rate': 100.0, 'org_id': 2157}
+{'org_name': '龙岩星火教育', 'shop_name': '龙岩星火教育', 'shop_id': 1562, 'rate': 100.0, 'org_id': 2209}
+{'org_name': '金麦田教育_15959204589', 'shop_name': '金麦田教育', 'shop_id': 518, 'rate': 100.0, 'org_id': 676}
+{'org_name': '快乐成长教育中心', 'shop_name': '快乐成长教育中心', 'shop_id': 1067, 'rate': 100.0, 'org_id': 1720}
+{'org_name': '福建省泉州市辰星教育咨询有限公司', 'shop_name': '福建省泉州市辰星教育咨询有限公司', 'shop_id': 1230, 'rate': 100.0, 'org_id': 1882}
+{'org_name': '嘉荷托辅中心', 'shop_name': '嘉荷托辅中心', 'shop_id': 1315, 'rate': 100.0, 'org_id': 1964}
+{'org_name': '新之博教育', 'shop_name': '新之博教育', 'shop_id': 1459, 'rate': 100.0, 'org_id': 2107}
+{'org_name': '李林托管辅导班', 'shop_name': '李林托管辅导班', 'shop_id': 1533, 'rate': 100.0, 'org_id': 2180}
+{'org_name': '格林学苑', 'shop_name': '格林学苑', 'shop_id': 1567, 'rate': 100.0, 'org_id': 2214}
+{'org_name': '安心学后托管', 'shop_name': '安心学后托管', 'shop_id': 1710, 'rate': 100.0, 'org_id': 2347}
+{'org_name': '创艺园教育', 'shop_name': '创艺园教育', 'shop_id': 1861, 'rate': 100.0, 'org_id': 2496}
+{'org_name': '语堂辅导中心', 'shop_name': '语堂辅导中心西塘校区', 'shop_id': 150, 'rate': 100.0, 'org_id': 268}
+{'org_name': '优加教育_13959240272', 'shop_name': '优加教育顶许校区', 'shop_id': 535, 'rate': 100.0, 'org_id': 774}
+{'org_name': '品学教育', 'shop_name': '品学教育', 'shop_id': 881, 'rate': 100.0, 'org_id': 1535}
+{'org_name': '宝贝e家托管中心', 'shop_name': '宝贝e家托管中心', 'shop_id': 1069, 'rate': 100.0, 'org_id': 1722}
+{'org_name': '领星教育', 'shop_name': '领星教育', 'shop_id': 1367, 'rate': 100.0, 'org_id': 2016}
+{'org_name': '优越教育', 'shop_name': '优越教育', 'shop_id': 1463, 'rate': 100.0, 'org_id': 2111}
+{'org_name': '乐星托教', 'shop_name': '乐星托教', 'shop_id': 1538, 'rate': 100.0, 'org_id': 2185}
+{'org_name': '临沂市红领巾托辅中心', 'shop_name': '临沂市红领巾托辅中心', 'shop_id': 1602, 'rate': 100.0, 'org_id': 2247}
+{'org_name': '智慧树教育', 'shop_name': '智慧树教育', 'shop_id': 1733, 'rate': 100.0, 'org_id': 2370}
+{'org_name': '扬帆教育', 'shop_name': '扬帆教育', 'shop_id': 1863, 'rate': 100.0, 'org_id': 2498}
+{'org_name': '优加教育_13959240272', 'shop_name': '优加教育乐海校区', 'shop_id': 1605, 'rate': 100.0, 'org_id': 774}
+{'org_name': '小天地教育', 'shop_name': '小天地教育', 'shop_id': 1117, 'rate': 100.0, 'org_id': 1769}
+{'org_name': '领星教育', 'shop_name': '领星教育体育中心校区', 'shop_id': 1866, 'rate': 100.0, 'org_id': 2016}
+{'org_name': '晨阳教育', 'shop_name': '晨阳教育', 'shop_id': 1465, 'rate': 100.0, 'org_id': 2113}
+{'org_name': '书乐教育苹果校区', 'shop_name': '书乐教育苹果校区', 'shop_id': 1542, 'rate': 100.0, 'org_id': 2189}
+{'org_name': '卓圣堂托教中心', 'shop_name': '卓圣堂托教中心长庆校区', 'shop_id': 1619, 'rate': 100.0, 'org_id': 2262}
+{'org_name': '星辰教育', 'shop_name': '星辰教育', 'shop_id': 1770, 'rate': 100.0, 'org_id': 2405}
+{'org_name': '福州书与路教育', 'shop_name': '福州书与路教育日出校区', 'shop_id': 1865, 'rate': 100.0, 'org_id': 2500}
+{'org_name': '北魏教育', 'shop_name': '北魏教育', 'shop_id': 259, 'rate': 100.0, 'org_id': 345}
+{'org_name': '厦门市星光教育连锁机构', 'shop_name': '厦门市星光教育连锁机构新村校区', 'shop_id': 674, 'rate': 100.0, 'org_id': 1183}
+{'org_name': '乐邦托教', 'shop_name': '乐邦托教', 'shop_id': 1286, 'rate': 100.0, 'org_id': 1937}
+{'org_name': '文侩教育', 'shop_name': '文侩教育', 'shop_id': 1392, 'rate': 100.0, 'org_id': 2041}
+{'org_name': '爱心托辅鼓一点', 'shop_name': '爱心托辅鼓一点', 'shop_id': 1469, 'rate': 100.0, 'org_id': 2117}
+{'org_name': '爱童辅导中心', 'shop_name': '爱童辅导中心', 'shop_id': 1550, 'rate': 100.0, 'org_id': 2197}
+{'org_name': '七色花托教工作室', 'shop_name': '漳州七色花托教工作室', 'shop_id': 1625, 'rate': 100.0, 'org_id': 2266}
+{'org_name': '给力教育_13950172765', 'shop_name': '给力教育', 'shop_id': 330, 'rate': 100.0, 'org_id': 444}
+{'org_name': '厦门市星光教育连锁机构', 'shop_name': '集美区星光教育东边校区', 'shop_id': 1447, 'rate': 100.0, 'org_id': 1183}
+{'org_name': '易学堂托辅中心', 'shop_name': '厦门思明第二实验小学', 'shop_id': 1171, 'rate': 100.0, 'org_id': 1823}
+{'org_name': '漳州伯乐教育', 'shop_name': '漳州伯乐教育', 'shop_id': 1398, 'rate': 100.0, 'org_id': 2047}
+{'org_name': '纯臻学堂（台三小分校）', 'shop_name': '纯臻学堂', 'shop_id': 1473, 'rate': 100.0, 'org_id': 2121}
+{'org_name': '梦航教育', 'shop_name': '梦航教育', 'shop_id': 1553, 'rate': 100.0, 'org_id': 2200}
+{'org_name': '九华教育溪白校点', 'shop_name': '九华教育溪白校点', 'shop_id': 1652, 'rate': 100.0, 'org_id': 2289}
+新增机构 **11** 家,增加详情如下
+{'org_name': '漳州品读教育', 'shop_name': '漳州品读教育', 'shop_id': 1559, 'rate': 100.0, 'org_id': 2206}
+{'org_name': '向日葵托教', 'shop_name': '向日葵托教', 'shop_id': 1836, 'rate': 100.0, 'org_id': 2471}
+{'org_name': '小蜡笔教育', 'shop_name': '小蜡笔教育', 'shop_id': 1948, 'rate': 100.0, 'org_id': 2581}
+{'org_name': '星火教育_17759629506', 'shop_name': '星火教育石厝校区', 'shop_id': 1922, 'rate': 100.0, 'org_id': 496}
+{'org_name': '好托管温莎教育', 'shop_name': '好托管温莎教育', 'shop_id': 1414, 'rate': 100.0, 'org_id': 2063}
+{'org_name': '好托管金太阳教育', 'shop_name': '好托管金太阳教育', 'shop_id': 1671, 'rate': 100.0, 'org_id': 2308}
+{'org_name': '翰林学堂', 'shop_name': '翰林学堂', 'shop_id': 1845, 'rate': 100.0, 'org_id': 2480}
+{'org_name': '红英福', 'shop_name': '红英福', 'shop_id': 243, 'rate': 100.0, 'org_id': 320}
+{'org_name': '天天彩虹教育', 'shop_name': '天天彩虹教育', 'shop_id': 1885, 'rate': 100.0, 'org_id': 2519}
+{'org_name': '鳌头2校区', 'shop_name': '乐毅思教育2', 'shop_id': 1803, 'rate': 100.0, 'org_id': 2438}
+{'org_name': '指南针教育', 'shop_name': '指南针教育', 'shop_id': 1944, 'rate': 100.0, 'org_id': 2577}
+减少机构 **36** 家.减少详情如下
+{'rate': 0.0, 'shop_name': '贝亲教育新房校区', 'shop_id': 1617, 'org_name': '贝亲教育', 'org_id': 2260}
+{'rate': 0.0, 'shop_name': '惠州市合生实验学校', 'shop_id': 1494, 'org_name': '惠州市惠城区嘉佳午托服务部', 'org_id': 2141}
+{'rate': 15.0, 'shop_name': '天一托教中心', 'shop_id': 492, 'org_name': '天一托教中心_13055219778', 'org_id': 632}
+{'rate': 27.2727, 'shop_name': '尚学园', 'shop_id': 1582, 'org_name': '好托管-尚学园', 'org_id': 2228}
+{'rate': 71.4286, 'shop_name': '角美中心小学', 'shop_id': 401, 'org_name': '星火教育_17759629506', 'org_id': 496}
+{'rate': 84.3137, 'shop_name': '锦绣教育', 'shop_id': 664, 'org_name': '锦绣教育_13696918507', 'org_id': 1169}
+{'rate': 90.0, 'shop_name': '城南四小校区', 'shop_id': 1275, 'org_name': '新余市金色未来外国语学校', 'org_id': 1927}
+{'rate': 90.9091, 'shop_name': '卓越教育', 'shop_id': 1589, 'org_name': '卓越教育', 'org_id': 2235}
+{'rate': 98.0, 'shop_name': '小金星托辅中心', 'shop_id': 1777, 'org_name': '小金星托辅中心', 'org_id': 2412}
+{'rate': 98.2906, 'shop_name': '三人行教育', 'shop_id': 1557, 'org_name': '乐之行教育', 'org_id': 2204}
+{'rate': 98.9583, 'shop_name': '多智源生活馆', 'shop_id': 1381, 'org_name': '多智源生活馆', 'org_id': 2030}
+{'rate': 100.0, 'shop_name': '聚学堂教育托辅中心', 'shop_id': 1218, 'org_name': '聚学堂教育托管中心', 'org_id': 1870}
+{'rate': 100.0, 'shop_name': '北京书香源山西省图分校', 'shop_id': 1530, 'org_name': '北京书香源山西省图分校', 'org_id': 2177}
+{'rate': 100.0, 'shop_name': '易佰教育', 'shop_id': 1587, 'org_name': '易佰教育', 'org_id': 2233}
+{'rate': 100.0, 'shop_name': '儒家安亲教育机构', 'shop_id': 1531, 'org_name': '儒家安亲教育机构', 'org_id': 2178}
+{'rate': 100.0, 'shop_name': '乔少儿国际课后服务中心', 'shop_id': 151, 'org_name': '乔少儿国际课后服务中心', 'org_id': 269}
+{'rate': 100.0, 'shop_name': '哆菲安亲', 'shop_id': 692, 'org_name': '哆菲安亲_13850010555', 'org_id': 1211}
+{'rate': 100.0, 'shop_name': '斑马线', 'shop_id': 1121, 'org_name': '斑马线安全托教中心', 'org_id': 1773}
+{'rate': 100.0, 'shop_name': '厦门可心之家教育民立校区', 'shop_id': 152, 'org_name': '厦门可心之家教育', 'org_id': 270}
+{'rate': 100.0, 'shop_name': '哈哈少儿培训中心', 'shop_id': 895, 'org_name': '哈哈少儿培训中心黄沙校', 'org_id': 1549}
+{'rate': 100.0, 'shop_name': '卓根教育保健校区', 'shop_id': 1234, 'org_name': '哈尔滨卓根教育', 'org_id': 1886}
+{'rate': 100.0, 'shop_name': '酷学堂', 'shop_id': 1729, 'org_name': '酷学堂教育', 'org_id': 2366}
+{'rate': 100.0, 'shop_name': '智慧星托管中心', 'shop_id': 1864, 'org_name': '智慧星托管中心', 'org_id': 2499}
+{'rate': 100.0, 'shop_name': '启志育才校区', 'shop_id': 165, 'org_name': '启志育才校区', 'org_id': 280}
+{'rate': 100.0, 'shop_name': '金麦田教育莲花校区', 'shop_id': 522, 'org_name': '金麦田教育莲花校区_15859296505', 'org_id': 688}
+{'rate': 100.0, 'shop_name': '学不凡教育五缘湾校区', 'shop_id': 1165, 'org_name': '学不凡教育', 'org_id': 1817}
+{'rate': 100.0, 'shop_name': '壹诚教育', 'shop_id': 1311, 'org_name': '壹诚教育', 'org_id': 1960}
+{'rate': 100.0, 'shop_name': '读书郎教育', 'shop_id': 1423, 'org_name': '读书郎教育', 'org_id': 2072}
+{'rate': 100.0, 'shop_name': '吉的堡少儿英语', 'shop_id': 1544, 'org_name': '吉的堡少儿英语', 'org_id': 2191}
+{'rate': 100.0, 'shop_name': '萌果果教育', 'shop_id': 1570, 'org_name': '萌果果教育', 'org_id': 2216}
+{'rate': 100.0, 'shop_name': '漳州市龙文区益智家园', 'shop_id': 1884, 'org_name': '漳州市龙文区益智家园', 'org_id': 2518}
+{'rate': 100.0, 'shop_name': '吉的堡and向日葵', 'shop_id': 1547, 'org_name': '吉的堡and向日葵', 'org_id': 2194}
+{'rate': 100.0, 'shop_name': '卓优教育', 'shop_id': 1571, 'org_name': '卓优教育', 'org_id': 2217}
+{'rate': 100.0, 'shop_name': '阳明教育松柏校区', 'shop_id': 1636, 'org_name': '阳明教育松柏校区', 'org_id': 2276}
+{'rate': 100.0, 'shop_name': '涵江区向日葵教育', 'shop_id': 1893, 'org_name': '涵江区向日葵教育', 'org_id': 2527}
+{'rate': 100.0, 'shop_name': '爱星教育', 'shop_id': 1526, 'org_name': '爱星教育', 'org_id': 2173}
+总计减少机构 **25** 家.
+今日减少机构列表也将发送至钉钉
+准备将搜索得到的数据写入并覆盖缓存文件中的原有内容...
+写入缓存成功
+今日检测图片到达率次数已标记为1
+-->执行检测数据库字段任务
+执行检测2018-04-02的推送情况
+数据库查询未推送连接成功
+查找2018-04-02未推送的字段信息
+查询未推送数据连接已正常关闭
+查找到6条数据未发送
+数据库查询已推送连接成功
+查找2018-04-02已推送的字段信息
+查询已推送数据连接已正常关闭
+查找到3053条数据已发送
+6条未推送的信息如下:
+{'shopid': 1236, 'studentid': 16328, 'id': 1401254}
+
+{'shopid': 461, 'studentid': 15871, 'id': 1401255}
+
+{'shopid': 1236, 'studentid': 16009, 'id': 1401256}
+
+{'shopid': 1236, 'studentid': 16299, 'id': 1401257}
+
+{'shopid': 890, 'studentid': 11472, 'id': 1401258}
+
+{'shopid': 792, 'studentid': 27758, 'id': 1401259}
+
+今日检测数据库字段次数已标记为1
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-02 14:43:02============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'time_end': '18', 'logpath': 'logs', 'database': 'haotuoguan', 'passwd': 'haotuoguan123456', 'author': 'cg閿欒繃', 'pro_for_letter': 'htgTimedTask', 'sql_path': 'sql/pic_Arrivals-test.sql', 'when_hour_checkall': '12', 'fieldcompare_name4': 'appendtime', 'email': 'no', 'fieldcompare_name3': 'id', 'user': 'haotuoguan', 'host': '10.9.115.174', 'time_beginning': '9', 'when_time_rm': '23', 'ProjectConfigure': '', 'port': '3306', 'field_name': 'send_state', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'table_name': 'htg_weixin_history', 'warning_level': '70', 'fieldcompare_name_value': 'OpenID', 'email_sendaddr': '', 'servername': '197', 'whether_rm_log': 'no', 'arrivals_standard': '80', 'whether_check_pic': 'yes', 'whether_check_pm2': 'no', 'whether_check_letter': 'yes', 'run_intervals': '300', 'checkdisk': 'no', 'username': '鏋楃箒', 'next_field_value': '1', 'savelog_to_file': 'yes', 'email_sendpasswd': '', 'dingtalk': 'no', 'fieldcompare_name1': 'shopid', 'smtp_server': '', 'fieldcompare_name2': 'studentid', 'sleeptime': '70', 'past_days_num': '3', 'createtime': '2017-09-30', 'number_accuracy': '2', 'rm_log_passday': '7', 'ToEmail': ['1732821152@qq.com'], 'first_field_value': '0', 'need_not_send_dateweek': '1 6 7'}
+需要运行的有: 
+{'time_end': '18', 'logpath': 'logs', 'database': 'haotuoguan', 'passwd': 'haotuoguan123456', 'author': 'cg閿欒繃', 'pro_for_letter': 'htgTimedTask', 'sql_path': 'sql/pic_Arrivals-test.sql', 'when_hour_checkall': '12', 'fieldcompare_name4': 'appendtime', 'email': 'no', 'fieldcompare_name3': 'id', 'user': 'haotuoguan', 'host': '10.9.115.174', 'time_beginning': '9', 'when_time_rm': '23', 'ProjectConfigure': '', 'port': '3306', 'field_name': 'send_state', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'table_name': 'htg_weixin_history', 'warning_level': '70', 'fieldcompare_name_value': 'OpenID', 'email_sendaddr': '', 'servername': '197', 'whether_rm_log': 'no', 'arrivals_standard': '80', 'whether_check_pic': 'yes', 'whether_check_pm2': 'no', 'whether_check_letter': 'yes', 'run_intervals': '300', 'checkdisk': 'no', 'username': '鏋楃箒', 'next_field_value': '1', 'savelog_to_file': 'yes', 'email_sendpasswd': '', 'dingtalk': 'no', 'fieldcompare_name1': 'shopid', 'smtp_server': '', 'fieldcompare_name2': 'studentid', 'sleeptime': '70', 'past_days_num': '3', 'createtime': '2017-09-30', 'number_accuracy': '2', 'rm_log_passday': '7', 'ToEmail': ['1732821152@qq.com'], 'first_field_value': '0', 'need_not_send_dateweek': '1 6 7'}
+-->执行检测数据库字段任务
+数据库连接成功
+查找send_state值为0的数据
+已查找到0条数据
+第一次查询连接已正常关闭
+无数据需要处理
+检测已完成
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-02 14:43:19============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'port': '3306', 'pro_for_letter': 'htgTimedTask', 'email_sendaddr': '', 'dingtalk': 'no', 'whether_rm_log': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'fieldcompare_name3': 'id', 'next_field_value': '1', 'sql_path': 'sql/pic_Arrivals-test.sql', 'logpath': 'logs', 'ToEmail': ['1732821152@qq.com'], 'fieldcompare_name1': 'shopid', 'whether_check_pm2': 'no', 'fieldcompare_name2': 'studentid', 'number_accuracy': '2', 'user': 'haotuoguan', 'email': 'no', 'first_field_value': '0', 'run_intervals': '300', 'sleeptime': '70', 'ProjectConfigure': '', 'fieldcompare_name4': 'appendtime', 'servername': '197', 'host': '10.9.115.174', 'savelog_to_file': 'yes', 'past_days_num': '3', 'email_sendpasswd': '', 'passwd': 'haotuoguan123456', 'when_hour_checkall': '14', 'need_not_send_dateweek': '1 6 7', 'arrivals_standard': '80', 'field_name': 'send_state', 'fieldcompare_name_value': 'OpenID', 'when_time_rm': '23', 'warning_level': '70', 'time_beginning': '9', 'rm_log_passday': '7', 'checkdisk': 'no', 'whether_check_letter': 'yes', 'username': '鏋楃箒', 'author': 'cg閿欒繃', 'time_end': '18', 'database': 'haotuoguan', 'smtp_server': '', 'table_name': 'htg_weixin_history', 'whether_check_pic': 'yes', 'createtime': '2017-09-30'}
+需要运行的有: 
+{'port': '3306', 'pro_for_letter': 'htgTimedTask', 'email_sendaddr': '', 'dingtalk': 'no', 'whether_rm_log': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866', 'fieldcompare_name3': 'id', 'next_field_value': '1', 'sql_path': 'sql/pic_Arrivals-test.sql', 'logpath': 'logs', 'ToEmail': ['1732821152@qq.com'], 'fieldcompare_name1': 'shopid', 'whether_check_pm2': 'no', 'fieldcompare_name2': 'studentid', 'number_accuracy': '2', 'user': 'haotuoguan', 'email': 'no', 'first_field_value': '0', 'run_intervals': '300', 'sleeptime': '70', 'ProjectConfigure': '', 'fieldcompare_name4': 'appendtime', 'servername': '197', 'host': '10.9.115.174', 'savelog_to_file': 'yes', 'past_days_num': '3', 'email_sendpasswd': '', 'passwd': 'haotuoguan123456', 'when_hour_checkall': '14', 'need_not_send_dateweek': '1 6 7', 'arrivals_standard': '80', 'field_name': 'send_state', 'fieldcompare_name_value': 'OpenID', 'when_time_rm': '23', 'warning_level': '70', 'time_beginning': '9', 'rm_log_passday': '7', 'checkdisk': 'no', 'whether_check_letter': 'yes', 'username': '鏋楃箒', 'author': 'cg閿欒繃', 'time_end': '18', 'database': 'haotuoguan', 'smtp_server': '', 'table_name': 'htg_weixin_history', 'whether_check_pic': 'yes', 'createtime': '2017-09-30'}
+-->执行检测数据库字段任务
+执行检测2018-04-02的推送情况
+数据库查询未推送连接成功
+查找2018-04-02未推送的字段信息
+查询未推送数据连接已正常关闭
+未查找到2018-04-02未推送的字段信息
+数据库查询已推送连接成功
+查找2018-04-02已推送的字段信息
+查询已推送数据连接已正常关闭
+查找到5211条数据已发送
+今日检测数据库字段次数已标记为1
+-->检测2018-04-02图片到达率
+数据库查询图片到达率已连接
+数据库查询图片连接已关闭
+准备从缓存文件中读取之前的数据...
+查找到的机构信息如下:
+['机构名', '校区名', '机构id', '校区id', '图片到达率']
+['童年托管', '童年托管', 1872, 1220, 0.0]
+['向日葵教育', '向日葵教育', 451, 336, 0.0]
+['博智学苑', '博智学苑', 264, 146, 0.0]
+['天一托教中心_13055219778', '天一托教中心', 632, 492, 0.0]
+['晨光教育_13696928419', '晨光教育', 1392, 792, 57.1429]
+['哈托教育_15710665983', '哈托教育', 1380, 779, 70.0]
+['三人行托辅', '三人行托辅', 1544, 890, 71.4286]
+['彩鑫艺恒教育', '新源校区', 1547, 893, 73.4375]
+['壹诚教育', '壹诚教育', 1960, 1311, 75.0]
+['福州市尚学巨人教育服务有限公司', '巨人教育', 1541, 887, 76.7442]
+['知新教育', '知新教育', 2417, 1782, 81.8182]
+['乐之行教育', '三人行教育', 2204, 1557, 82.6087]
+['育鹰教育', '海滨小学', 1804, 1152, 85.7143]
+['菁华园托管', '菁华园托管', 1912, 1260, 97.8723]
+['天天托管', '天天托管', 1942, 1291, 98.2906]
+['菁英教育', '菁英教育', 1938, 1287, 98.4375]
+['漳州优嘉托辅中心', '漳州江滨小学优嘉托辅中心', 2479, 1844, 98.7342]
+['小蜡笔教育', '小蜡笔教育', 2581, 1948, 100.0]
+['语堂辅导中心', '语堂辅导中心西塘校区', 268, 150, 100.0]
+['金麦田教育_15959204589', '金麦田教育', 676, 518, 100.0]
+['快乐成长教育中心', '快乐成长教育中心', 1720, 1067, 100.0]
+['聚学堂教育托管中心', '聚学堂教育托辅中心', 1870, 1218, 100.0]
+['助成教育', '助成教育灌口总部', 1941, 1292, 100.0]
+['惠州陈江纽思达教育培训中心', '惠州陈江纽思达教育培训中心', 2049, 1400, 100.0]
+['长汀县新梦想教育', '长汀县新梦想教育汀州校区', 2133, 1486, 100.0]
+['临沂市红领巾托辅中心', '临沂市红领巾托辅中心', 2247, 1602, 100.0]
+['鲸鲸教育', '鲸鲸教育', 2334, 1697, 100.0]
+['翰林学堂', '翰林学堂', 2480, 1845, 100.0]
+['红英福', '红英福', 320, 243, 100.0]
+['优加教育_13959240272', '优加教育顶许校区', 774, 535, 100.0]
+['品学教育', '品学教育', 1535, 881, 100.0]
+['宝贝e家托管中心', '宝贝e家托管中心', 1722, 1069, 100.0]
+['好托管温莎教育', '好托管温莎教育', 2063, 1414, 100.0]
+['仓山进附一小', '仓山进附一小', 2150, 1503, 100.0]
+['漳州品读教育', '漳州品读教育', 2206, 1559, 100.0]
+['贝亲教育', '贝亲教育新房校区', 2260, 1617, 100.0]
+['安心学后托管', '安心学后托管', 2347, 1710, 100.0]
+['创艺园教育', '创艺园教育', 2496, 1861, 100.0]
+['北魏教育', '北魏教育', 345, 259, 100.0]
+['优加教育_13959240272', '优加教育乐海校区', 774, 1605, 100.0]
+['小天地教育', '小天地教育', 1769, 1117, 100.0]
+['福建省泉州市辰星教育咨询有限公司', '福建省泉州市辰星教育咨询有限公司', 1882, 1230, 100.0]
+['新中星教育', '新中星全托辅导中心', 2078, 1429, 100.0]
+['轻松一百教育', '轻松一百', 2157, 1510, 100.0]
+['雅韵教育', '雅韵教育', 2207, 1560, 100.0]
+['卓圣堂托教中心', '卓圣堂托教中心长庆校区', 2262, 1619, 100.0]
+['智慧树教育', '智慧树教育', 2370, 1733, 100.0]
+['扬帆教育', '扬帆教育', 2498, 1863, 100.0]
+['给力教育_13950172765', '给力教育', 444, 330, 100.0]
+['厦门市星光教育连锁机构', '厦门市星光教育连锁机构新村校区', 1183, 674, 100.0]
+['斑马线安全托教中心', '斑马线', 1773, 1121, 100.0]
+['闰润雨学苑光华校区', '润润雨学苑', 1888, 1236, 100.0]
+['嘉荷托辅中心', '嘉荷托辅中心', 1964, 1315, 100.0]
+['新之博教育', '新之博教育', 2107, 1459, 100.0]
+['李林托管辅导班', '李林托管辅导班', 2180, 1533, 100.0]
+['龙岩星火教育', '龙岩星火教育', 2209, 1562, 100.0]
+['七色花托教工作室', '漳州七色花托教工作室', 2266, 1625, 100.0]
+['星辰教育', '星辰教育', 2405, 1770, 100.0]
+['智慧星托管中心', '智慧星托管中心', 2499, 1864, 100.0]
+['厦门市星光教育连锁机构', '集美区星光教育东边校区', 1183, 1447, 100.0]
+['领星教育', '领星教育', 2016, 1367, 100.0]
+['优越教育', '优越教育', 2111, 1463, 100.0]
+['乐星托教', '乐星托教', 2185, 1538, 100.0]
+['格林学苑', '格林学苑', 2214, 1567, 100.0]
+['九华教育溪白校点', '九华教育溪白校点', 2289, 1652, 100.0]
+['福州书与路教育', '福州书与路教育日出校区', 2500, 1865, 100.0]
+['星火教育_17759629506', '星火教育石厝校区', 496, 1922, 100.0]
+['新星托教_18965106386', '新星托教', 1222, 696, 100.0]
+['好托管虎邱小太阳教育', '安溪虎邱小太阳托管', 1552, 898, 100.0]
+['易学堂托辅中心', '厦门思明第二实验小学', 1823, 1171, 100.0]
+['乐邦托教', '乐邦托教', 1937, 1286, 100.0]
+['领星教育', '领星教育体育中心校区', 2016, 1866, 100.0]
+['晨阳教育', '晨阳教育', 2113, 1465, 100.0]
+['书乐教育苹果校区', '书乐教育苹果校区', 2189, 1542, 100.0]
+['萌果果教育', '萌果果教育', 2216, 1570, 100.0]
+['九华教育梧塘校点', '九华教育梧塘校点', 2290, 1653, 100.0]
+['鳌头2校区', '乐毅思教育2', 2438, 1803, 100.0]
+['漳州市龙文区益智家园', '漳州市龙文区益智家园', 2518, 1884, 100.0]
+['启志教育', '启志教育腾龙校区', 246, 342, 100.0]
+['启明教育', '厦门启明教育', 589, 461, 100.0]
+['厦门倍安心教育咨询有限公司_13959296637', '厦门倍安心教育咨询有限公司', 1361, 765, 100.0]
+['心苗教育', '心苗教育', 1690, 1037, 100.0]
+['卓越教育', '卓越教育', 1836, 1184, 100.0]
+['文侩教育', '文侩教育', 2041, 1392, 100.0]
+['爱心托辅鼓一点', '爱心托辅鼓一点', 2117, 1469, 100.0]
+['爱童辅导中心', '爱童辅导中心', 2197, 1550, 100.0]
+['小博士英语', '小博士英语', 2220, 1574, 100.0]
+['雅学教育培训中心', '雅学教育', 2293, 1656, 100.0]
+['向日葵托教', '向日葵托教', 2471, 1836, 100.0]
+['天天彩虹教育', '天天彩虹教育', 2519, 1885, 100.0]
+['习成教育', '习成教育', 1717, 1064, 100.0]
+['优爱托教培训中心', '优爱托教培训中心', 1840, 1188, 100.0]
+['助成教育', '助成教育思明分校', 1941, 1290, 100.0]
+['漳州伯乐教育', '漳州伯乐教育', 2047, 1398, 100.0]
+['纯臻学堂（台三小分校）', '纯臻学堂', 2121, 1473, 100.0]
+['梦航教育', '梦航教育', 2200, 1553, 100.0]
+['好托管-尚学园', '尚学园', 2228, 1582, 100.0]
+['好托管金太阳教育', '好托管金太阳教育', 2308, 1671, 100.0]
+['指南针教育', '指南针教育', 2577, 1944, 100.0]
+查找到99家机构有使用签到,并于2018-04-02一天内总共的图片平均到达率为93.61%,其中到达率低于80%的有10家机构
+昨天和今天都有签到的机构有 **87** 家,详情如下
+{'org_name': '童年托管', 'rate': 0.0, 'org_id': 1872, 'shop_name': '童年托管', 'shop_id': 1220}
+{'org_name': '向日葵教育', 'rate': 0.0, 'org_id': 451, 'shop_name': '向日葵教育', 'shop_id': 336}
+{'org_name': '博智学苑', 'rate': 0.0, 'org_id': 264, 'shop_name': '博智学苑', 'shop_id': 146}
+{'org_name': '晨光教育_13696928419', 'rate': 57.1429, 'org_id': 1392, 'shop_name': '晨光教育', 'shop_id': 792}
+{'org_name': '哈托教育_15710665983', 'rate': 70.0, 'org_id': 1380, 'shop_name': '哈托教育', 'shop_id': 779}
+{'org_name': '三人行托辅', 'rate': 71.4286, 'org_id': 1544, 'shop_name': '三人行托辅', 'shop_id': 890}
+{'org_name': '彩鑫艺恒教育', 'rate': 73.4375, 'org_id': 1547, 'shop_name': '新源校区', 'shop_id': 893}
+{'org_name': '福州市尚学巨人教育服务有限公司', 'rate': 76.7442, 'org_id': 1541, 'shop_name': '巨人教育', 'shop_id': 887}
+{'org_name': '知新教育', 'rate': 81.8182, 'org_id': 2417, 'shop_name': '知新教育', 'shop_id': 1782}
+{'org_name': '育鹰教育', 'rate': 85.7143, 'org_id': 1804, 'shop_name': '海滨小学', 'shop_id': 1152}
+{'org_name': '菁华园托管', 'rate': 97.8723, 'org_id': 1912, 'shop_name': '菁华园托管', 'shop_id': 1260}
+{'org_name': '天天托管', 'rate': 98.2906, 'org_id': 1942, 'shop_name': '天天托管', 'shop_id': 1291}
+{'org_name': '菁英教育', 'rate': 98.4375, 'org_id': 1938, 'shop_name': '菁英教育', 'shop_id': 1287}
+{'org_name': '漳州优嘉托辅中心', 'rate': 98.7342, 'org_id': 2479, 'shop_name': '漳州江滨小学优嘉托辅中心', 'shop_id': 1844}
+{'org_name': '小蜡笔教育', 'rate': 100.0, 'org_id': 2581, 'shop_name': '小蜡笔教育', 'shop_id': 1948}
+{'org_name': '语堂辅导中心', 'rate': 100.0, 'org_id': 268, 'shop_name': '语堂辅导中心西塘校区', 'shop_id': 150}
+{'org_name': '金麦田教育_15959204589', 'rate': 100.0, 'org_id': 676, 'shop_name': '金麦田教育', 'shop_id': 518}
+{'org_name': '快乐成长教育中心', 'rate': 100.0, 'org_id': 1720, 'shop_name': '快乐成长教育中心', 'shop_id': 1067}
+{'org_name': '助成教育', 'rate': 100.0, 'org_id': 1941, 'shop_name': '助成教育灌口总部', 'shop_id': 1292}
+{'org_name': '惠州陈江纽思达教育培训中心', 'rate': 100.0, 'org_id': 2049, 'shop_name': '惠州陈江纽思达教育培训中心', 'shop_id': 1400}
+{'org_name': '长汀县新梦想教育', 'rate': 100.0, 'org_id': 2133, 'shop_name': '长汀县新梦想教育汀州校区', 'shop_id': 1486}
+{'org_name': '临沂市红领巾托辅中心', 'rate': 100.0, 'org_id': 2247, 'shop_name': '临沂市红领巾托辅中心', 'shop_id': 1602}
+{'org_name': '翰林学堂', 'rate': 100.0, 'org_id': 2480, 'shop_name': '翰林学堂', 'shop_id': 1845}
+{'org_name': '红英福', 'rate': 100.0, 'org_id': 320, 'shop_name': '红英福', 'shop_id': 243}
+{'org_name': '优加教育_13959240272', 'rate': 100.0, 'org_id': 774, 'shop_name': '优加教育顶许校区', 'shop_id': 535}
+{'org_name': '品学教育', 'rate': 100.0, 'org_id': 1535, 'shop_name': '品学教育', 'shop_id': 881}
+{'org_name': '宝贝e家托管中心', 'rate': 100.0, 'org_id': 1722, 'shop_name': '宝贝e家托管中心', 'shop_id': 1069}
+{'org_name': '好托管温莎教育', 'rate': 100.0, 'org_id': 2063, 'shop_name': '好托管温莎教育', 'shop_id': 1414}
+{'org_name': '仓山进附一小', 'rate': 100.0, 'org_id': 2150, 'shop_name': '仓山进附一小', 'shop_id': 1503}
+{'org_name': '漳州品读教育', 'rate': 100.0, 'org_id': 2206, 'shop_name': '漳州品读教育', 'shop_id': 1559}
+{'org_name': '安心学后托管', 'rate': 100.0, 'org_id': 2347, 'shop_name': '安心学后托管', 'shop_id': 1710}
+{'org_name': '创艺园教育', 'rate': 100.0, 'org_id': 2496, 'shop_name': '创艺园教育', 'shop_id': 1861}
+{'org_name': '北魏教育', 'rate': 100.0, 'org_id': 345, 'shop_name': '北魏教育', 'shop_id': 259}
+{'org_name': '优加教育_13959240272', 'rate': 100.0, 'org_id': 774, 'shop_name': '优加教育乐海校区', 'shop_id': 1605}
+{'org_name': '小天地教育', 'rate': 100.0, 'org_id': 1769, 'shop_name': '小天地教育', 'shop_id': 1117}
+{'org_name': '福建省泉州市辰星教育咨询有限公司', 'rate': 100.0, 'org_id': 1882, 'shop_name': '福建省泉州市辰星教育咨询有限公司', 'shop_id': 1230}
+{'org_name': '新中星教育', 'rate': 100.0, 'org_id': 2078, 'shop_name': '新中星全托辅导中心', 'shop_id': 1429}
+{'org_name': '轻松一百教育', 'rate': 100.0, 'org_id': 2157, 'shop_name': '轻松一百', 'shop_id': 1510}
+{'org_name': '雅韵教育', 'rate': 100.0, 'org_id': 2207, 'shop_name': '雅韵教育', 'shop_id': 1560}
+{'org_name': '卓圣堂托教中心', 'rate': 100.0, 'org_id': 2262, 'shop_name': '卓圣堂托教中心长庆校区', 'shop_id': 1619}
+{'org_name': '智慧树教育', 'rate': 100.0, 'org_id': 2370, 'shop_name': '智慧树教育', 'shop_id': 1733}
+{'org_name': '扬帆教育', 'rate': 100.0, 'org_id': 2498, 'shop_name': '扬帆教育', 'shop_id': 1863}
+{'org_name': '给力教育_13950172765', 'rate': 100.0, 'org_id': 444, 'shop_name': '给力教育', 'shop_id': 330}
+{'org_name': '厦门市星光教育连锁机构', 'rate': 100.0, 'org_id': 1183, 'shop_name': '厦门市星光教育连锁机构新村校区', 'shop_id': 674}
+{'org_name': '闰润雨学苑光华校区', 'rate': 100.0, 'org_id': 1888, 'shop_name': '润润雨学苑', 'shop_id': 1236}
+{'org_name': '嘉荷托辅中心', 'rate': 100.0, 'org_id': 1964, 'shop_name': '嘉荷托辅中心', 'shop_id': 1315}
+{'org_name': '新之博教育', 'rate': 100.0, 'org_id': 2107, 'shop_name': '新之博教育', 'shop_id': 1459}
+{'org_name': '李林托管辅导班', 'rate': 100.0, 'org_id': 2180, 'shop_name': '李林托管辅导班', 'shop_id': 1533}
+{'org_name': '龙岩星火教育', 'rate': 100.0, 'org_id': 2209, 'shop_name': '龙岩星火教育', 'shop_id': 1562}
+{'org_name': '七色花托教工作室', 'rate': 100.0, 'org_id': 2266, 'shop_name': '漳州七色花托教工作室', 'shop_id': 1625}
+{'org_name': '星辰教育', 'rate': 100.0, 'org_id': 2405, 'shop_name': '星辰教育', 'shop_id': 1770}
+{'org_name': '厦门市星光教育连锁机构', 'rate': 100.0, 'org_id': 1183, 'shop_name': '集美区星光教育东边校区', 'shop_id': 1447}
+{'org_name': '领星教育', 'rate': 100.0, 'org_id': 2016, 'shop_name': '领星教育', 'shop_id': 1367}
+{'org_name': '优越教育', 'rate': 100.0, 'org_id': 2111, 'shop_name': '优越教育', 'shop_id': 1463}
+{'org_name': '乐星托教', 'rate': 100.0, 'org_id': 2185, 'shop_name': '乐星托教', 'shop_id': 1538}
+{'org_name': '格林学苑', 'rate': 100.0, 'org_id': 2214, 'shop_name': '格林学苑', 'shop_id': 1567}
+{'org_name': '九华教育溪白校点', 'rate': 100.0, 'org_id': 2289, 'shop_name': '九华教育溪白校点', 'shop_id': 1652}
+{'org_name': '福州书与路教育', 'rate': 100.0, 'org_id': 2500, 'shop_name': '福州书与路教育日出校区', 'shop_id': 1865}
+{'org_name': '星火教育_17759629506', 'rate': 100.0, 'org_id': 496, 'shop_name': '星火教育石厝校区', 'shop_id': 1922}
+{'org_name': '新星托教_18965106386', 'rate': 100.0, 'org_id': 1222, 'shop_name': '新星托教', 'shop_id': 696}
+{'org_name': '好托管虎邱小太阳教育', 'rate': 100.0, 'org_id': 1552, 'shop_name': '安溪虎邱小太阳托管', 'shop_id': 898}
+{'org_name': '易学堂托辅中心', 'rate': 100.0, 'org_id': 1823, 'shop_name': '厦门思明第二实验小学', 'shop_id': 1171}
+{'org_name': '乐邦托教', 'rate': 100.0, 'org_id': 1937, 'shop_name': '乐邦托教', 'shop_id': 1286}
+{'org_name': '领星教育', 'rate': 100.0, 'org_id': 2016, 'shop_name': '领星教育体育中心校区', 'shop_id': 1866}
+{'org_name': '晨阳教育', 'rate': 100.0, 'org_id': 2113, 'shop_name': '晨阳教育', 'shop_id': 1465}
+{'org_name': '书乐教育苹果校区', 'rate': 100.0, 'org_id': 2189, 'shop_name': '书乐教育苹果校区', 'shop_id': 1542}
+{'org_name': '九华教育梧塘校点', 'rate': 100.0, 'org_id': 2290, 'shop_name': '九华教育梧塘校点', 'shop_id': 1653}
+{'org_name': '鳌头2校区', 'rate': 100.0, 'org_id': 2438, 'shop_name': '乐毅思教育2', 'shop_id': 1803}
+{'org_name': '启志教育', 'rate': 100.0, 'org_id': 246, 'shop_name': '启志教育腾龙校区', 'shop_id': 342}
+{'org_name': '启明教育', 'rate': 100.0, 'org_id': 589, 'shop_name': '厦门启明教育', 'shop_id': 461}
+{'org_name': '厦门倍安心教育咨询有限公司_13959296637', 'rate': 100.0, 'org_id': 1361, 'shop_name': '厦门倍安心教育咨询有限公司', 'shop_id': 765}
+{'org_name': '心苗教育', 'rate': 100.0, 'org_id': 1690, 'shop_name': '心苗教育', 'shop_id': 1037}
+{'org_name': '卓越教育', 'rate': 100.0, 'org_id': 1836, 'shop_name': '卓越教育', 'shop_id': 1184}
+{'org_name': '文侩教育', 'rate': 100.0, 'org_id': 2041, 'shop_name': '文侩教育', 'shop_id': 1392}
+{'org_name': '爱心托辅鼓一点', 'rate': 100.0, 'org_id': 2117, 'shop_name': '爱心托辅鼓一点', 'shop_id': 1469}
+{'org_name': '爱童辅导中心', 'rate': 100.0, 'org_id': 2197, 'shop_name': '爱童辅导中心', 'shop_id': 1550}
+{'org_name': '雅学教育培训中心', 'rate': 100.0, 'org_id': 2293, 'shop_name': '雅学教育', 'shop_id': 1656}
+{'org_name': '向日葵托教', 'rate': 100.0, 'org_id': 2471, 'shop_name': '向日葵托教', 'shop_id': 1836}
+{'org_name': '天天彩虹教育', 'rate': 100.0, 'org_id': 2519, 'shop_name': '天天彩虹教育', 'shop_id': 1885}
+{'org_name': '习成教育', 'rate': 100.0, 'org_id': 1717, 'shop_name': '习成教育', 'shop_id': 1064}
+{'org_name': '优爱托教培训中心', 'rate': 100.0, 'org_id': 1840, 'shop_name': '优爱托教培训中心', 'shop_id': 1188}
+{'org_name': '助成教育', 'rate': 100.0, 'org_id': 1941, 'shop_name': '助成教育思明分校', 'shop_id': 1290}
+{'org_name': '漳州伯乐教育', 'rate': 100.0, 'org_id': 2047, 'shop_name': '漳州伯乐教育', 'shop_id': 1398}
+{'org_name': '纯臻学堂（台三小分校）', 'rate': 100.0, 'org_id': 2121, 'shop_name': '纯臻学堂', 'shop_id': 1473}
+{'org_name': '梦航教育', 'rate': 100.0, 'org_id': 2200, 'shop_name': '梦航教育', 'shop_id': 1553}
+{'org_name': '好托管金太阳教育', 'rate': 100.0, 'org_id': 2308, 'shop_name': '好托管金太阳教育', 'shop_id': 1671}
+{'org_name': '指南针教育', 'rate': 100.0, 'org_id': 2577, 'shop_name': '指南针教育', 'shop_id': 1944}
+新增机构 **12** 家,增加详情如下
+{'org_name': '天一托教中心_13055219778', 'rate': 0.0, 'org_id': 632, 'shop_name': '天一托教中心', 'shop_id': 492}
+{'org_name': '壹诚教育', 'rate': 75.0, 'org_id': 1960, 'shop_name': '壹诚教育', 'shop_id': 1311}
+{'org_name': '乐之行教育', 'rate': 82.6087, 'org_id': 2204, 'shop_name': '三人行教育', 'shop_id': 1557}
+{'org_name': '聚学堂教育托管中心', 'rate': 100.0, 'org_id': 1870, 'shop_name': '聚学堂教育托辅中心', 'shop_id': 1218}
+{'org_name': '鲸鲸教育', 'rate': 100.0, 'org_id': 2334, 'shop_name': '鲸鲸教育', 'shop_id': 1697}
+{'org_name': '贝亲教育', 'rate': 100.0, 'org_id': 2260, 'shop_name': '贝亲教育新房校区', 'shop_id': 1617}
+{'org_name': '斑马线安全托教中心', 'rate': 100.0, 'org_id': 1773, 'shop_name': '斑马线', 'shop_id': 1121}
+{'org_name': '智慧星托管中心', 'rate': 100.0, 'org_id': 2499, 'shop_name': '智慧星托管中心', 'shop_id': 1864}
+{'org_name': '萌果果教育', 'rate': 100.0, 'org_id': 2216, 'shop_name': '萌果果教育', 'shop_id': 1570}
+{'org_name': '漳州市龙文区益智家园', 'rate': 100.0, 'org_id': 2518, 'shop_name': '漳州市龙文区益智家园', 'shop_id': 1884}
+{'org_name': '小博士英语', 'rate': 100.0, 'org_id': 2220, 'shop_name': '小博士英语', 'shop_id': 1574}
+{'org_name': '好托管-尚学园', 'rate': 100.0, 'org_id': 2228, 'shop_name': '尚学园', 'shop_id': 1582}
+无减少的机构
+总计增加机构 **12** 家.
+当前为周1,不发送到钉钉
+准备将搜索得到的数据写入并覆盖缓存文件中的原有内容...
+写入缓存成功
+今日检测图片到达率次数已标记为1
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============

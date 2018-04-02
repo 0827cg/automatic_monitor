@@ -241,16 +241,17 @@ class FileUtil:
         intSleepTime = "70"
         intPastDays = "3"
 
-        strHost = "xxx"
+        strHost = "10.9.115.174"
         strPort = "3306"
-        strUser = "xxx"
-        strPasswd = "xxx"
-        strDatabase = "xxx"
+        strUser = "haotuoguan"
+        strPasswd = "haotuoguan123456"
+        strDatabase = "haotuoguan"
 
         strCheckPicArrivals = "yes"
         strSqlFilePath = "sql/pic_Arrivals-test.sql"
         intStandardArrivals = "80"
         intAccuracy = "2"
+        strNeedNotSendDateWeek = "6 7"
 
         strIntervals = "300"
         strHour = "9"
@@ -359,6 +360,8 @@ class FileUtil:
         config.set('Pic_Arrivals', 'arrivals_standard', intStandardArrivals)
         config.set('Pic_Arrivals', '# after the decimal point number')
         config.set('Pic_Arrivals', 'number_accuracy', intAccuracy)
+        config.set('Pic_Arrivals', '# pic_arrivals compare no use list msg need not send to dingtalk')
+        config.set('Pic_Arrivals', 'need_not_send_dateWeek', strNeedNotSendDateWeek)
 
         config.set('RunConfigure', '# set run progress timing, unit second')
         config.set('RunConfigure', 'run_intervals', strIntervals)

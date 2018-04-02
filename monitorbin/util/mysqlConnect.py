@@ -26,8 +26,13 @@ class DoMysql:
         # 连接数据库
         # 返回一个连接
 
-        connection = pymysql.connect(host = self.strHost, port = int(self.strPort), user = self.strUser,
+        connection = None
+
+        try:
+            connection = pymysql.connect(host = self.strHost, port = int(self.strPort), user = self.strUser,
                                      passwd = self.strPasswd, db = self.strDatabase,
                                      charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)
+        except:
+            print('请重新检查数据库配置(可能配置出错或者网络出错)')
 
         return connection

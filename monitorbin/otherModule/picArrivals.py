@@ -25,6 +25,8 @@ class PicArrivals:
         self.intHourCheckAll = intHourCheckAll
         self.allModuleRunAllObj = allModuleRunAllObj
 
+        self.listNeedNotSendDateWeek = self.getNeedNotSendWeekDate(dictNeedRunMsg);
+
         if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
             
             if(self.allModuleRunAllObj.intOverAllCheckPicArrivals == 0):
@@ -77,7 +79,7 @@ class PicArrivals:
                 listResult = self.rmoveDecimal(listResultFirst)
                 listMsgForLog = self.getSomeForLog(listResult)
 
-                picArrivalCompare = PicArrivalCompare(self.fileUtilObj, self.dataTemplateObj)
+                picArrivalCompare = PicArrivalCompare(self.fileUtilObj, self.dataTemplateObj, self.listNeedNotSendDateWeek)
                 
                 listNewResultSome = self.getSomeMsg(listResult, intArrivalsStandart)
 
@@ -153,7 +155,7 @@ class PicArrivals:
                 listResult = self.rmoveDecimal(listResultFirst)
                 listMsgForLog = self.getSomeForLog(listResult)
 
-                picArrivalCompare = PicArrivalCompare(self.fileUtilObj, self.dataTemplateObj)
+                picArrivalCompare = PicArrivalCompare(self.fileUtilObj, self.dataTemplateObj, self.listNeedNotSendDateWeek)
 
                 listNewResultSome = self.getSomeMsg(listResult, intArrivalsStandart)
 
@@ -377,6 +379,19 @@ class PicArrivals:
         return dictMsgForCheckPic
 
 
+    def getNeedNotSendWeekDate(self, dictNeedRunMsg):
+
+        # need_not_send_dateweek: 指定周几不发送未使用设备的机构列表到钉钉
+        # 这项配置可以不配置,并不是必须的配置参数,如果未进行配置那么则表示周一至周日都发送
+        # add in -2018-04-02
+
+        listNeedNotSendDateWeek = []
+
+        if('need_not_send_dateweek' in dictNeedRunMsg):
+            strNeedNotSendWeekDate = dictNeedRunMsg.get('need_not_send_dateweek')
+            listNeedNotSendDateWeek = strNeedNotSendWeekDate.split(' ')
+
+        return listNeedNotSendDateWeek
 
 
 

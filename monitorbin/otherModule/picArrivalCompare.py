@@ -5,6 +5,7 @@
 # time  : 2018-01-11
 
 import decimal
+from monitorbin.util.sysTime import RunTime
 
 class PicArrivalCompare:
 
@@ -14,13 +15,16 @@ class PicArrivalCompare:
     # 目前这里将是对比昨天和今天的到达率,一些变量的名字将需要注意，这里并没有进行更改
     # 2018-03-14
 
+    # listNeedNotSendDateWeek: add in -2018-04-02
+
     listBeforeYesterdayTotal = []
     tmpFileDir = "tmp"
     tmpFileName = "automatic_monitor.am"
 
-    def __init__(self, fileUtilObj, dataTemplateObj):
+    def __init__(self, fileUtilObj, dataTemplateObj, listNeedNotSendDateWeek):
         self.fileUtilObj = fileUtilObj
         self.dataTemplateObj = dataTemplateObj
+        self.listNeedNotSendDateWeek = listNeedNotSendDateWeek
         self.listBeforeYesterdayTotal = self.getListBeforeYesterdayTotal()
         if len(self.listBeforeYesterdayTotal) == 0:
             self.listBeforeYesterdayTotal = [{'shop_id': -1, 'org_id': -1}]
@@ -157,6 +161,9 @@ class PicArrivalCompare:
         # 添加判断，若增加或减少的机构为0，则日志中不打印
         # add --2018-03-28
 
+        # 添加限定条件,即如限定周日周六两天不发送减少的机构列表到dingTalk中
+        # add in -2018-04-02
+
         listTotalExist = dictNewResult['listTotalExist']
         listDataOnlyExistForBY = dictNewResult['listDataOnlyExistForBY']
         listDataOnlyExistForY = dictNewResult['listDataOnlyExistForY']
@@ -200,8 +207,15 @@ class PicArrivalCompare:
                                                    dictContentResult.get('strOnlyReduceContent') +
                                                    dictContentResult.get('strTotalChangeContent')) + "]\n\n")
 
-        if len(listDataOnlyExistForBY) != 0:
-            self.dataTemplateObj.dataAll += "减少机构如下: \n\n" + strTotalReduceContent + "\n\n"
+        strWeekNum = RunTime().getWeekNum()
+        if strWeekNum in self.listNeedNotSendDateWeek:
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent(("当前为周" + strWeekNum + ",不发送到钉钉"), 'runLog')
+        else:
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent("今日减少机构列表也将发送至钉钉", 'runLog')
+            if len(listDataOnlyExistForBY) != 0:
+                self.dataTemplateObj.dataAll += "减少机构如下: \n\n" + strTotalReduceContent + "\n\n"
 
 
     def judgeMentChange(self, listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY):

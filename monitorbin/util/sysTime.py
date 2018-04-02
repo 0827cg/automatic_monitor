@@ -92,6 +92,14 @@ class RunTime:
         return int(timeStamp)
 
 
+    def getWeekNum(self):
+
+        # 获取当前是星期几
+        # add in 2018-04-02
+
+        strWeekNum = time.strftime("%w", time.localtime())
+        return strWeekNum
+
     def doCutHorizontalLine(self, strData):
 
         # 用来将日期中存在的'-'删除,返回一个没有'-'的日期字符串
@@ -106,5 +114,3 @@ class RunTime:
                 listNewStrData.append(listStrDataItem)
         return ''.join(listNewStrData)
             
-
-    

@@ -39,6 +39,7 @@
 
 * [Pm2]
     * whether_check_pm2 : 是否检测pm2,yes/no
+	* pro_for_letter: 检测pm2搭载的项目名,将监控这个运行的项目是否运行正常,执行重启操作
 	
 * [UseConfigure]
 	* servername: 填写服务器的别名，以此来辨别是哪台服务器
@@ -46,6 +47,9 @@
 
 * [LogConfigure]
 	* logpath: 存放日志文件的文件夹路径
+	* whether_rm_log: 是否执行删除日志操作
+	* rm_log_passday: 删除多少天前的日志
+	* when_time_rm: 在一天中的那个时候开始执行删除日志操作,单位：hour
 
 * [EmailConfigure]
     * email: 值为yes/no，是否使用email来发送结果消息
@@ -86,7 +90,9 @@
 * [Pic_Arrivals]
     * whether_check_pic: 是否检测图片到达率
     * sql_path: 存放该sql查询语句的的文件路径
+	* arrivals_standard: 一个到达率的标准值，如果低于这个值将会进行记录
     * number_accuracy: 保留的小数点个数
+	* need_not_send_dateweek: 规定在那些天(以具体周几来设置)将一些检测到的未使用设备的机构列表不发送到钉钉(消息通知)
 
 	
 * [RunConfigure]
