@@ -278,7 +278,16 @@ class PicArrivalCompare:
         intMark = self.fileUtilObj.checkFileExists(self.tmpFileDir + "/" + self.tmpFileName)
         if intMark == 1:
             strContent = self.fileUtilObj.readFileContent(self.tmpFileDir + "/" + self.tmpFileName)
-            listBYTotal = eval(strContent)
+
+            # 这里将读取到的缓存内容转换为list集合dict元素类型。因为缓存内容是一行内容，并不存在换行，所以可以转换
+            # 如果修改缓存文件后,其内容存在多行,则在类型转换时会出错
+            # 添加try-except异常处理--2018-03-29
+            try:
+                listBYTotal = eval(strContent)
+            except:
+                listBYTotal = [{'shop_id': -1, 'org_id': -1}]
+                if self.fileUtilObj.boolWhetherShowLog & True:
+                    self.fileUtilObj.writerContent("缓存内容转换list类型时出错", 'runLog')
 
         else:
             if self.fileUtilObj.boolWhetherShowLog & True:
