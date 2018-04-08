@@ -6,6 +6,7 @@
 
 import decimal
 from monitorbin.util.sysTime import RunTime
+from monitorbin.util.prettyTableDo import PrettyTableDo
 
 class PicArrivalCompare:
 
@@ -28,6 +29,9 @@ class PicArrivalCompare:
         self.listBeforeYesterdayTotal = self.getListBeforeYesterdayTotal()
         if len(self.listBeforeYesterdayTotal) == 0:
             self.listBeforeYesterdayTotal = [{'shop_id': -1, 'org_id': -1}]
+        else:
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent("缓存读取完成", 'runLog')
 
 
     def compareData(self, listYesterdayTotal):
@@ -164,6 +168,9 @@ class PicArrivalCompare:
         # 添加限定条件,即如限定周日周六两天不发送减少的机构列表到dingTalk中
         # add in -2018-04-02
 
+        # 添加表格化输出,取消直接list打印
+        # add in 2018-04-02
+
         listTotalExist = dictNewResult['listTotalExist']
         listDataOnlyExistForBY = dictNewResult['listDataOnlyExistForBY']
         listDataOnlyExistForY = dictNewResult['listDataOnlyExistForY']
@@ -171,27 +178,33 @@ class PicArrivalCompare:
         dictContentResult = self.judgeMentChangeForNew(listTotalExist, listDataOnlyExistForBY, listDataOnlyExistForY)
         strTotalReduceContent = ''
 
+        prettyTableDo = PrettyTableDo()
+        strTotalExistTable = prettyTableDo.getMsgForTableShowByListDict(listTotalExist, 1)
         if self.fileUtilObj.boolWhetherShowLog & True:
-            self.fileUtilObj.writerContent(((str(dictContentResult.get('strTotalExistContent'))) + "详情如下"), 'runLog')
-        for listTotalExistItem in listTotalExist:
-            self.fileUtilObj.writerContent(str(listTotalExistItem), 'runLog')
+            self.fileUtilObj.writerContent(((str(dictContentResult.get('strTotalExistContent'))) + "详情如下\n" + strTotalExistTable), 'runLog')
+        # for listTotalExistItem in listTotalExist:
+        #     self.fileUtilObj.writerContent(str(listTotalExistItem), 'runLog')
 
         if len(listDataOnlyExistForY) != 0:
 
+            strDataOnlyExistForYTable = prettyTableDo.getMsgForTableShowByListDict(listDataOnlyExistForY, 1)
+
             if self.fileUtilObj.boolWhetherShowLog & True:
-                self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyAddContent'))) + "增加详情如下"), 'runLog')
-            for listDataOnlyExistForYItem in listDataOnlyExistForY:
-                self.fileUtilObj.writerContent(str(listDataOnlyExistForYItem), 'runLog')
+                self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyAddContent'))) + "增加详情如下\n" + strDataOnlyExistForYTable), 'runLog')
+            # for listDataOnlyExistForYItem in listDataOnlyExistForY:
+            #     self.fileUtilObj.writerContent(str(listDataOnlyExistForYItem), 'runLog')
         else:
             if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("无增加的机构", 'runLog')
 
         if len(listDataOnlyExistForBY) != 0:
 
+            strDataOnlyExistForBYTable = prettyTableDo.getMsgForTableShowByListDict(listDataOnlyExistForBY, 1)
+
             if self.fileUtilObj.boolWhetherShowLog & True:
-                self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyReduceContent'))) + "减少详情如下"), 'runLog')
+                self.fileUtilObj.writerContent(((str(dictContentResult.get('strOnlyReduceContent'))) + "减少详情如下\n" + strDataOnlyExistForBYTable), 'runLog')
             for listDataOnlyExistForBYItem in listDataOnlyExistForBY:
-                self.fileUtilObj.writerContent(str(listDataOnlyExistForBYItem), 'runLog')
+                # self.fileUtilObj.writerContent(str(listDataOnlyExistForBYItem), 'runLog')
 
                 strTotalReduceContent += (listDataOnlyExistForBYItem.get('org_name') + " - " +
                                       listDataOnlyExistForBYItem.get('shop_name') + "\n\n")
@@ -213,7 +226,7 @@ class PicArrivalCompare:
                 self.fileUtilObj.writerContent(("当前为周" + strWeekNum + ",不发送到钉钉"), 'runLog')
         else:
             if self.fileUtilObj.boolWhetherShowLog & True:
-                self.fileUtilObj.writerContent("今日减少机构列表也将发送至钉钉", 'runLog')
+                self.fileUtilObj.writerContent("今日减少机构列表信息将添加到消息模板中", 'runLog')
             if len(listDataOnlyExistForBY) != 0:
                 self.dataTemplateObj.dataAll += "减少机构如下: \n\n" + strTotalReduceContent + "\n\n"
 
@@ -307,6 +320,7 @@ class PicArrivalCompare:
             if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("未发现缓存文件", 'runLog')
                 listBYTotal = [{'shop_id': -1, 'org_id': -1}]
+
         return listBYTotal
 
     def writerListTotalToFile(self, listTotal):

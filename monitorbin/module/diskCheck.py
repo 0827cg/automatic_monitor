@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from monitorbin.util.process import ProcessCL
+from monitorbin.util.prettyTableDo import PrettyTableDo
 
 # author: cg错过
 # time  : 2017-12-07
@@ -50,6 +51,11 @@ class DiskSizeCheck:
                     self.fileUtil.writerContent("将检测磁盘全部节点信息", 'runLog')
                 
                 intMountPointsNum = self.getMountPointsNum()
+                if(intMountPointsNum == 0):
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("获取磁盘节点个数出错", 'runLog')
+
+
                 listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
                 listCutMountPointsMsg = self.formatCutMsgForSendAll(listMountPointsMsg)
                 strCutAllMsg = self.formatCutMsgForSendAllToStr(listCutMountPointsMsg)
@@ -95,13 +101,20 @@ class DiskSizeCheck:
     def checkTog(self):
 
         intMountPointsNum = self.getMountPointsNum()
+        if (intMountPointsNum == 0):
+            if (self.fileUtil.boolWhetherShowLog & True):
+                self.fileUtil.writerContent("获取磁盘节点个数出错(m)", 'runLog')
+
         listMountPointsMsg = self.getMountPointsMsg(intMountPointsNum)
         listOutMsg = self.checkUse(listMountPointsMsg)
         if(len(listOutMsg) > 0):
+
+            strOutMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listOutMsg, 1)
+
             if(self.fileUtil.boolWhetherShowLog & True):
-                self.fileUtil.writerContent(("超过" + str(self.intWarningLevel) + "%的挂载点如下:"), 'runLog')
-                self.fileUtil.writerContent(str(listOutMsg), 'runLog')
-            self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + str(listOutMsg)
+                self.fileUtil.writerContent(("超过" + str(self.intWarningLevel) + "%的挂载点如下:\n" + strOutMsgTable), 'runLog')
+                # self.fileUtil.writerContent(str(listOutMsg), 'runLog')
+            self.dataTempObj.dataAll += "> 超过的节点如下\n" + str(listOutMsg)
         else:
             if(self.fileUtil.boolWhetherShowLog & True):
                 self.fileUtil.writerContent(("无超过" + str(self.intWarningLevel) + "%的挂载点"), 'runLog')
@@ -115,10 +128,13 @@ class DiskSizeCheck:
 
         strGetMountPointsNumCL = ("df -Th | wc -l")
         dictResult = self.processCL.getResultAndProcess(strGetMountPointsNumCL)
-        intTotalNum = dictResult.get('stdout')
-        #print(intTotalNum)
-        intMountPointsNum = int(float(intTotalNum)) - 1
-        
+        strTotalNum = dictResult.get('stdout')
+        #print(strTotalNum)
+        try:
+            intMountPointsNum = int(float(strTotalNum)) - 1
+        except:
+            intMountPointsNum = 0
+
         return intMountPointsNum
 
 
@@ -156,12 +172,16 @@ class DiskSizeCheck:
                 dictOneMountPointsMsg[listMsgName[columnNum]] = strResultStdout.strip('\n')
                 
             listMountPointsMsg.append(dictOneMountPointsMsg)
+
+        strMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listMountPointsMsg, 1)
+
         if(self.fileUtil.boolWhetherShowLog & True):
-            self.fileUtil.writerContent(str(len(listMountPointsMsg)) + "条挂载点信息的dict类型显示如下",
+            self.fileUtil.writerContent((str(len(listMountPointsMsg)) + "条挂载点信息的dict类型显示如下\n" + strMsgTable),
                                         'runLog')
-        for dictMountPointsMsgItem in listMountPointsMsg:
-            if(self.fileUtil.boolWhetherShowLog & True):
-                self.fileUtil.writerContent(str(dictMountPointsMsgItem), 'runLog')
+
+        # for dictMountPointsMsgItem in listMountPointsMsg:
+        #     if(self.fileUtil.boolWhetherShowLog & True):
+        #         self.fileUtil.writerContent(str(dictMountPointsMsgItem), 'runLog')
 
         return listMountPointsMsg
         

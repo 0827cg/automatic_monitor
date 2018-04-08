@@ -7,6 +7,7 @@
 from monitorbin.util.mysqlConnect import DoMysql
 from monitorbin.util.sysTime import RunTime
 from monitorbin.otherModule.picArrivalCompare import PicArrivalCompare
+from monitorbin.util.prettyTableDo import PrettyTableDo
 
 class PicArrivals:
 
@@ -153,18 +154,24 @@ class PicArrivals:
                 strTotalSearchSql = self.getToalSql(strSqlContent, intTodayBeginStamp, intTodayEndStamp)
                 listResultFirst = self.doSearchSql(strTotalSearchSql, dictMsgForMysql)
                 listResult = self.rmoveDecimal(listResultFirst)
-                listMsgForLog = self.getSomeForLog(listResult)
+
+                # listMsgForLog = self.getSomeForLog(listResult)
+                # 上面的代码只是打印日志,使用集合打印.现在用表格化输出,使用此下代码
+                strMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listResult, 1)
+                # 方法getSomeForLog()闲置不用
+                # change in 2018-04-02
+
 
                 picArrivalCompare = PicArrivalCompare(self.fileUtilObj, self.dataTemplateObj, self.listNeedNotSendDateWeek)
 
                 listNewResultSome = self.getSomeMsg(listResult, intArrivalsStandart)
 
                 if (self.fileUtilObj.boolWhetherShowLog & True):
-                    self.fileUtilObj.writerContent("查找到的机构信息如下:", 'runLog')
+                    self.fileUtilObj.writerContent(("数据库中查找到今日使用了设备的机构信息如下:\n" + strMsgTable), 'runLog')
 
-                for listMsgForLogItem in listMsgForLog:
-                    if (self.fileUtilObj.boolWhetherShowLog & True):
-                        self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
+                # for listMsgForLogItem in listMsgForLog:
+                #     if (self.fileUtilObj.boolWhetherShowLog & True):
+                #         self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
 
                 dictValue = self.getAverageValue(listResult)
 

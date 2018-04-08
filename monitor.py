@@ -47,5 +47,11 @@ if __name__ == '__main__':
 * self.dataTempObj.dataAll += "> 超过的节点如下\n" + "> " + listOutMsg,
 * 有两处没有进行对list的类型转换，转string类型.现已经添加类型转换str(listOutMsg)
 
+* 2018-04-08:
+* 地方同03-02出的问题一样，
+* 出错: intMountPointsNum = int(float(intTotalNum)) - 1
+*       ValueError: could not convert string to float:
+* 修改: 添加了一个try-except语句，如若出错则将返回值设为0,在后面调用该方法的代码中进行判断
+
 ======================
 '''

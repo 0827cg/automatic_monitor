@@ -223,7 +223,7 @@ class FileUtil:
 
         strUseDingtalk = "yes"
         strWebhook = ("https://oapi.dingtalk.com/robot/send?access_token=793b8e66" +
-                          "16eb991b10044ec9c0a7f528f2f7b560xxxxxxx0a79c667397c7523a0866")
+                          "16eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866")
 
         strCheckDisk = "yes"
         strWarning_level = "70"

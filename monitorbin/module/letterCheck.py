@@ -7,6 +7,7 @@
 from monitorbin.util.mysqlConnect import DoMysql
 from monitorbin.util.sysTime import RunTime
 from monitorbin.module.pm2ProjectCheck import ProjectCheck
+from monitorbin.util.prettyTableDo import PrettyTableDo
 import time
 
 
@@ -94,11 +95,13 @@ class CheckLetter:
                     # 不将为推送详情发送出去
                     #self.dataTemplate.dataAll += ("> \t\t 其未推送的信息如下:\n")
 
+                    strNoSendMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listNoSendMsg, 1)
+
                     if(self.fileUtil.boolWhetherShowLog & True):
-                        self.fileUtil.writerContent(str(len(listNoSendMsg)) + "条未推送的信息如下:", 'runLog')
-                    for listNoSendMsgItem in listNoSendMsg:
-                        if(self.fileUtil.boolWhetherShowLog & True):
-                            self.fileUtil.writerContent((str(listNoSendMsgItem) + "\n"), 'runLog')
+                        self.fileUtil.writerContent((str(len(listNoSendMsg)) + "条未推送的信息如下:\n" + strNoSendMsgTable), 'runLog')
+                    # for listNoSendMsgItem in listNoSendMsg:
+                    #     if(self.fileUtil.boolWhetherShowLog & True):
+                    #         self.fileUtil.writerContent((str(listNoSendMsgItem) + "\n"), 'runLog')
 
                         #self.dataTemplate.dataAll += ("> \t\t " + str(listNoSendMsgItem) + "\n")
 
@@ -153,7 +156,7 @@ class CheckLetter:
         else:
             if(self.fileUtil.boolWhetherShowLog & True):
                 self.fileUtil.writerContent("数据库连接成功", 'runLog')
-                self.fileUtil.writerContent((("查找" + self.strField + "值为%d" + "的数据") %(self.intFirst)),
+                self.fileUtil.writerContent((("准备查找" + self.strField + "值为%d" + "的数据") %(self.intFirst)),
                                             'runLog')
 
             try:
@@ -171,15 +174,19 @@ class CheckLetter:
 
                     cursor.close()
 
-                    if listResult is None:
+                    if(listResult is None) or (len(listResult) == 0):
                         if(self.fileUtil.boolWhetherShowLog & True):
                             self.fileUtil.writerContent((("未查找到" + self.strField + "值为%d" +
                                                          "的数据") %(self.intFirst)), 'runLog')
                     else:
+
+                        strFirstValueMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listResult, 1)
+
                         if(self.fileUtil.boolWhetherShowLog & True):
-                            self.fileUtil.writerContent(("已查找到%d条数据" %(len(listResult))), 'runLog')
-                        for listResultItem in listResult:
-                            self.fileUtil.writerContent(str(listResultItem), 'runLog')
+                            self.fileUtil.writerContent(("已查找到%d条数据,如下" %(len(listResult))), 'runLog')
+                            self.fileUtil.writerContent(strFirstValueMsgTable, 'runLog')
+                        # for listResultItem in listResult:
+                        #     self.fileUtil.writerContent(str(listResultItem), 'runLog')
                         #findWhetherTheField(objConnection, strTable, strField, intFirst, intNext, listResult)
                         
             finally:
@@ -270,16 +277,18 @@ class CheckLetter:
             else:
                 strLogContent = ((doMySql.strDatabase + "数据库中,  " + str(intTime) +
                                "秒后，还有如下" + str(len(listNewResultFind)) + "条字段的" + self.strField +
-                               "值依然是%d") %(self.intFirst))
+                               "值依然是%d,如下") %(self.intFirst))
 
                 strContentEnd = ''
+
+                strNewResultFindMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listNewResultFind, 1)
 
                 for listNewResultItem in listNewResultFind:
                     strResultItem += str(listNewResultItem) + "\n"
                 
                 if(self.fileUtil.boolWhetherShowLog & True):
-                    self.fileUtil.writerContent(strLogContent, 'runLog')
-                    self.fileUtil.writerContent(strResultItem, 'runLog')
+                    self.fileUtil.writerContent((strLogContent + "\n" + strNewResultFindMsgTable), 'runLog')
+                    # self.fileUtil.writerContent(strNewResultFineMsgTable, 'runLog')
 
                     self.fileUtil.writerContent(("尝试重启推送服务" + self.proNameForLetter), 'runLog')
 
@@ -351,7 +360,7 @@ class CheckLetter:
         else:
             if(self.fileUtil.boolWhetherShowLog & True):
                 self.fileUtil.writerContent("数据库查询未推送连接成功", 'runLog')
-                self.fileUtil.writerContent("查找" + str(dateYesterday) + "未推送的字段信息",'runLog')
+                self.fileUtil.writerContent("准备查找" + str(dateYesterday) + "未推送的字段信息",'runLog')
             try:
                 with objConnection3.cursor() as cursor:
                     strSearchNoSend = (("SELECT " + self.strFieldCompare1 + " , " + self.strFieldCompare2 +
