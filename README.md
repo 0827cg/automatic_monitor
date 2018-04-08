@@ -106,13 +106,14 @@
 #### 使用到的模块
 
 * pymysql
+* prettyTable
 
 #### 运行实例
 
-1. 如果没安装pymysql，需要先安装这个模块
-    运行命令`pip3 install pymysql`
+1. 如果没安装pymysql和prettyTable，需要先安装这个模块
+    运行命令`pip3 install pymysql`及`pip3 install prettyTable`
 
-2. 进入这个目录，使用命令`python3 monitor.py`即可运行
+2. 进入这个目录，使用命令`python3 monitor.py`即可运行,如果需要持续化运行,可以使用命令`nohup python3 monitor.py &`
 
 	
 第一次运行如果没有配置文件，脚本将会自动初始化配置文件
