@@ -18,19 +18,27 @@ class PrettyTableDo:
         '''
         # 返回一个已经表格话的字符串类型数据
 
-        listTableTitle = list(listDictMsg[0].keys())
-        # strAlignTitle = listTableTitle[0]
+        if len(listDictMsg) != 0:
 
-        prettyTableContent = PrettyTable(listTableTitle)
-        prettyTableContent.padding_width = intPaddingLength
+            if intPaddingLength <= 0:
 
-        for listDictMsgItem in listDictMsg:
+                intPaddingLength = 0
 
-            listTableRowValue = []
+            listTableTitle = list(listDictMsg[0].keys())
+            strAlignTitle = listTableTitle[0]
 
-            for listTitleItem in listTableTitle:
-                listTableRowValue.append(listDictMsgItem[listTitleItem])
+            prettyTableContent = PrettyTable(listTableTitle)
+            prettyTableContent.padding_width = intPaddingLength
 
-            prettyTableContent.add_row(listTableRowValue)
+            for listDictMsgItem in listDictMsg:
 
-        return str(prettyTableContent)
+                listTableRowValue = []
+
+                for listTitleItem in listTableTitle:
+                    listTableRowValue.append(listDictMsgItem[listTitleItem])
+
+                prettyTableContent.add_row(listTableRowValue)
+        else:
+            prettyTableContent = 'nothing value, may be the list is empty'
+
+        return prettyTableContent

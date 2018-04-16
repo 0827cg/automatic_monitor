@@ -62,8 +62,10 @@ class Operate:
         while True:
             
             self.fileUtil = FileUtil()
-            self.dataTemplate = DataTemplate(self.fileUtil.strDateTime)
             dictNeedRunMsg = self.fileUtil.getNeedRunMsg()
+            self.strServerName = dictNeedRunMsg.get('servername')
+            self.dataTemplate = DataTemplate(self.fileUtil.strDateTime, self.strServerName)
+            # dictNeedRunMsg = self.fileUtil.getNeedRunMsg()
             intRunIntervals = int(dictNeedRunMsg.get('run_intervals'))
 
             self.intHourCheckAll = dictNeedRunMsg.get('when_hour_checkall')

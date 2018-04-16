@@ -179,9 +179,11 @@ class PicArrivalCompare:
         strTotalReduceContent = ''
 
         prettyTableDo = PrettyTableDo()
-        strTotalExistTable = prettyTableDo.getMsgForTableShowByListDict(listTotalExist, 1)
-        if self.fileUtilObj.boolWhetherShowLog & True:
-            self.fileUtilObj.writerContent(((str(dictContentResult.get('strTotalExistContent'))) + "详情如下\n" + strTotalExistTable), 'runLog')
+
+        if len(listTotalExist) != 0:
+            strTotalExistTable = prettyTableDo.getMsgForTableShowByListDict(listTotalExist, 1)
+            if self.fileUtilObj.boolWhetherShowLog & True:
+                self.fileUtilObj.writerContent(((str(dictContentResult.get('strTotalExistContent'))) + "详情如下\n" + strTotalExistTable), 'runLog')
         # for listTotalExistItem in listTotalExist:
         #     self.fileUtilObj.writerContent(str(listTotalExistItem), 'runLog')
 

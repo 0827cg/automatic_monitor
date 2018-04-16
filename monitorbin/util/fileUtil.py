@@ -453,7 +453,7 @@ class FileUtil:
         # 2017-10-30添加了run_intervals, when_hour_checkall, remove_log_time
         # 2017-12-07: 删除了smtp_server,email_sendaddr,email_sendpasswd的验证
 
-        # 2017-12-11: 添加了time_beginning, time_end, past_days_num, savelogtofile的验证
+        # 2017-12-11: 添加了time_beginning, time_end, past_days_num, savelog_to_file的验证
         
         intMark = -1
         if(len(dictConfMsg) != 0):
@@ -461,7 +461,7 @@ class FileUtil:
                 if((keyItem == 'logpath') | (keyItem == 'run_intervals')
                    | (keyItem == 'when_hour_checkall') | (keyItem == 'remove_log_time') |
                    (keyItem == 'time_beginning') | (keyItem == 'time_end') |
-                   (keyItem == 'past_days_num') | (keyItem == 'savelogtofile')):
+                   (keyItem == 'past_days_num') | (keyItem == 'savelog_to_file')):
                     if(dictConfMsg.get(keyItem) == ''):
                         strErr = ("未读取到%s配置参数的值，请修改配置文件" %(keyItem))
                         self.writerContent(strErr, 'runLog')

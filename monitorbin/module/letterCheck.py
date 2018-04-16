@@ -35,7 +35,12 @@ class CheckLetter:
         # self.dataYesterday = self.runTime.getPastDataDay(1)
         self.dataDay = self.runTime.getTime("%Y-%m-%d")
 
-        self.proNameForLetter = dictNeedRunMsg.get('pro_for_letter')
+        self.intIndexWhetherCheck = self.checkWhetherRestartPm2(dictNeedRunMsg)
+        self.intIndexWhetherExistPmPro = self.checkWhetherExistPmPro(dictNeedRunMsg)
+        if(self.intIndexWhetherExistPmPro == 1):
+            self.proNameForLetter = dictNeedRunMsg.get('pro_for_letter')
+        else:
+            self.proNameForLetter = 'null'
         
         if(self.fileUtil.boolWhetherShowLog & True):
             self.fileUtil.writerContent(("-->执行检测数据库字段任务"), 'runLog')
@@ -290,14 +295,23 @@ class CheckLetter:
                     self.fileUtil.writerContent((strLogContent + "\n" + strNewResultFindMsgTable), 'runLog')
                     # self.fileUtil.writerContent(strNewResultFineMsgTable, 'runLog')
 
-                    self.fileUtil.writerContent(("尝试重启推送服务" + self.proNameForLetter), 'runLog')
+                if(self.intIndexWhetherCheck == 1):
+                    if(self.proNameForLetter != 'null'):
+                        if (self.fileUtil.boolWhetherShowLog & True):
+                            self.fileUtil.writerContent(("将尝试重启服务" + self.proNameForLetter), 'runLog')
 
-                projectCheck = ProjectCheck(self.fileUtil)
-                intResult = projectCheck.restartProByStrName(self.proNameForLetter)
-                if intResult == 1:
-                    strContentEnd = "推送服务已重启"
+                        projectCheck = ProjectCheck(self.fileUtil)
+                        intResult = projectCheck.restartProByStrName(self.proNameForLetter)
+                        if intResult == 1:
+                            strContentEnd = (self.proNameForLetter + "服务已重启")
+                        else:
+                            strContentEnd = (self.proNameForLetter + "服务重启失败")
+                    else:
+                        if (self.fileUtil.boolWhetherShowLog & True):
+                            self.fileUtil.writerContent("未配置检测项目", 'runLog')
                 else:
-                    strContentEnd = "推送服务重启失败"
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent(("不执行重启服务" + self.proNameForLetter), 'runLog')
 
                 intNoSendNum = len(listNewResultFind)
                 strContent = "> - 未推送总数有 **" + str(intNoSendNum) + "** 条(" + strContentEnd + ")\n\n"
@@ -604,4 +618,32 @@ class CheckLetter:
                 
         return dictMsgForMysql
 
-        
+
+    def checkWhetherRestartPm2(self, dictNeedRunMsg):
+
+        # 检测是否进行重启pm2搭载的项目
+        # whether_check_pm2字段的值yes/no两个作用
+        # 一是全局检测pm2 list的输出是否正常(是否有stop),其实现在pm2Check.py中
+        # 二是在此文件中用来判断,当程序检测到有未推送字段的时候,根据此判断是否进行重启
+        # add in 2018-04-09
+
+        if('whether_check_pm2' in dictNeedRunMsg):
+            if(dictNeedRunMsg.get('whether_check_pm2') == 'yes'):
+                intIndex = 1
+        else:
+            intIndex = 0
+
+        return intIndex
+
+
+    def checkWhetherExistPmPro(self, dictNeedRunMsg):
+
+        # 判断是否存在pro_for_letter
+
+        if('pro_for_letter' in dictNeedRunMsg):
+            if(dictNeedRunMsg.get('whether_check_pm2') != ''):
+                intIndex = 1
+        else:
+            intIndex = 0
+
+        return intIndex
