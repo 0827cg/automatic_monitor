@@ -41,4 +41,4 @@ class PrettyTableDo:
         else:
             prettyTableContent = 'nothing value, may be the list is empty'
 
-        return prettyTableContent
+        return str(prettyTableContent)
