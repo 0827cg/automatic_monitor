@@ -69,21 +69,21 @@ class FileUtil:
                 with open(self.strlogContentName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
             else:
-                with open(self.strlogContentName, 'w', encoding='utf-8') as fileObj:
+                with open(self.strlogContentName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
         elif(strFileMark == 'Second'):
             if(whetherAdd & True):
                 with open(self.strlogContentSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
             else:
-                with open(self.strlogContentSecondName, 'w', encoding='utf-8') as fileObj:
+                with open(self.strlogContentSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
         else:
             if(whetherAdd & True):
                 with open(self.strRunLogPathName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
             else:
-                with open(self.strRunLogPathName, 'w', encoding='utf-8') as fileObj:
+                with open(self.strRunLogPathName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
 
     def writerErr(self, strContent, strFileMark='Hour', whetherAdd=True):
@@ -95,14 +95,14 @@ class FileUtil:
                 with open(self.strlogErrName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write("\n" + strContent)
             else:
-                with open(self.strlogErrName, 'w', encoding='utf-8') as fileObj:
+                with open(self.strlogErrName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
         else:
             if(whetherAdd & True):
                 with open(self.strlogErrSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write("\n" + strContent)
             else:
-                with open(self.strlogErrSecondName, 'w', encoding='utf-8') as fileObj:
+                with open(self.strlogErrSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
 
     def writerToFile(self, strContent, strFileNameAndPath, whetherAdd=True):
@@ -113,7 +113,7 @@ class FileUtil:
             with open(strFileNameAndPath, 'a', encoding='utf-8') as fileObj:
                 fileObj.write("\n" + strContent)
         else:
-            with open(strFileNameAndPath, 'w', encoding='utf-8') as fileObj:
+            with open(strFileNameAndPath, 'a', encoding='utf-8') as fileObj:
                 fileObj.write(strContent)
     
 
