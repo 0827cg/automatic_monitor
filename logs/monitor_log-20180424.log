@@ -1,0 +1,136 @@
+
+============2018-04-24 16:24:35============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'rm_log_passday': '7', 'sql_path': 'sql/pic_Arrivals-test.sql', 'checkdisk': 'no', 'when_time_rm': '23', 'fieldcompare_name4': 'appendtime', 'logpath': 'logs', 'first_field_value': '0', 'next_field_value': '1', 'whether_check_pm2': 'no', 'host': '10.9.115.174', 'user': 'haotuoguan', 'email_sendpasswd': '', 'createtime': '2017-09-30', 'passwd': 'haotuoguan123456', 'time_end': '18', 'whether_check_pic': 'yes', 'whether_rm_log': 'no', 'ProjectConfigure': '', 'fieldcompare_name3': 'id', 'database': 'haotuoguan', 'time_beginning': '9', 'table_name': 'htg_weixin_history', 'sleeptime': '70', 'smtp_server': '', 'email_sendaddr': '', 'fieldcompare_name1': 'shopid', 'port': '3306', 'run_intervals': '300', 'savelog_to_file': 'yes', 'username': '鏋楃箒', 'fieldcompare_name_value': 'OpenID', 'past_days_num': '3', 'dingtalk': 'no', 'email': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'author': 'cg閿欒繃', 'when_hour_checkall': '17', 'fieldcompare_name2': 'studentid', 'pro_for_letter': 'htgTimedTask', 'number_accuracy': '2', 'ToEmail': ['1732821152@qq.com'], 'servername': '197', 'warning_level': '70', 'field_name': 'send_state', 'arrivals_standard': '80', 'need_not_send_dateweek': '6 7', 'whether_check_letter': 'yes'}
+需要运行的有: 
+{'rm_log_passday': '7', 'sql_path': 'sql/pic_Arrivals-test.sql', 'checkdisk': 'no', 'when_time_rm': '23', 'fieldcompare_name4': 'appendtime', 'logpath': 'logs', 'first_field_value': '0', 'next_field_value': '1', 'whether_check_pm2': 'no', 'host': '10.9.115.174', 'user': 'haotuoguan', 'email_sendpasswd': '', 'createtime': '2017-09-30', 'passwd': 'haotuoguan123456', 'time_end': '18', 'whether_check_pic': 'yes', 'whether_rm_log': 'no', 'ProjectConfigure': '', 'fieldcompare_name3': 'id', 'database': 'haotuoguan', 'time_beginning': '9', 'table_name': 'htg_weixin_history', 'sleeptime': '70', 'smtp_server': '', 'email_sendaddr': '', 'fieldcompare_name1': 'shopid', 'port': '3306', 'run_intervals': '300', 'savelog_to_file': 'yes', 'username': '鏋楃箒', 'fieldcompare_name_value': 'OpenID', 'past_days_num': '3', 'dingtalk': 'no', 'email': 'no', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'author': 'cg閿欒繃', 'when_hour_checkall': '17', 'fieldcompare_name2': 'studentid', 'pro_for_letter': 'htgTimedTask', 'number_accuracy': '2', 'ToEmail': ['1732821152@qq.com'], 'servername': '197', 'warning_level': '70', 'field_name': 'send_state', 'arrivals_standard': '80', 'need_not_send_dateweek': '6 7', 'whether_check_letter': 'yes'}
+
+============2018-04-24 16:27:11============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'createtime': '2017-09-30', 'redispath': '', 'whether_run_count_num': 'yes', 'whether_count_food': 'yes', 'smtp_server': '', 'table_name': 'htg_weixin_history', 'time_beginning': '9', 'username': '鏋楃箒', 'whether_check_pic': 'yes', 'port': '3306', 'time_end': '18', 'logpath': 'logs', 'number_accuracy': '2', 'email_sendaddr': '', 'pro_for_letter': 'htgTimedTask', 'nginxpath': '', 'servername': '116', 'savelog_to_file': 'yes', 'sql_path': 'sql/pic_Arrivals-test.sql', 'tomcatpath': '', 'past_days_num': '3', 'fieldcompare_name_value': 'OpenID', 'fieldcompare_name4': 'appendtime', 'whether_check_pm2': 'yes', 'first_field_value': '0', 'whether_rm_log': 'yes', 'author': 'cg閿欒繃', 'arrivals_standard': '80', 'run_intervals': '300', 'fieldcompare_name3': 'id', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'ToEmail': ['1732821152@qq.com'], 'when_hour_checkall': '9', 'passwd': 'haotuoguan123456', 'host': '10.9.115.174', 'fieldcompare_name2': 'studentid', 'database': 'haotuoguan', 'user': 'haotuoguan', 'sleeptime': '70', 'when_time_rm': '23', 'warning_level': '70', 'need_not_send_dateweek': '6 7', 'whether_check_letter': 'yes', 'rm_log_passday': '7', 'email_sendpasswd': '', 'email': 'no', 'checkdisk': 'yes', 'dingtalk': 'yes', 'next_field_value': '1', 'field_name': 'send_state', 'whether_count_dynamic': 'yes', 'fieldcompare_name1': 'shopid'}
+未读取到tomcat配置参数,如需检测tomcat请修改配置文件
+未读取到nginx配置参数,如需检测nginx请修改配置文件
+未读取到redis配置参数,如需检测redis请修改配置文件
+需要运行的有: 
+{'createtime': '2017-09-30', 'whether_run_count_num': 'yes', 'whether_count_food': 'yes', 'smtp_server': '', 'table_name': 'htg_weixin_history', 'time_beginning': '9', 'username': '鏋楃箒', 'whether_check_pic': 'yes', 'port': '3306', 'time_end': '18', 'logpath': 'logs', 'number_accuracy': '2', 'email_sendaddr': '', 'pro_for_letter': 'htgTimedTask', 'servername': '116', 'savelog_to_file': 'yes', 'sql_path': 'sql/pic_Arrivals-test.sql', 'past_days_num': '3', 'fieldcompare_name_value': 'OpenID', 'fieldcompare_name4': 'appendtime', 'whether_check_pm2': 'yes', 'first_field_value': '0', 'whether_rm_log': 'yes', 'author': 'cg閿欒繃', 'arrivals_standard': '80', 'run_intervals': '300', 'fieldcompare_name3': 'id', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'ToEmail': ['1732821152@qq.com'], 'when_hour_checkall': '9', 'passwd': 'haotuoguan123456', 'host': '10.9.115.174', 'fieldcompare_name2': 'studentid', 'database': 'haotuoguan', 'user': 'haotuoguan', 'sleeptime': '70', 'when_time_rm': '23', 'warning_level': '70', 'need_not_send_dateweek': '6 7', 'whether_check_letter': 'yes', 'rm_log_passday': '7', 'email_sendpasswd': '', 'email': 'no', 'checkdisk': 'yes', 'dingtalk': 'yes', 'next_field_value': '1', 'field_name': 'send_state', 'whether_count_dynamic': 'yes', 'fieldcompare_name1': 'shopid'}
+-->执行统计图片数量
+
+============2018-04-24 16:27:55============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'fieldcompare_name1': 'shopid', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'whether_count_dynamic': 'yes', 'run_intervals': '300', 'first_field_value': '0', 'email_sendaddr': '', 'logpath': 'logs', 'field_name': 'send_state', 'whether_count_food': 'yes', 'whether_check_pm2': 'yes', 'number_accuracy': '2', 'user': 'haotuoguan', 'when_time_rm': '23', 'whether_run_count_num': 'yes', 'pro_for_letter': 'htgTimedTask', 'whether_check_pic': 'yes', 'smtp_server': '', 'fieldcompare_name2': 'studentid', 'nginxpath': '', 'whether_rm_log': 'yes', 'email_sendpasswd': '', 'tomcatpath': '', 'fieldcompare_name3': 'id', 'savelog_to_file': 'yes', 'need_not_send_dateweek': '6 7', 'port': '3306', 'when_hour_checkall': '9', 'redispath': '', 'rm_log_passday': '7', 'past_days_num': '3', 'host': '10.9.115.174', 'database': 'haotuoguan', 'dingtalk': 'yes', 'time_end': '18', 'email': 'no', 'sleeptime': '70', 'warning_level': '70', 'author': 'cg閿欒繃', 'sql_path': 'sql/pic_Arrivals-test.sql', 'servername': '116', 'whether_check_letter': 'yes', 'fieldcompare_name4': 'appendtime', 'username': '鏋楃箒', 'passwd': 'haotuoguan123456', 'checkdisk': 'yes', 'table_name': 'htg_weixin_history', 'createtime': '2017-09-30', 'time_beginning': '9', 'fieldcompare_name_value': 'OpenID', 'ToEmail': ['1732821152@qq.com'], 'arrivals_standard': '80', 'next_field_value': '1'}
+未读取到tomcat配置参数,如需检测tomcat请修改配置文件
+未读取到nginx配置参数,如需检测nginx请修改配置文件
+未读取到redis配置参数,如需检测redis请修改配置文件
+需要运行的有: 
+{'fieldcompare_name1': 'shopid', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'whether_count_dynamic': 'yes', 'run_intervals': '300', 'first_field_value': '0', 'email_sendaddr': '', 'logpath': 'logs', 'field_name': 'send_state', 'whether_count_food': 'yes', 'whether_check_pm2': 'yes', 'number_accuracy': '2', 'user': 'haotuoguan', 'when_time_rm': '23', 'whether_run_count_num': 'yes', 'pro_for_letter': 'htgTimedTask', 'whether_check_pic': 'yes', 'smtp_server': '', 'fieldcompare_name2': 'studentid', 'whether_rm_log': 'yes', 'email_sendpasswd': '', 'fieldcompare_name3': 'id', 'savelog_to_file': 'yes', 'need_not_send_dateweek': '6 7', 'port': '3306', 'when_hour_checkall': '9', 'rm_log_passday': '7', 'past_days_num': '3', 'host': '10.9.115.174', 'database': 'haotuoguan', 'dingtalk': 'yes', 'time_end': '18', 'email': 'no', 'sleeptime': '70', 'warning_level': '70', 'author': 'cg閿欒繃', 'sql_path': 'sql/pic_Arrivals-test.sql', 'servername': '116', 'whether_check_letter': 'yes', 'fieldcompare_name4': 'appendtime', 'username': '鏋楃箒', 'passwd': 'haotuoguan123456', 'checkdisk': 'yes', 'table_name': 'htg_weixin_history', 'createtime': '2017-09-30', 'time_beginning': '9', 'fieldcompare_name_value': 'OpenID', 'ToEmail': ['1732821152@qq.com'], 'arrivals_standard': '80', 'next_field_value': '1'}
+-->执行统计图片数量
+开始统计食谱的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+开始统计动态的图片数量
+
+============2018-04-24 16:43:11============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'number_accuracy': '2', 'whether_count_food': 'yes', 'warning_level': '70', 'email_sendpasswd': '', 'email': 'no', 'fieldcompare_name4': 'appendtime', 'when_time_rm': '23', 'fieldcompare_name1': 'shopid', 'run_intervals': '300', 'fieldcompare_name3': 'id', 'sleeptime': '70', 'sql_path': 'sql/pic_Arrivals-test.sql', 'first_field_value': '0', 'whether_run_count_num': 'yes', 'Pm2': '', 'past_days_num': '3', 'username': '鏋楃箒', 'whether_count_dynamic': 'yes', 'database': 'haotuoguan', 'email_sendaddr': '', 'author': 'cg閿欒繃', 'host': '10.9.115.174', 'field_name': 'send_state', 'port': '3306', 'next_field_value': '1', 'when_hour_checkall': '9', 'time_end': '18', 'arrivals_standard': '80', 'logpath': 'logs', 'createtime': '2017-09-30', 'whether_rm_log': 'yes', 'passwd': 'haotuoguan123456', 'servername': '116', 'time_beginning': '9', 'table_name': 'htg_weixin_history', 'savelog_to_file': 'yes', 'need_not_send_dateweek': '6 7', 'user': 'haotuoguan', 'smtp_server': '', 'rm_log_passday': '7', 'ToEmail': ['1732821152@qq.com'], 'fieldcompare_name_value': 'OpenID', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'ProjectConfigure': '', 'fieldcompare_name2': 'studentid'}
+需要运行的有: 
+{'number_accuracy': '2', 'whether_count_food': 'yes', 'warning_level': '70', 'email_sendpasswd': '', 'email': 'no', 'fieldcompare_name4': 'appendtime', 'when_time_rm': '23', 'fieldcompare_name1': 'shopid', 'run_intervals': '300', 'fieldcompare_name3': 'id', 'sleeptime': '70', 'sql_path': 'sql/pic_Arrivals-test.sql', 'first_field_value': '0', 'whether_run_count_num': 'yes', 'Pm2': '', 'past_days_num': '3', 'username': '鏋楃箒', 'whether_count_dynamic': 'yes', 'database': 'haotuoguan', 'email_sendaddr': '', 'author': 'cg閿欒繃', 'host': '10.9.115.174', 'field_name': 'send_state', 'port': '3306', 'next_field_value': '1', 'when_hour_checkall': '9', 'time_end': '18', 'arrivals_standard': '80', 'logpath': 'logs', 'createtime': '2017-09-30', 'whether_rm_log': 'yes', 'passwd': 'haotuoguan123456', 'servername': '116', 'time_beginning': '9', 'table_name': 'htg_weixin_history', 'savelog_to_file': 'yes', 'need_not_send_dateweek': '6 7', 'user': 'haotuoguan', 'smtp_server': '', 'rm_log_passday': '7', 'ToEmail': ['1732821152@qq.com'], 'fieldcompare_name_value': 'OpenID', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'ProjectConfigure': '', 'fieldcompare_name2': 'studentid'}
+-->执行统计图片数量
+开始统计食谱的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'foodPicNum': Decimal('59')}]
+
+============2018-04-24 16:45:22============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'email': 'no', 'email_sendaddr': '', 'fieldcompare_name2': 'studentid', 'host': '10.9.115.174', 'createtime': '2017-09-30', 'sleeptime': '70', 'when_hour_checkall': '9', 'whether_count_dynamic': 'yes', 'fieldcompare_name4': 'appendtime', 'whether_run_count_num': 'yes', 'database': 'haotuoguan', 'next_field_value': '1', 'number_accuracy': '2', 'arrivals_standard': '80', 'past_days_num': '3', 'when_time_rm': '23', 'username': '鏋楃箒', 'field_name': 'send_state', 'rm_log_passday': '7', 'need_not_send_dateweek': '6 7', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'ToEmail': ['1732821152@qq.com'], 'servername': '116', 'Pm2': '', 'warning_level': '70', 'time_end': '18', 'smtp_server': '', 'sql_path': 'sql/pic_Arrivals-test.sql', 'time_beginning': '9', 'user': 'haotuoguan', 'author': 'cg閿欒繃', 'email_sendpasswd': '', 'ProjectConfigure': '', 'table_name': 'htg_weixin_history', 'fieldcompare_name_value': 'OpenID', 'logpath': 'logs', 'whether_count_food': 'yes', 'passwd': 'haotuoguan123456', 'fieldcompare_name1': 'shopid', 'first_field_value': '0', 'port': '3306', 'run_intervals': '300', 'whether_rm_log': 'yes', 'savelog_to_file': 'yes', 'fieldcompare_name3': 'id'}
+需要运行的有: 
+{'email': 'no', 'email_sendaddr': '', 'fieldcompare_name2': 'studentid', 'host': '10.9.115.174', 'createtime': '2017-09-30', 'sleeptime': '70', 'when_hour_checkall': '9', 'whether_count_dynamic': 'yes', 'fieldcompare_name4': 'appendtime', 'whether_run_count_num': 'yes', 'database': 'haotuoguan', 'next_field_value': '1', 'number_accuracy': '2', 'arrivals_standard': '80', 'past_days_num': '3', 'when_time_rm': '23', 'username': '鏋楃箒', 'field_name': 'send_state', 'rm_log_passday': '7', 'need_not_send_dateweek': '6 7', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'ToEmail': ['1732821152@qq.com'], 'servername': '116', 'Pm2': '', 'warning_level': '70', 'time_end': '18', 'smtp_server': '', 'sql_path': 'sql/pic_Arrivals-test.sql', 'time_beginning': '9', 'user': 'haotuoguan', 'author': 'cg閿欒繃', 'email_sendpasswd': '', 'ProjectConfigure': '', 'table_name': 'htg_weixin_history', 'fieldcompare_name_value': 'OpenID', 'logpath': 'logs', 'whether_count_food': 'yes', 'passwd': 'haotuoguan123456', 'fieldcompare_name1': 'shopid', 'first_field_value': '0', 'port': '3306', 'run_intervals': '300', 'whether_rm_log': 'yes', 'savelog_to_file': 'yes', 'fieldcompare_name3': 'id'}
+-->执行统计图片数量
+开始统计食谱的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'foodPicNum': Decimal('59')}]
+开始统计动态的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'dynamicPicNum': Decimal('34')}]
+-->尝试准备删除日志文件
+时间不为23时,不执行删除日志文件
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-24 16:50:41============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'next_field_value': '1', 'ToEmail': ['1732821152@qq.com'], 'time_beginning': '9', 'createtime': '2017-09-30', 'fieldcompare_name1': 'shopid', 'number_accuracy': '2', 'need_not_send_dateweek': '6 7', 'database': 'haotuoguan', 'when_time_rm': '23', 'servername': '116', 'table_name': 'htg_weixin_history', 'whether_count_food': 'yes', 'email': 'no', 'logpath': 'logs', 'user': 'haotuoguan', 'Pm2': '', 'field_name': 'send_state', 'passwd': 'haotuoguan123456', 'ProjectConfigure': '', 'sql_path': 'sql/pic_Arrivals-test.sql', 'whether_run_count_num': 'yes', 'fieldcompare_name4': 'appendtime', 'fieldcompare_name2': 'studentid', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'first_field_value': '0', 'smtp_server': '', 'time_end': '18', 'username': '鏋楃箒', 'whether_rm_log': 'yes', 'arrivals_standard': '80', 'port': '3306', 'author': 'cg閿欒繃', 'run_intervals': '300', 'fieldcompare_name3': 'id', 'host': '10.9.115.174', 'email_sendaddr': '', 'rm_log_passday': '7', 'savelog_to_file': 'yes', 'past_days_num': '3', 'fieldcompare_name_value': 'OpenID', 'whether_count_dynamic': 'yes', 'sleeptime': '70', 'email_sendpasswd': '', 'when_hour_checkall': '9', 'warning_level': '70'}
+需要运行的有: 
+{'next_field_value': '1', 'ToEmail': ['1732821152@qq.com'], 'time_beginning': '9', 'createtime': '2017-09-30', 'fieldcompare_name1': 'shopid', 'number_accuracy': '2', 'need_not_send_dateweek': '6 7', 'database': 'haotuoguan', 'when_time_rm': '23', 'servername': '116', 'table_name': 'htg_weixin_history', 'whether_count_food': 'yes', 'email': 'no', 'logpath': 'logs', 'user': 'haotuoguan', 'Pm2': '', 'field_name': 'send_state', 'passwd': 'haotuoguan123456', 'ProjectConfigure': '', 'sql_path': 'sql/pic_Arrivals-test.sql', 'whether_run_count_num': 'yes', 'fieldcompare_name4': 'appendtime', 'fieldcompare_name2': 'studentid', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'first_field_value': '0', 'smtp_server': '', 'time_end': '18', 'username': '鏋楃箒', 'whether_rm_log': 'yes', 'arrivals_standard': '80', 'port': '3306', 'author': 'cg閿欒繃', 'run_intervals': '300', 'fieldcompare_name3': 'id', 'host': '10.9.115.174', 'email_sendaddr': '', 'rm_log_passday': '7', 'savelog_to_file': 'yes', 'past_days_num': '3', 'fieldcompare_name_value': 'OpenID', 'whether_count_dynamic': 'yes', 'sleeptime': '70', 'email_sendpasswd': '', 'when_hour_checkall': '9', 'warning_level': '70'}
+-->执行统计图片数量
+开始统计食谱的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'foodPicNum': Decimal('59')}]
+生成数据如: > - 查找到今日(截止至目前9)食谱中上传的图片有 **59** 张
+开始统计动态的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'dynamicPicNum': Decimal('34')}]
+生成数据如: > - 查找到今日(截止至目前9)动态中上传的图片有 **34** 张
+-->尝试准备删除日志文件
+时间不为23时,不执行删除日志文件
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-24 16:55:06============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'table_name': 'htg_weixin_history', 'whether_count_food': 'yes', 'next_field_value': '1', 'whether_run_count_num': 'yes', 'sql_path': 'sql/pic_Arrivals-test.sql', 'email': 'no', 'passwd': 'haotuoguan123456', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'time_beginning': '9', 'smtp_server': '', 'time_end': '18', 'servername': '116', 'arrivals_standard': '80', 'past_days_num': '3', 'number_accuracy': '2', 'rm_log_passday': '7', 'Pm2': '', 'database': 'haotuoguan', 'username': '鏋楃箒', 'whether_rm_log': 'yes', 'email_sendaddr': '', 'savelog_to_file': 'yes', 'sleeptime': '70', 'logpath': 'logs', 'ToEmail': ['1732821152@qq.com'], 'first_field_value': '0', 'fieldcompare_name2': 'studentid', 'warning_level': '70', 'fieldcompare_name3': 'id', 'whether_count_dynamic': 'yes', 'field_name': 'send_state', 'fieldcompare_name4': 'appendtime', 'fieldcompare_name_value': 'OpenID', 'email_sendpasswd': '', 'fieldcompare_name1': 'shopid', 'port': '3306', 'run_intervals': '300', 'ProjectConfigure': '', 'when_time_rm': '23', 'createtime': '2017-09-30', 'need_not_send_dateweek': '6 7', 'author': 'cg閿欒繃', 'user': 'haotuoguan', 'when_hour_checkall': '9', 'host': '10.9.115.174'}
+需要运行的有: 
+{'table_name': 'htg_weixin_history', 'whether_count_food': 'yes', 'next_field_value': '1', 'whether_run_count_num': 'yes', 'sql_path': 'sql/pic_Arrivals-test.sql', 'email': 'no', 'passwd': 'haotuoguan123456', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'time_beginning': '9', 'smtp_server': '', 'time_end': '18', 'servername': '116', 'arrivals_standard': '80', 'past_days_num': '3', 'number_accuracy': '2', 'rm_log_passday': '7', 'Pm2': '', 'database': 'haotuoguan', 'username': '鏋楃箒', 'whether_rm_log': 'yes', 'email_sendaddr': '', 'savelog_to_file': 'yes', 'sleeptime': '70', 'logpath': 'logs', 'ToEmail': ['1732821152@qq.com'], 'first_field_value': '0', 'fieldcompare_name2': 'studentid', 'warning_level': '70', 'fieldcompare_name3': 'id', 'whether_count_dynamic': 'yes', 'field_name': 'send_state', 'fieldcompare_name4': 'appendtime', 'fieldcompare_name_value': 'OpenID', 'email_sendpasswd': '', 'fieldcompare_name1': 'shopid', 'port': '3306', 'run_intervals': '300', 'ProjectConfigure': '', 'when_time_rm': '23', 'createtime': '2017-09-30', 'need_not_send_dateweek': '6 7', 'author': 'cg閿欒繃', 'user': 'haotuoguan', 'when_hour_checkall': '9', 'host': '10.9.115.174'}
+
+============2018-04-24 16:56:28============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'time_beginning': '9', 'smtp_server': '', 'need_not_send_dateweek': '6 7', 'whether_run_count_num': 'yes', 'email_sendaddr': '', 'run_intervals': '300', 'fieldcompare_name4': 'appendtime', 'first_field_value': '0', 'user': 'haotuoguan', 'table_name': 'htg_weixin_history', 'host': '10.9.115.174', 'sql_path': 'sql/pic_Arrivals-test.sql', 'field_name': 'send_state', 'when_hour_checkall': '9', 'port': '3306', 'email_sendpasswd': '', 'username': '鏋楃箒', 'rm_log_passday': '7', 'ProjectConfigure': '', 'createtime': '2017-09-30', 'past_days_num': '3', 'time_end': '18', 'arrivals_standard': '80', 'number_accuracy': '2', 'logpath': 'logs', 'fieldcompare_name1': 'shopid', 'sleeptime': '70', 'whether_rm_log': 'yes', 'fieldcompare_name_value': 'OpenID', 'when_time_rm': '23', 'fieldcompare_name2': 'studentid', 'ToEmail': ['1732821152@qq.com'], 'database': 'haotuoguan', 'email': 'no', 'whether_count_food': 'yes', 'passwd': 'haotuoguan123456', 'warning_level': '70', 'author': 'cg閿欒繃', 'servername': '116', 'Pm2': '', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'fieldcompare_name3': 'id', 'next_field_value': '1', 'savelog_to_file': 'yes', 'whether_count_dynamic': 'yes'}
+需要运行的有: 
+{'time_beginning': '9', 'smtp_server': '', 'need_not_send_dateweek': '6 7', 'whether_run_count_num': 'yes', 'email_sendaddr': '', 'run_intervals': '300', 'fieldcompare_name4': 'appendtime', 'first_field_value': '0', 'user': 'haotuoguan', 'table_name': 'htg_weixin_history', 'host': '10.9.115.174', 'sql_path': 'sql/pic_Arrivals-test.sql', 'field_name': 'send_state', 'when_hour_checkall': '9', 'port': '3306', 'email_sendpasswd': '', 'username': '鏋楃箒', 'rm_log_passday': '7', 'ProjectConfigure': '', 'createtime': '2017-09-30', 'past_days_num': '3', 'time_end': '18', 'arrivals_standard': '80', 'number_accuracy': '2', 'logpath': 'logs', 'fieldcompare_name1': 'shopid', 'sleeptime': '70', 'whether_rm_log': 'yes', 'fieldcompare_name_value': 'OpenID', 'when_time_rm': '23', 'fieldcompare_name2': 'studentid', 'ToEmail': ['1732821152@qq.com'], 'database': 'haotuoguan', 'email': 'no', 'whether_count_food': 'yes', 'passwd': 'haotuoguan123456', 'warning_level': '70', 'author': 'cg閿欒繃', 'servername': '116', 'Pm2': '', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'fieldcompare_name3': 'id', 'next_field_value': '1', 'savelog_to_file': 'yes', 'whether_count_dynamic': 'yes'}
+未到达时间,不执行统计图片数量
+-->尝试准备删除日志文件
+时间不为23时,不执行删除日志文件
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
+
+============2018-04-24 16:57:22============
+获取运行需要的配置数据
+读取到的配置文件信息如下: 
+{'fieldcompare_name_value': 'OpenID', 'fieldcompare_name3': 'id', 'host': '10.9.115.174', 'need_not_send_dateweek': '6 7', 'fieldcompare_name4': 'appendtime', 'whether_rm_log': 'yes', 'Pm2': '', 'servername': '116', 'arrivals_standard': '80', 'when_hour_checkall': '16', 'sql_path': 'sql/pic_Arrivals-test.sql', 'fieldcompare_name2': 'studentid', 'savelog_to_file': 'yes', 'fieldcompare_name1': 'shopid', 'table_name': 'htg_weixin_history', 'next_field_value': '1', 'email_sendpasswd': '', 'username': '鏋楃箒', 'run_intervals': '300', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'time_end': '18', 'whether_count_dynamic': 'yes', 'author': 'cg閿欒繃', 'createtime': '2017-09-30', 'logpath': 'logs', 'past_days_num': '3', 'time_beginning': '9', 'whether_count_food': 'yes', 'email_sendaddr': '', 'port': '3306', 'whether_run_count_num': 'yes', 'smtp_server': '', 'when_time_rm': '23', 'first_field_value': '0', 'sleeptime': '70', 'passwd': 'haotuoguan123456', 'ToEmail': ['1732821152@qq.com'], 'database': 'haotuoguan', 'rm_log_passday': '7', 'number_accuracy': '2', 'user': 'haotuoguan', 'warning_level': '70', 'ProjectConfigure': '', 'email': 'no', 'field_name': 'send_state'}
+需要运行的有: 
+{'fieldcompare_name_value': 'OpenID', 'fieldcompare_name3': 'id', 'host': '10.9.115.174', 'need_not_send_dateweek': '6 7', 'fieldcompare_name4': 'appendtime', 'whether_rm_log': 'yes', 'Pm2': '', 'servername': '116', 'arrivals_standard': '80', 'when_hour_checkall': '16', 'sql_path': 'sql/pic_Arrivals-test.sql', 'fieldcompare_name2': 'studentid', 'savelog_to_file': 'yes', 'fieldcompare_name1': 'shopid', 'table_name': 'htg_weixin_history', 'next_field_value': '1', 'email_sendpasswd': '', 'username': '鏋楃箒', 'run_intervals': '300', 'webhook': 'https://oapi.dingtalk.com/robot/send?access_token=793b8e6616eb991b10044ec9c0a7f528f2f7b560xxxxxxxa0866', 'time_end': '18', 'whether_count_dynamic': 'yes', 'author': 'cg閿欒繃', 'createtime': '2017-09-30', 'logpath': 'logs', 'past_days_num': '3', 'time_beginning': '9', 'whether_count_food': 'yes', 'email_sendaddr': '', 'port': '3306', 'whether_run_count_num': 'yes', 'smtp_server': '', 'when_time_rm': '23', 'first_field_value': '0', 'sleeptime': '70', 'passwd': 'haotuoguan123456', 'ToEmail': ['1732821152@qq.com'], 'database': 'haotuoguan', 'rm_log_passday': '7', 'number_accuracy': '2', 'user': 'haotuoguan', 'warning_level': '70', 'ProjectConfigure': '', 'email': 'no', 'field_name': 'send_state'}
+-->尝试准备删除日志文件
+时间不为23时,不执行删除日志文件
+-->执行统计图片数量
+开始统计食谱的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'foodPicNum': Decimal('62')}]
+生成数据如: > - 查找到今日(截止至目前16)食谱中上传的图片有 **62** 张
+开始统计动态的图片数量
+数据库查询已连接
+数据库查询连接已关闭
+获取到的结果为:[{'dynamicPicNum': Decimal('34')}]
+生成数据如: > - 查找到今日(截止至目前16)动态中上传的图片有 **34** 张
+不执行email服务
+不执行钉钉服务
+5.0分钟后将再次检测运行
+============
