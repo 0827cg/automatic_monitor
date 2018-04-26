@@ -108,12 +108,14 @@ class FileUtil:
     def writerToFile(self, strContent, strFileNameAndPath, whetherAdd=True):
 
         # 写入内容到指定文件
+        # 这里的whetherAdd表示是否清空追加
+        # 如果为False则会清空追加
 
         if(whetherAdd & True):
             with open(strFileNameAndPath, 'a', encoding='utf-8') as fileObj:
                 fileObj.write("\n" + strContent)
         else:
-            with open(strFileNameAndPath, 'a', encoding='utf-8') as fileObj:
+            with open(strFileNameAndPath, 'w', encoding='utf-8') as fileObj:
                 fileObj.write(strContent)
     
 
@@ -253,6 +255,12 @@ class FileUtil:
         intAccuracy = "2"
         strNeedNotSendDateWeek = "6 7"
 
+        strWhetherRunCountNum = "yes"
+        strWhetherCountFoodNum = "yes"
+        strWhetherCountDynamicNum = "yes"
+
+        strWhetherGetIntegralSit = "yes"
+
         strIntervals = "300"
         strHour = "9"
         strShowLog = "yes"
@@ -279,6 +287,8 @@ class FileUtil:
         config.add_section("CheckLetterConfigure")
         config.add_section("MysqlConfigure")
         config.add_section("Pic_Arrivals")
+        config.add_section("CountPicNum")
+        config.add_section("Integral")
         config.add_section('RunConfigure')
         config.add_section("Message")
 
@@ -362,6 +372,14 @@ class FileUtil:
         config.set('Pic_Arrivals', 'number_accuracy', intAccuracy)
         config.set('Pic_Arrivals', '# pic_arrivals compare no use list msg need not send to dingtalk')
         config.set('Pic_Arrivals', 'need_not_send_dateWeek', strNeedNotSendDateWeek)
+
+        config.set('CountPicNum', '# count the pic num or other, the whether_run_count_num is chief choice')
+        config.set('CountPicNum', 'whether_run_count_num', strWhetherRunCountNum)
+        config.set('CountPicNum', 'whether_count_food', strWhetherCountFoodNum)
+        config.set('CountPicNum', 'whether_count_dynamic', strWhetherCountDynamicNum)
+
+        config.set('Integral', '# integral situation')
+        config.set('Integral', 'whether_get_integral_sit', strWhetherGetIntegralSit)
 
         config.set('RunConfigure', '# set run progress timing, unit second')
         config.set('RunConfigure', 'run_intervals', strIntervals)

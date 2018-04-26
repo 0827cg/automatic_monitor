@@ -26,7 +26,7 @@ class PicArrivals:
         self.intHourCheckAll = intHourCheckAll
         self.allModuleRunAllObj = allModuleRunAllObj
 
-        self.listNeedNotSendDateWeek = self.getNeedNotSendWeekDate(dictNeedRunMsg);
+        self.listNeedNotSendDateWeek = self.getNeedNotSendWeekDate(dictNeedRunMsg)
 
         if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
             
@@ -43,9 +43,8 @@ class PicArrivals:
                                                    str(self.allModuleRunAllObj.intOverAllCheckPicArrivals)), 'runLog')
             else:   
                 if(self.fileUtilObj.boolWhetherShowLog & True):
-                    self.fileUtilObj.writerContent(("今日" + str(self.intHourCheckAll) +
-                                                "内已检测图片到达率,今日将不再全面检测\n" +
-                                                 "将进行错误监控任务"), 'runLog')
+                    self.fileUtilObj.writerContent(("-->今日" + str(self.intHourCheckAll) +
+                                                "时内已检测图片到达率,今日将不再全面检测"), 'runLog')
 
 
 
@@ -152,6 +151,10 @@ class PicArrivals:
             if (intMark == 1):
                 strSqlContent = self.fileUtilObj.readFileContent(self.strSearchSql)
                 strTotalSearchSql = self.getToalSql(strSqlContent, intTodayBeginStamp, intTodayEndStamp)
+
+                if (self.fileUtilObj.boolWhetherShowLog & True):
+                    self.fileUtilObj.writerContent(("查询图片到达率sql: " + strTotalSearchSql), 'runLog')
+
                 listResultFirst = self.doSearchSql(strTotalSearchSql, dictMsgForMysql)
                 listResult = self.rmoveDecimal(listResultFirst)
 

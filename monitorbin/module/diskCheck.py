@@ -72,8 +72,8 @@ class DiskSizeCheck:
                 
             else:
                 if(self.fileUtil.boolWhetherShowLog & True):
-                    self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
-                                                "内已检测硬盘,今日将不再检测\n" +
+                    self.fileUtil.writerContent(("-->今日" + str(self.intHourCheckAll) +
+                                                "时内已检测硬盘,今日将不再检测\n" +
                                                  "将进行错误监控任务"), 'runLog')
                 self.checkTog()
             

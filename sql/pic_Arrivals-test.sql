@@ -1,3 +1,9 @@
+/*
+    author: cg
+    time: 2017-12-14
+    description: 获取规定之间内所有(出了578)使用了设备的校区的图片到达率
+*/
+
 SELECT
   htg_org.id AS 'org_id',
   htg_org.NAME AS 'org_name',

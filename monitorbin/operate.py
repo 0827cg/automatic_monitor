@@ -10,10 +10,13 @@ from monitorbin.module.letterCheck import CheckLetter
 from monitorbin.module.pm2Check import Pm2Operate
 from monitorbin.otherModule.picArrivals import PicArrivals
 from monitorbin.otherModule.rmLog import RMlog
+from monitorbin.otherModule.countPicNum import CountPicNum
+from monitorbin.otherModule.integralSituation import IntegralSit
 from monitorbin.util.emailUtil import EmailUtil
 from monitorbin.util.dingTalk import ResponseDD
 from monitorbin.util.dataTemplate import DataTemplate
 from monitorbin.util.allRunNum import AllModuleRunAll
+from monitorbin.util.sysTime import RunTime
 from threading import Timer
 import time
 
@@ -95,7 +98,7 @@ class Operate:
 
             if(self.fileUtil.boolWhetherShowLog & True):
                 self.fileUtil.writerContent((str(intRunIntervals/60) + "分钟后将再次检测运行"), 'runLog')
-                self.fileUtil.writerContent("============", 'runLog')
+                self.fileUtil.writerContent("============" + str(RunTime().getDateTime()) + "============", 'runLog')
 
             time.sleep(intRunIntervals)
             
@@ -156,6 +159,19 @@ class Operate:
                 if(strCheckPm2 == 'yes'):
                     pm2Operate = Pm2Operate(self.fileUtil, self.dataTemplate, self.fileUtil.strHourTime,
                                             self.intHourCheckAll, self.allModuleRunAll)
+
+            if(keyItem.find('whether_run_count_num') != -1):
+                strWhetherRun = dictNeedRunMsg.get(keyItem)
+                if(strWhetherRun == 'yes'):
+                    countPicNum = CountPicNum(self.fileUtil, self.dataTemplate, dictNeedRunMsg, self.fileUtil.strHourTime,
+                                              self.intHourCheckAll, self.allModuleRunAll)
+
+            if(keyItem.find('whether_get_integral_sit') != -1):
+                strWhetherRunIntegral = dictNeedRunMsg.get(keyItem)
+                if(strWhetherRunIntegral == 'yes'):
+                    integralSit = IntegralSit(self.fileUtil, self.dataTemplate, dictNeedRunMsg, self.fileUtil.strHourTime,
+                                              self.intHourCheckAll, self.allModuleRunAll)
+
             if(keyItem.find('whether_rm_log') != -1):
                 strRMlog = dictNeedRunMsg.get(keyItem)
                 if(strRMlog == 'yes'):

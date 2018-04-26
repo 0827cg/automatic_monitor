@@ -12,6 +12,7 @@ class AllModuleRunAll:
     # 当然也可以利用此条件来执行几次，就看后面调用时的代码怎么写了
 
     # 2017-12-14添加intOverAllCheckPicArrivals,intOverAllCheckPm2
+    # 2018-04-25添加intOverAllCountNum, intOverAllGetIntegralSit
 
     intOverAllCheckTomcatNum = 0
     intOverAllCheckNginxNum = 0
@@ -20,6 +21,8 @@ class AllModuleRunAll:
     intOverAllCheckDiskNum = 0
     intOverAllCheckPicArrivals = 0
     intOverAllCheckPm2 = 0
+    intOverAllCountNum = 0
+    intOverAllGetIntegralSit = 0
 
     '''
 
@@ -54,7 +57,7 @@ class AllModuleRunAll:
         if((self.intOverAllCheckTomcatNum == 1) | (self.intOverAllCheckNginxNum == 1) |
            (self.intOverAllCheckRedisNum == 1) | (self.intOverAllCheckLetterNum == 1) |
            (self.intOverAllCheckDiskNum == 1) | (self.intOverAllCheckPicArrivals ==1) |
-           (self.intOverAllCheckPm2 == 1)):
+           (self.intOverAllCheckPm2 == 1) | (self.intOverAllCountNum == 1) | (self.intOverAllGetIntegralSit == 1)):
 
             self.intOverAllCheckTomcatNum = 0
             self.intOverAllCheckNginxNum = 0
@@ -63,6 +66,8 @@ class AllModuleRunAll:
             self.intOverAllCheckDiskNum = 0
             self.intOverAllCheckPicArrivals = 0
             self.intOverAllCheckPm2 = 0
+            self.intOverAllCountNum = 0
+            self.intOverAllGetIntegralSit = 0
 
             intIndex = 1
 

@@ -25,6 +25,10 @@ class PicArrivalCompare:
     def __init__(self, fileUtilObj, dataTemplateObj, listNeedNotSendDateWeek):
         self.fileUtilObj = fileUtilObj
         self.dataTemplateObj = dataTemplateObj
+
+        #if self.fileUtilObj.boolWhetherShowLog & True:
+        #    self.fileUtilObj.writerContent(("今日listNeedNotSendDateWeek" + str(listNeedNotSendDateWeek)), 'runLog')
+
         self.listNeedNotSendDateWeek = listNeedNotSendDateWeek
         self.listBeforeYesterdayTotal = self.getListBeforeYesterdayTotal()
         if len(self.listBeforeYesterdayTotal) == 0:
@@ -316,12 +320,16 @@ class PicArrivalCompare:
             except:
                 listBYTotal = [{'shop_id': -1, 'org_id': -1}]
                 if self.fileUtilObj.boolWhetherShowLog & True:
-                    self.fileUtilObj.writerContent("缓存内容转换list类型时出错", 'runLog')
+                    self.fileUtilObj.writerContent("缓存内容转换list类型时出错,缓存内容如下", 'runLog')
+                    self.fileUtilObj.writerContent(strContent, 'runLog')
 
         else:
             if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("未发现缓存文件", 'runLog')
                 listBYTotal = [{'shop_id': -1, 'org_id': -1}]
+
+        if self.fileUtilObj.boolWhetherShowLog & True:
+            self.fileUtilObj.writerContent(("缓存中读取到的信息: " + str(listBYTotal)), 'runLog')
 
         return listBYTotal
 

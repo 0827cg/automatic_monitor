@@ -50,7 +50,7 @@ class RMlog:
                                                     "时,将准备删除日志文件"), 'runLog')
 
                 listFileName = self.fileUtilObj.getFileNameFromPath(self.strLogPath)
-                listNeedRMFileName = self.getNeedRMFileName(listFileName, strNewOtherDay)
+                listNeedRMFileName = self.getNeedRMFileNameMonitor(listFileName, strNewOtherDay)
 
                 if(len(listNeedRMFileName) != 0):
 
@@ -99,6 +99,36 @@ class RMlog:
             if(intFileData < int(strNewOtherDay)):
                 listNeedRMFileName.append(listFileNameItem)
         
+        return listNeedRMFileName
+
+    def getNeedRMFileNameMonitor(self, listFileName, strNewOtherDay):
+
+        # listFileName: 日志目录下的所有文件名
+        # strNewOtherDay: 过去intPassday天的日期,格式已转换成"%Y%m%d"的
+        # 其中runTime.getPastDataDay()返回的日期格式时"%Y-%m-%d"
+        # 而日志文件的日期格式是"%Y%m%d"
+        # 调用runTime中的doCutHorizontalLine()即可将'-'去除
+        # 通过字符串的str[xx:xx]来获取日期
+        # 例如日志名为: monitor_log-20171215.log
+        # 则通过monitor_log-20171215.log[12:20]即可获得20171215
+        # 返回需要删除的日志文件名
+
+        # 更改删除规则: 如果文件名中包含'monitor'字样,则视为需要删除的文件
+        # 并且从文件命名的末尾开始读取日期
+        # 例如: monitor_log-20171215.log[-12:-4]即可获得20171215
+        # add in 2018-04-26
+
+        listNeedRMFileName = []
+
+
+        for listFileNameItem in listFileName:
+
+            if('monitor' in str(listFileNameItem)):
+
+                intFileData = int(listFileNameItem[-12:-4])
+                if (intFileData < int(strNewOtherDay)):
+                    listNeedRMFileName.append(listFileNameItem)
+
         return listNeedRMFileName
 
 

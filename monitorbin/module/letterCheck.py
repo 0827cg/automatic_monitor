@@ -117,8 +117,8 @@ class CheckLetter:
                 
             else:
                 if(self.fileUtil.boolWhetherShowLog & True):
-                    self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
-                                                "内已检测数据库字段,今日将不再全面检测\n" +
+                    self.fileUtil.writerContent(("-->今日" + str(self.intHourCheckAll) +
+                                                "时内已检测数据库字段,今日将不再全面检测\n" +
                                                  "将进行错误监控任务"), 'runLog')
 
                 # 配置文件中的when_hour_checkall时内进行错误监控,和下面else内一样
@@ -506,6 +506,10 @@ class CheckLetter:
                                         self.strFieldCompare4 + " >= %d AND " + self.strFieldCompare4 +
                                         " <= %d") % (self.intFirst, intTodayBeginStamp, intTodayEndStamp))
 
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("查询今日未推送数据sql: " + strSearchNoSend)
+
+
                     cursor.execute(strSearchNoSend)
                     listNoSend = cursor.fetchall()
 
@@ -565,6 +569,10 @@ class CheckLetter:
                                              " WHERE " + self.strField + " = %d AND " + self.strFieldCompare4 + " >= %d AND " +
                                              self.strFieldCompare4 + " <= %d") % (
                                             self.intNext, intTodayBeginStamp, intTodayEndStamp))
+
+                    if (self.fileUtil.boolWhetherShowLog & True):
+                        self.fileUtil.writerContent("查询今日已推送数据sql: " + strSearchAlreadySend)
+
 
                     cursor.execute(strSearchAlreadySend)
 

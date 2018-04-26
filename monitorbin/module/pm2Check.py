@@ -37,7 +37,7 @@ class Pm2Operate:
                                                    str(self.allModuleRunAllObj.intOverAllCheckPm2)), 'runLog')
             else:
                 if(self.fileUtilObj.boolWhetherShowLog & True):
-                    self.fileUtilObj.writerContent(("今日" + str(self.intHourCheckAll) +
+                    self.fileUtilObj.writerContent(("-->今日" + str(self.intHourCheckAll) +
                                                 "内已检测pm2,今日将不再全面检测\n" +
                                                  "将进行错误监控任务"), 'runLog')
                 
