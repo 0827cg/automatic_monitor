@@ -328,8 +328,9 @@ class PicArrivalCompare:
                 self.fileUtilObj.writerContent("未发现缓存文件", 'runLog')
                 listBYTotal = [{'shop_id': -1, 'org_id': -1}]
 
+        strTableContent = PrettyTableDo().getMsgForTableShowByListDict(listBYTotal, 1)
         if self.fileUtilObj.boolWhetherShowLog & True:
-            self.fileUtilObj.writerContent(("缓存中读取到的信息: " + str(listBYTotal)), 'runLog')
+            self.fileUtilObj.writerContent(("缓存中读取到的信息: " + strTableContent), 'runLog')
 
         return listBYTotal
 
