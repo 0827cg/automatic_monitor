@@ -99,6 +99,9 @@ class CountPicNum:
                     self.fileUtilObj.writerContent(("获取到的结果为:" + str(listResult)), 'runLog')
                 floatDynamicPicNum = listResult[0].get('dynamicPicNum')
 
+                if(floatDynamicPicNum is None):
+                    floatDynamicPicNum = 0
+
                 strSendData = ("> - 查找到今日(截止至目前" + str(self.intHourCheckAll) +
                                              "时)动态中上传的图片有 **" + str(floatDynamicPicNum) + "** 张")
                 self.dataTempObj.dataAll += strSendData + "\n\n"
