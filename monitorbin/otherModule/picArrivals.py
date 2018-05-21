@@ -90,7 +90,7 @@ class PicArrivals:
                     if(self.fileUtilObj.boolWhetherShowLog & True):
                         self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
 
-                dictValue = self.getAverageValue(listResult)
+                dictValue = self.getAverageValueTotal(listResult)
 
                 self.dataTemplateObj.dataAll += (" > - 查找到 **" + str(dictValue.get('totalNum')) +
                                                  "** 家机构有使用签到,并于" + str(self.dateYesterday) +
@@ -176,7 +176,7 @@ class PicArrivals:
                 #     if (self.fileUtilObj.boolWhetherShowLog & True):
                 #         self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
 
-                dictValue = self.getAverageValue(listResult)
+                dictValue = self.getAverageValueTotal(listResult)
 
                 self.dataTemplateObj.dataAll += (" > - 查找到 **" + str(dictValue.get('totalNum')) +
                                                  "** 家机构有使用签到,并于" + str(dateTodayBegin) +
@@ -226,6 +226,45 @@ class PicArrivals:
         dictValue['averageValue'] = round(floatAverageValue, int(self.intAccuracy))
 
         return dictValue
+
+    def getAverageValueTotal(self, listResult):
+
+        # listResult: 所有数据,包括达到100的
+        # 统计平均值
+        # dict里存放的字段有
+        # totalNum: 所有机构个数
+        # averageValue: 图片到达率平均值
+
+        # 计算所有的图片平均到达率，这个方法时根据sql所查出来的(所有数据的pic_to_ed字段值的总数/pic_to_all字段值的总数)
+        # 以此来作为平均图片到达率
+        # 而上面的之前方法getAverageValue()是计算rate字段值的总数/数据的条数
+        # 现在看来getAverageValue()方法得到的值并不能作为所有的平均图片到达率,而是现在的此方法
+        # this method add in 2018-05-21
+
+        dictValue = {}
+        intTotalNum = len(listResult)
+
+        if (intTotalNum != 0):
+
+            intTotalEd = 0
+            intTotalAll = 0
+
+            for listResultItem in listResult:
+                intEdValue = int(listResultItem.get('pic_to_ed'))
+                intAllValue = int(listResultItem.get('pic_to_all'))
+
+                intTotalEd += intEdValue
+                intTotalAll += intAllValue
+
+            floatAverageValue = (intTotalEd / intTotalAll)
+        else:
+            floatAverageValue = 0.00
+
+        dictValue['totalNum'] = intTotalNum
+        dictValue['averageValue'] = round(floatAverageValue, int(self.intAccuracy))
+
+        return dictValue
+
         
 
     
