@@ -90,7 +90,7 @@ class PicArrivals:
                     if(self.fileUtilObj.boolWhetherShowLog & True):
                         self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
 
-                dictValue = self.getAverageValueTotal(listResult)
+                dictValue = self.getAverageValueTotal(listResultFirst)
 
                 self.dataTemplateObj.dataAll += (" > - 查找到 **" + str(dictValue.get('totalNum')) +
                                                  "** 家机构有使用签到,并于" + str(self.dateYesterday) +
@@ -160,7 +160,7 @@ class PicArrivals:
 
                 # listMsgForLog = self.getSomeForLog(listResult)
                 # 上面的代码只是打印日志,使用集合打印.现在用表格化输出,使用此下代码
-                strMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listResult, 1)
+                strMsgTable = PrettyTableDo().getMsgForTableShowByListDict(listResultFirst, 1)
                 # 方法getSomeForLog()闲置不用
                 # change in 2018-04-02
 
@@ -176,7 +176,7 @@ class PicArrivals:
                 #     if (self.fileUtilObj.boolWhetherShowLog & True):
                 #         self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
 
-                dictValue = self.getAverageValueTotal(listResult)
+                dictValue = self.getAverageValueTotal(listResultFirst)
 
                 self.dataTemplateObj.dataAll += (" > - 查找到 **" + str(dictValue.get('totalNum')) +
                                                  "** 家机构有使用签到,并于" + str(dateTodayBegin) +
@@ -192,8 +192,8 @@ class PicArrivals:
                                                     str(intArrivalsStandart) + "%的有" +
                                                     str(len(listNewResultSome)) + "家机构"), 'runLog')
 
-                picArrivalCompare.compareData(listResult)
-                picArrivalCompare.writerListTotalToFile(listResult)
+                picArrivalCompare.compareData(listResultFirst)
+                picArrivalCompare.writerListTotalToFile(listResultFirst)
 
 
             else:
