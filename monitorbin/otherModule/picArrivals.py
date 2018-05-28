@@ -261,7 +261,7 @@ class PicArrivals:
             floatAverageValue = 0.00
 
         dictValue['totalNum'] = intTotalNum
-        dictValue['averageValue'] = round(floatAverageValue, int(self.intAccuracy))
+        dictValue['averageValue'] = round((floatAverageValue * 100), int(self.intAccuracy))
 
         return dictValue
 
