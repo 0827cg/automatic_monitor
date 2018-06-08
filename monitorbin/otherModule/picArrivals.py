@@ -193,7 +193,7 @@ class PicArrivals:
                                                     str(len(listNewResultSome)) + "家机构"), 'runLog')
 
                 picArrivalCompare.compareData(listResultFirst)
-                picArrivalCompare.writerListTotalToFile(listResultFirst)
+                picArrivalCompare.writerListTotalToFile(listResult)
 
 
             else:
