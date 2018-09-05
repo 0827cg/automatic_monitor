@@ -53,3 +53,12 @@ class DataTemplate:
             }
         }
         return dictData
+
+
+    def createMarkdownDataForEmail(self):
+
+        # 创建一个markdown语法的数据，并返回
+
+        strDataContentMark = (self.dataAll + "> \r\r " + self.strServerName + '-' + self.strDateTime)
+
+        return strDataContentMark

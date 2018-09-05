@@ -17,25 +17,25 @@ class ResponseDD:
         self.dataTemplate = dataTemplateObj
         dictMsgForDD = self.getForDDMsg(dictNeedRunMsg)
 
-        if((len(dictMsgForDD) == 1) and ('err' in dictMsgForDD)):
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+        if (len(dictMsgForDD) == 1) and ('err' in dictMsgForDD):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("钉钉发送配置不全,发送钉钉消息任务运行中止", 'runLog')
         else:
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("-->执行发送钉钉消息任务", 'runLog')
             self.webHookURL = dictMsgForDD.get('webhook')
             strData = self.dataTemplate.dataAll
-            if(strData == ""):
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+            if strData == "":
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("数据为空,将不执行执行发送钉钉消息任务", 'runLog')
             else:
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("发送至钉钉的初始数据内容如下:", 'runLog')
                     self.fileUtilObj.writerContent(strData, 'runLog')
                     
                 dictData = self.dataTemplate.createMarkdownData()
                 
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("重构后的数据内容如下:", 'runLog')
                     self.fileUtilObj.writerContent(str(dictData), 'runLog')
                 
@@ -51,8 +51,8 @@ class ResponseDD:
         # 初步这里只需要'webhook'这个数据
 
         dictMsgForDD = {}
-        if('webhook' in dictNeedRunMsg):
-            if(dictNeedRunMsg.get('webhook') != ''):
+        if 'webhook' in dictNeedRunMsg:
+            if dictNeedRunMsg.get('webhook') != '':
                 dictMsgForDD['webhook'] = dictNeedRunMsg.get('webhook')
             else:
                 dictMsgForDD['err'] = "Msg Incomplete"
@@ -70,11 +70,11 @@ class ResponseDD:
         json_data = json.dumps(dictData).encode('utf-8')
         req = urllib.request.Request(self.webHookURL, data=json_data, headers=headers)
         response = urllib.request.urlopen(req)
-        if(int(response.getcode()) == 200):
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+        if int(response.getcode()) == 200:
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("已发送至钉钉", 'runLog')
         else:
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("未成功发送至钉钉", 'runLog')
 
         

@@ -14,7 +14,7 @@ class EmailUtil:
 
     # 发送邮件模块
 
-    def __init__(self, dictNeedRunMsg, fileUtilObj):
+    def __init__(self, dictNeedRunMsg, fileUtilObj, dataTemplateObj):
 
         # dictNeedRunMsg:存放从配置文件中读取到的数据，其数据是本次检测运行所需要的数据
         # 该数据仅进行了初步过滤
@@ -25,23 +25,50 @@ class EmailUtil:
         # mail_sendPasswd:
         # mail_toAddr:
 
+        # dataTemplateObj: 模板数据对象
+
         self.fileUtilObj = fileUtilObj
         dictEmailMsg = self.getForEmailMsg(dictNeedRunMsg)
+        self.dataTemplateObj = dataTemplateObj
         
-        if((len(dictEmailMsg) == 1) and ('err' in dictEmailMsg)):
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+        if (len(dictEmailMsg) == 1) and ('err' in dictEmailMsg):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("邮件发送配置不全,发送邮件任务运行中止", 'runLog')
         else:
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("-->执行邮件服务", 'runLog')
-            listEmailContentMsg = self.checkAndGetForEmailListMsg()
+            # listEmailContentMsg = self.checkAndGetForEmailListMsg()
+
+            strData = self.dataTemplateObj.dataAll
+            if strData == "":
+                if self.fileUtilObj.boolWhetherShowLog & True:
+                    self.fileUtilObj.writerContent("数据为空,将不执行执行发送邮箱消息任务", 'runLog')
+            else:
+
+                listEmailContent = []
+                listEmailContent.append('check')
+                listEmailContent.append('监控服务')
+
+                if self.fileUtilObj.boolWhetherShowLog & True:
+                    self.fileUtilObj.writerContent("发送至邮箱的初始数据内容如下:", 'runLog')
+                    self.fileUtilObj.writerContent(strData, 'runLog')
+
+                dictData = self.dataTemplateObj.createMarkdownDataForEmail()
+                listEmailContent.append(dictData)
+
+                if self.fileUtilObj.boolWhetherShowLog & True:
+                    self.fileUtilObj.writerContent("重构后的数据内容如下:", 'runLog')
+                    self.fileUtilObj.writerContent(str(dictData), 'runLog')
+
+                self.choiceSend(dictEmailMsg, listEmailContent)
+
             
-            strServerName = dictEmailMsg.get('servername')
-            strUserName = dictEmailMsg.get('username')
-            listNewEmailContentMsg = self.fileUtilObj.reWriterForEmail(listEmailContentMsg, dictEmailMsg)
+            # strServerName = dictEmailMsg.get('servername')
+            # strUserName = dictEmailMsg.get('username')
+            # listNewEmailContentMsg = self.fileUtilObj.reWriterForEmail(listEmailContentMsg, dictEmailMsg)
             
-            self.choiceSend(dictEmailMsg, listNewEmailContentMsg)
-        
+
+
     def getForEmailMsg(self, dictNeedRunMsg):
 
         # 将从配置文件的完全读取到的数据中，抽取出发送邮件需要的数据，存放为dict类型并返回
@@ -65,7 +92,7 @@ class EmailUtil:
             if((keyItem == 'email_sendaddr') | (keyItem == 'email_sendpasswd') |
                (keyItem == 'smtp_server') | (keyItem == 'ToEmail') | (keyItem == 'logpath') |
                (keyItem == 'servername') | (keyItem == 'username')):
-                if(dictNeedRunMsg.get(keyItem) != ''):
+                if dictNeedRunMsg.get(keyItem) != '':
                     
                     dictMsgForEmail[keyItem] = dictNeedRunMsg.get(keyItem)
                 else:
@@ -89,33 +116,33 @@ class EmailUtil:
         listSendContent = []
         intExistsContent = self.fileUtilObj.checkFileExists(self.fileUtilObj.strlogContentName)
         intExistsContentS = self.fileUtilObj.checkFileExists(self.fileUtilObj.strlogContentSecondName)
-        if(intExistsContent == 1):
+        if intExistsContent == 1:
             listSendContent.append('Hour')
             #print(self.fileUtilObj.strlogContentName)
             strContent = self.fileUtilObj.readFileContent(self.fileUtilObj.strlogContentName)
             listSendContent.append(strContent)
             
             intExistsErr = self.fileUtilObj.checkFileExists(self.fileUtilObj.strlogErrName)
-            if(intExistsErr == 1):
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+            if intExistsErr == 1:
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("小时运行, 出现错误,错误信息在附件中", 'runLog')
                 listSendContent.append(self.fileUtilObj.strlogErrName)
             else:
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("小时运行，无错误", 'runLog')
-        elif(intExistsContentS == 1):
+        elif intExistsContentS == 1:
             listSendContent.append('Second')
             #print(self.fileUtilObj.strlogContentSecondName)
             strContentS = self.fileUtilObj.readFileContent(self.fileUtilObj.strlogContentSecondName)
             listSendContent.append(strContentS)
             
             intExistsErrS = self.fileUtilObj.checkFileExists(self.fileUtilObj.strlogErrSecondName)
-            if(intExistsErrS == 1):
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+            if intExistsErrS == 1:
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("分钟运行, 出现错误,错误信息在附件中", 'runLog')
                 listSendContent.append(self.fileUtilObj.strlogErrSecondName)
             else:
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("分钟运行，无错误", 'Log')
 
         else:
@@ -123,7 +150,7 @@ class EmailUtil:
             strContent = "未发现需要作为邮件内容发送的文件"
             self.fileUtilObj.writerContent(strContent, 'runLog')
             listSendContent.append(strContent)
-        if(self.fileUtilObj.boolWhetherShowLog & True):
+        if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent("数据未重构, 如下.将进行重构", 'runLog')
             self.fileUtilObj.writerContent(str(listSendContent), 'runLog')
 
@@ -143,8 +170,8 @@ class EmailUtil:
         strSubject = listEmailContent[1]
         strContent = listEmailContent[2]
 
-        if(len(listEmailContent) == 3):
-            if(listEmailContent[0] != 'no'):
+        if len(listEmailContent) == 3:
+            if listEmailContent[0] != 'no':
                 self.sendEmailByString(strSmtpServer, strSendAddr, strPasswd,
                                listToAddr, strSubject, strContent)
             else:
@@ -169,32 +196,35 @@ class EmailUtil:
         # strContent: 邮件内容字符串类型
         
         # mail_port = '465'
-        
-        message = MIMEText(strContent, "plain", "utf-8")
-        message['Subject'] = Header(strSubject, 'utf-8')
-        message['From'] = Header('monitor<%s>' % strSendAddr, 'utf-8')
-        message['To'] = Header('monitor.admin', 'utf-8')
+
+        if self.fileUtilObj.boolWhetherShowLog & True:
+            self.fileUtilObj.writerContent("准备发送邮件", 'runLog')
 
         try:
+            message = MIMEText(strContent, "plain", "utf-8")
+            message['Subject'] = Header(strSubject, 'utf-8')
+            message['From'] = Header('monitor<%s>' % strSendAddr, 'utf-8')
+            message['To'] = Header('monitor.admin', 'utf-8')
+
             smtpObj = SMTP_SSL(strSmtpServer)
             smtpObj.set_debuglevel(1)
             smtpObj.ehlo(strSmtpServer)
             smtpObj.login(strSendAddr, strPasswd)
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("登陆成功",  'runLog')
-            if(len(listToAddr) > 0):
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+            if len(listToAddr) > 0:
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("接受地址不为空", 'runLog')
                 smtpObj.sendmail(strSendAddr, listToAddr, message.as_string())
                 smtpObj.quit()
             else:
                 self.fileUtilObj.writerContent("接收邮件地址为空", 'runLog')
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("邮件发送成功", 'runLog')
         except:
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent(sys.exc_info()[0], 'runLog')
-            self.fileUtilObj.writerContent("邮件发送失败", 'runLog')
+                self.fileUtilObj.writerContent("邮件发送失败", 'runLog')
 
 
     def sendEmailByStringAndFile(self, strSmtpServer, strSendAddr, strPasswd,
@@ -210,36 +240,38 @@ class EmailUtil:
         
         # mail_port = '465'
 
-        message = MIMEMultipart()
-        message['Subject'] = Header(strSubject, 'utf-8')
-        message['From'] = Header('monitor<%s>' % strSendAddr, 'utf-8')
-        message['To'] = Header('monitor.admin', 'utf-8')
-
-        message.attach(MIMEText(strContent, 'plain', 'utf-8'))
-
-        annexFile = MIMEText(open(strErrFilePath, 'rb').read(), 'base64', 'utf-8')
-        annexFile["Content-Type"] = 'application/octet-stream'
-        annexFile["Content-Disposition"] = 'attachment; filename="err_logs.txt"'
-        message.attach(annexFile)
 
         try:
+
+            message = MIMEMultipart()
+            message['Subject'] = Header(strSubject, 'utf-8')
+            message['From'] = Header('monitor<%s>' % strSendAddr, 'utf-8')
+            message['To'] = Header('monitor.admin', 'utf-8')
+
+            message.attach(MIMEText(strContent, 'plain', 'utf-8'))
+
+            annexFile = MIMEText(open(strErrFilePath, 'rb').read(), 'base64', 'utf-8')
+            annexFile["Content-Type"] = 'application/octet-stream'
+            annexFile["Content-Disposition"] = 'attachment; filename="err_logs.txt"'
+            message.attach(annexFile)
+
             smtpObj = SMTP_SSL(strSmtpServer)
             smtpObj.set_debuglevel(1)
             smtpObj.ehlo(strSmtpServer)
             smtpObj.login(strSendAddr, strPasswd)
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("登陆成功",  'runLog')
-            if(len(listToAddr) > 0):
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+            if len(listToAddr) > 0:
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("接受地址不为空", 'runLog')
                 smtpObj.sendmail(strSendAddr, listToAddr, message.as_string())
                 smtpObj.quit()
             else:
                 self.fileUtilObj.writerContent("接受邮件地址为空", 'runLog')
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("附件邮件发送成功", 'runLog')
         except:
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent(sys.exc_info()[0], 'runLog')
             self.fileUtilObj.writerContent("附件邮件发送失败", 'runLog')
         
