@@ -28,18 +28,18 @@ class RedisOperate:
         self.strRedisPath = strRedisPath
         self.allModuleRunAllObj = allModuleRunAllObj
         
-        if(self.fileUtil.boolWhetherShowLog & True):
+        if self.fileUtil.boolWhetherShowLog & True:
             self.fileUtil.writerContent("-->准备检测redis", 'runLog')
             self.fileUtil.writerContent("检测redis路径...", 'runLog')
             
         intCheckResult = self.fileUtil.checkFileExists(self.strRedisPath)
-        if(intCheckResult == 1):
-            if(self.fileUtil.boolWhetherShowLog & True):
+        if intCheckResult == 1:
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("redis路径存在,将执行检测redis", 'runLog')
             self.checkRedis()
         else:
             self.fileUtil.writerContent("配置的redis路径不存在", 'runLog')
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("redis检测模块将退出", 'runLog')
 
     def checkRedis(self):
@@ -49,19 +49,19 @@ class RedisOperate:
 
         strRedisStatus = self.getRedisStatus()
 
-        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
+        if (self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll)):
 
-            if(self.allModuleRunAllObj.intOverAllCheckRedisNum == 0):
+            if self.allModuleRunAllObj.intOverAllCheckRedisNum == 0:
                 
                 self.checkRedisStatus(strRedisStatus)
 
                 self.allModuleRunAllObj.intOverAllCheckRedisNum = 1
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("今日检测redis次数已标记为" +
                                                 str(self.allModuleRunAllObj.intOverAllCheckRedisNum)), 'runLog')
 
             else:
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
                                                 "内已检测redis,今日将不再检测\n" +
                                                  "将进行错误监控任务"), 'runLog')
@@ -78,7 +78,7 @@ class RedisOperate:
     def checkTog(self, strRedisStatus):
         
         intMark = self.checkRedisStatus(strRedisStatus, 'Second')
-        if(intMark == -1):
+        if intMark == -1:
             self.tryStartRedis(self.strRedisPath)
 
 
@@ -100,21 +100,21 @@ class RedisOperate:
         intMark = -1
         strRedis = "redis-server"
 
-        if(strRedisStatus.find(strRedis) != -1):
+        if strRedisStatus.find(strRedis) != -1:
             #print("redis在运行")
-            if(strFileMark=='Hour'):
+            if strFileMark=='Hour':
                 self.fileUtil.writerContent("redis在运行")
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent("redis在运行", 'runLog')
             intMark = 1
         else:
-            if(strFileMark=='Hour'):
+            if strFileMark=='Hour':
                 self.fileUtil.writerContent("redis未运行")
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent("redis未运行", 'runLog')
             else:
                 self.fileUtil.writerContent("redis未运行", 'Second')
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent("redis未运行", 'runLog')
             #print("redis未运行")
         return intMark
@@ -128,23 +128,23 @@ class RedisOperate:
         #print("脚本尝试将其启动....")
         #print(strRedisPath)
         self.fileUtil.writerContent("脚本尝试将其启动...", 'Second')
-        if(self.fileUtil.boolWhetherShowLog & True):
+        if self.fileUtil.boolWhetherShowLog & True:
             self.fileUtil.writerContent("脚本尝试将其启动...", 'runLog')
         strStartRedisCL = strRedisPath + "/src/./redis-server"
         processCL = ProcessCL()
         dictResult = processCL.getContinueResultAndProcess(strStartRedisCL)
         strOut = dictResult.get('stdout')
         strErr = dictResult.get('stderr')
-        if(strOut.find('redis.io') != -1):
+        if strOut.find('redis.io') != -1:
             self.fileUtil.writerContent("redis已被脚本启动", 'Second')
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("redis已被脚本启动", 'runLog')
             #print("redis已被脚本启动成功")
             intMark = 1
         else:
             #print("脚本启动redis未成功，请手动启动")
             self.fileUtil.writerContent("脚本启动redis未成功，请手动启动", 'Second')
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("脚本启动redis未成功，请手动启动", 'runLog')
             self.fileUtil.writerErr(("redis: " + strErr), 'Second')
             #print(strErr)

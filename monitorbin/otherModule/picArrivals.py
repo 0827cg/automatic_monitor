@@ -28,9 +28,9 @@ class PicArrivals:
 
         self.listNeedNotSendDateWeek = self.getNeedNotSendWeekDate(dictNeedRunMsg)
 
-        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
+        if (self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll)):
             
-            if(self.allModuleRunAllObj.intOverAllCheckPicArrivals == 0):
+            if self.allModuleRunAllObj.intOverAllCheckPicArrivals == 0:
 
                 dictMsgForMysql = self.getMsgForMysql(dictNeedRunMsg)
                 dictMsgForCheckPic = self.getMsgForCheckPic(dictNeedRunMsg)
@@ -38,11 +38,11 @@ class PicArrivals:
                 self.checkTogToday(dictMsgForMysql, dictMsgForCheckPic)
                 
                 self.allModuleRunAllObj.intOverAllCheckPicArrivals = 1
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("今日检测图片到达率次数已标记为" +
                                                    str(self.allModuleRunAllObj.intOverAllCheckPicArrivals)), 'runLog')
             else:   
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("-->今日" + str(self.intHourCheckAll) +
                                                 "时内已检测图片到达率,今日将不再全面检测"), 'runLog')
 
@@ -58,12 +58,12 @@ class PicArrivals:
         self.intYesterdayStamp = self.runTime.getTimeStamp(str(self.dateYesterday), "%Y-%m-%d")
         self.intTodayStamp = self.runTime.getTodayStamp()
 
-        if(self.fileUtilObj.boolWhetherShowLog & True):
+        if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent(("-->检测" + str(self.dateYesterday) + "图片到达率"), 'runLog')
             
-        if(((len(dictMsgForMysql) == 1) and ('err' in dictMsgForMysql)) or
+        if (((len(dictMsgForMysql) == 1) and ('err' in dictMsgForMysql)) or
            ((len(dictMsgForCheckPic) == 1) and ('err' in dictMsgForCheckPic))):
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("检测图片到达率所需配置信息不全,致检测任务中止", 'runLog')
         else:
             
@@ -72,7 +72,7 @@ class PicArrivals:
             intArrivalsStandart = int(dictMsgForCheckPic.get('arrivals_standard'))
 
             intMark = self.fileUtilObj.checkFileExists(self.strSearchSql)
-            if(intMark == 1):
+            if intMark == 1:
                 strSqlContent = self.fileUtilObj.readFileContent(self.strSearchSql)
                 strTotalSearchSql = self.getToalSql(strSqlContent, self.intYesterdayStamp, self.intTodayStamp)
                 listResultFirst = self.doSearchSql(strTotalSearchSql, dictMsgForMysql)
@@ -83,11 +83,11 @@ class PicArrivals:
                 
                 listNewResultSome = self.getSomeMsg(listResult, intArrivalsStandart)
 
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("查找到的机构信息如下:", 'runLog')
                 
                 for listMsgForLogItem in listMsgForLog:   
-                    if(self.fileUtilObj.boolWhetherShowLog & True):
+                    if self.fileUtilObj.boolWhetherShowLog & True:
                         self.fileUtilObj.writerContent((str(listMsgForLogItem)), 'runLog')
 
                 dictValue = self.getAverageValueTotal(listResultFirst)
@@ -98,7 +98,7 @@ class PicArrivals:
                                                  str(dictValue.get('averageValue')) + "%** ,其中到达率低于" +
                                                  str(intArrivalsStandart) + "%的有 **" +
                                                  str(len(listNewResultSome)) + "** 家机构\n")
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("查找到" + str(dictValue.get('totalNum')) +
                                                  "家机构有使用签到,并于" + str(self.dateYesterday) +
                                                  "一天内总共的图片平均到达率为" +
@@ -111,7 +111,7 @@ class PicArrivals:
 
                 
             else:
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("未发现" + self.strSearchSql + "文件,将停止检测"), 'runLog')
 
     def checkTogToday(self, dictMsgForMysql, dictMsgForCheckPic):
@@ -134,7 +134,7 @@ class PicArrivals:
         dateTodayEnd = self.runTime.getDateTime()
         intTodayEndStamp = self.runTime.getTimeStamp(dateTodayEnd, "%Y-%m-%d %H:%M:%S")
 
-        if (self.fileUtilObj.boolWhetherShowLog & True):
+        if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent(("-->检测" + str(dateTodayBegin) + "图片到达率"), 'runLog')
 
         if (((len(dictMsgForMysql) == 1) and ('err' in dictMsgForMysql)) or
@@ -148,11 +148,11 @@ class PicArrivals:
             intArrivalsStandart = int(dictMsgForCheckPic.get('arrivals_standard'))
 
             intMark = self.fileUtilObj.checkFileExists(self.strSearchSql)
-            if (intMark == 1):
+            if intMark == 1:
                 strSqlContent = self.fileUtilObj.readFileContent(self.strSearchSql)
                 strTotalSearchSql = self.getToalSql(strSqlContent, intTodayBeginStamp, intTodayEndStamp)
 
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("查询图片到达率sql: " + strTotalSearchSql), 'runLog')
 
                 listResultFirst = self.doSearchSql(strTotalSearchSql, dictMsgForMysql)
@@ -169,7 +169,7 @@ class PicArrivals:
 
                 listNewResultSome = self.getSomeMsg(listResult, intArrivalsStandart)
 
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("数据库中查找到今日使用了设备的机构信息如下:\n" + strMsgTable), 'runLog')
 
                 # for listMsgForLogItem in listMsgForLog:
@@ -184,7 +184,7 @@ class PicArrivals:
                                                  str(dictValue.get('averageValue')) + "%** ,其中到达率低于" +
                                                  str(intArrivalsStandart) + "%的有 **" +
                                                  str(len(listNewResultSome)) + "** 家机构\n")
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("查找到" + str(dictValue.get('totalNum')) +
                                                     "家机构有使用签到,并于" + str(dateTodayBegin) +
                                                     "一天内总共的图片平均到达率为" +
@@ -197,7 +197,7 @@ class PicArrivals:
 
 
             else:
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("未发现" + self.strSearchSql + "文件,将停止检测"), 'runLog')
 
     def getAverageValue(self, listResult):
@@ -212,7 +212,7 @@ class PicArrivals:
         intTotalNum = len(listResult)
         floatTotalValue = 0.0
 
-        if(intTotalNum != 0):
+        if intTotalNum != 0:
 
             for listResultItem in listResult:
                 floatValue = float(listResultItem.get('rate'))
@@ -244,7 +244,7 @@ class PicArrivals:
         dictValue = {}
         intTotalNum = len(listResult)
 
-        if (intTotalNum != 0):
+        if intTotalNum != 0:
 
             intTotalEd = 0
             intTotalAll = 0
@@ -289,11 +289,11 @@ class PicArrivals:
         doMySql = DoMysql(dictMsgForMysql)
         connectionObj = doMySql.connectionMySQL()
         
-        if(connectionObj is None):
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+        if connectionObj is None:
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("数据库查询图片到达率连接失败", 'runLog')
         else:
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("数据库查询图片到达率已连接", 'runLog')
 
             try:
@@ -302,17 +302,17 @@ class PicArrivals:
                     cursor.execute(strSearchSql)
                     listResult = cursor.fetchall()
                     
-                if(len(listResult) == 0 ):
-                    if(self.fileUtilObj.boolWhetherShowLog & True):
+                if len(listResult) == 0:
+                    if self.fileUtilObj.boolWhetherShowLog & True:
                         self.fileUtilObj.writerContent("未查找到数据", 'runLog')
 
             except:
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("查询时出错", 'runLog')
 
             finally:
                 connectionObj.close()
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("数据库查询图片连接已关闭", 'runLog')
 
         return listResult
@@ -396,7 +396,7 @@ class PicArrivals:
         for keyItem in dictNeedRunMsg:
             if((keyItem == 'host') | (keyItem == 'port') |
                (keyItem == 'user') | (keyItem == 'passwd') | (keyItem == 'database')):
-                if(dictNeedRunMsg.get(keyItem) != ''):
+                if dictNeedRunMsg.get(keyItem) != '':
                     
                     dictMsgForMysql[keyItem] = dictNeedRunMsg.get(keyItem)
                 else:
@@ -419,7 +419,7 @@ class PicArrivals:
         for keyItem in dictNeedRunMsg:
             if((keyItem == 'sql_path') | (keyItem == 'number_accuracy') |
                (keyItem == 'arrivals_standard')):
-                if(dictNeedRunMsg.get(keyItem) != ''):
+                if dictNeedRunMsg.get(keyItem) != '':
                     dictMsgForCheckPic[keyItem] = dictNeedRunMsg.get(keyItem)
                 else:
                     dictMsgForCheckPic.clear()
@@ -436,7 +436,7 @@ class PicArrivals:
 
         listNeedNotSendDateWeek = []
 
-        if('need_not_send_dateweek' in dictNeedRunMsg):
+        if 'need_not_send_dateweek' in dictNeedRunMsg:
             strNeedNotSendWeekDate = dictNeedRunMsg.get('need_not_send_dateweek')
             listNeedNotSendDateWeek = strNeedNotSendWeekDate.split(' ')
 

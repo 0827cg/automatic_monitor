@@ -32,13 +32,13 @@ class TomcatOperate:
         self.allModuleRunAllObj = allModuleRunAllObj
         #self.fileUtil.writerContent("你好")
         
-        if(self.fileUtil.boolWhetherShowLog & True):
+        if self.fileUtil.boolWhetherShowLog & True:
             self.fileUtil.writerContent("-->准备检测tomcat", 'runLog')
             self.fileUtil.writerContent("检测tomcat路径...", 'runLog')
             
         intCheckResult = self.fileUtil.checkFileExists(self.strTotalPath)
-        if(intCheckResult == 1):
-            if(self.fileUtil.boolWhetherShowLog & True):
+        if intCheckResult == 1:
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("tomcat路径存在,将执行检测tomcat", 'runLog')
             self.checkTomcat()
         else:
@@ -56,24 +56,24 @@ class TomcatOperate:
         listTomcatPort = dictTomcatMsg.get('tomcatPort')
         listTomcatPath = dictTomcatMsg.get('tomcatPath')
         
-        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
+        if (self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll)):
 
-            if(self.allModuleRunAllObj.intOverAllCheckTomcatNum == 0):
+            if self.allModuleRunAllObj.intOverAllCheckTomcatNum == 0:
                 
                 for i in range(len(listTomcatPort)):
                     intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus)
-                    if(intMark == 1):
+                    if intMark == 1:
                         #print("查看日志")
                         #self.fileUtil.writerContent("查看日志")
                         self.checkTomcatLogStatusByTomcatName(i, listTomcatName, listTomcatPort)
 
                 self.allModuleRunAllObj.intOverAllCheckTomcatNum = 1
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("今日检测tomcat次数已标记为" +
                                                 str(self.allModuleRunAllObj.intOverAllCheckTomcatNum)), 'runLog')
 
             else:
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("今日" + str(self.intHourCheckAll) +
                                                 "内已检测tomcat,今日将不再检测\n" +
                                                  "将进行错误监控任务"), 'runLog')
@@ -96,7 +96,7 @@ class TomcatOperate:
 
         for i in range(len(listTomcatPort)):
             intMark = self.checkTomcatStatusByPort(i, listTomcatName, listTomcatPort, strTomcatStatus, 'Second')
-            if(intMark != 1):
+            if intMark != 1:
 	            #print("重启")
                 self.tryStartTomcat(i, listTomcatPath, listTomcatName)
 
@@ -123,22 +123,22 @@ class TomcatOperate:
         #listTomcatName = dictTomcatMsg.get('tomcatName')
         #listTomcatPort = dictTomcatMsg.get('tomcatPort')
 
-        if(strTomcatStatus.find(listTomcatName[intIndex]) != -1):
+        if strTomcatStatus.find(listTomcatName[intIndex]) != -1:
             intMark = 1
-            if(strFileMark=='Hour'):
+            if strFileMark=='Hour':
                 self.fileUtil.writerContent(("%s在运行" %(listTomcatName[intIndex])), 'Hour', False)
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("%s在运行" %(listTomcatName[intIndex])), 'runLog')
             #else:
                 #self.fileUtil.writerContent(("%s在运行" %(listTomcatName[intIndex])), 'Second')
         else:
-            if(strFileMark=='Hour'):
+            if strFileMark=='Hour':
                 self.fileUtil.writerContent(("%s未运行" %(listTomcatName[intIndex])))
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("%s未运行" %(listTomcatName[intIndex])), 'runLog')
             else:
                 self.fileUtil.writerContent(("%s未运行" %(listTomcatName[intIndex])), 'Second')
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("%s未运行" %(listTomcatName[intIndex])), 'runLog')
                 #print("%s未运行" %(listTomcatName[intIndex]))
 
@@ -161,15 +161,15 @@ class TomcatOperate:
         processCL = ProcessCL()
         dictResult = processCL.getResultAndProcess(checkLogCL)
         strOut = dictResult.get('stdout')
-        if(strOut.find("exception") != -1):
+        if strOut.find("exception") != -1:
             intMark = -1
             #print("%s日志输出异常" %(listTomcatName[intIndex]))
             self.fileUtil.writerContent(("%s日志输出异常" %(listTomcatName[intIndex])))
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent(("%s日志输出异常" %(listTomcatName[intIndex])), 'runLog')
         else:
             self.fileUtil.writerContent(("%s日志输出正常" %(listTomcatName[intIndex])))
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent(("%s日志输出正常" %(listTomcatName[intIndex])), 'runLog')
             #print("%s日志输出正常" %(listTomcatName[intIndex]))
             self.fileUtil.writerErr(("###" + listTomcatName[intIndex]))
@@ -190,7 +190,7 @@ class TomcatOperate:
         #listTomcatName = dictTomcatMsg.get('tomcatName')
         #print("脚本尝试将其启动....")
         self.fileUtil.writerContent("脚本尝试将其启动...", 'Second')
-        if(self.fileUtil.boolWhetherShowLog & True):
+        if self.fileUtil.boolWhetherShowLog & True:
             self.fileUtil.writerContent("脚本尝试将其启动...", 'runLog')
         strOperateTomcatPath = listTomcatPath[intIndex]
         tryStartTomcatCL = strOperateTomcatPath + "/bin/./catalina.sh start"
@@ -198,8 +198,8 @@ class TomcatOperate:
         dictResult = processCL.getResultAndProcess(tryStartTomcatCL)
         strOut = dictResult.get('stdout')
         strErr = dictResult.get('stderr')
-        if(strOut != ''):
-            if((strOut.find('Tomcat started') != -1) & (strErr == '')):
+        if strOut != '':
+            if (strOut.find('Tomcat started') != -1) & (strErr == ''):
                 #print("%s已被脚本启动成功" %(listTomcatName[intIndex]))
                 self.fileUtil.writerContent(("%s已被脚本启动成功" %(listTomcatName[intIndex])),
                                             'Second')
@@ -219,7 +219,7 @@ class TomcatOperate:
             #print("%s启动命令未执行" %(listTomcatName[intIndex]))
             self.fileUtil.writerContent(("%s启动命令未执行,请手动执行" %(listTomcatName[intIndex])),
                                         'Second')
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent(("%s启动命令未执行,请手动执行" %(listTomcatName[intIndex])),
                                         'runLog')
             #print(strErr)
@@ -259,12 +259,12 @@ class TomcatOperate:
         dictTomcatMsg['tomcatPort'] = listTomcatPort
         dictTomcatMsg['tomcatPath'] = listTomcatPath
 
-        if(len(listTomcatPort) > 0):
-            if(self.fileUtil.boolWhetherShowLog & True):
+        if len(listTomcatPort) > 0:
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("获取到的tomcat信息", 'runLog')
                 self.fileUtil.writerContent(dictTomcatMsg, 'runLog')
         else:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("该目录下未发现tomcat,无法进行下一步检测", 'runLog')
         
         return dictTomcatMsg

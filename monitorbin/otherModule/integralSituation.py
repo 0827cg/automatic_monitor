@@ -27,16 +27,16 @@ class IntegralSit:
         self.runTimeObj = RunTime()
         self.mysqlUtilObj = MySqlUtil(self.fileUtilObj)
 
-        if ((self.intNowHourTime == self.intHourCheckAll) or (self.intNowHourTime == ("0" + self.intHourCheckAll))):
+        if (self.intNowHourTime == self.intHourCheckAll) or (self.intNowHourTime == ("0" + self.intHourCheckAll)):
 
-            if (self.allModuleRunAllObj.intOverAllGetIntegralSit == 0):
+            if self.allModuleRunAllObj.intOverAllGetIntegralSit == 0:
 
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("-->执行获取积分使用详情", 'runLog')
 
                 dictMsgForMysql = self.mysqlUtilObj.getMsgForMysql(dictNeedRunMsg)
-                if ((len(dictMsgForMysql) == 1) and ('err' in dictMsgForMysql)):
-                    if (self.fileUtilObj.boolWhetherShowLog & True):
+                if (len(dictMsgForMysql) == 1) and ('err' in dictMsgForMysql):
+                    if self.fileUtilObj.boolWhetherShowLog & True:
                         self.fileUtilObj.writerContent(("获取积分使用详情所需mysql信息不全,致检测任务中止"), 'runLog')
                 else:
 
@@ -49,14 +49,14 @@ class IntegralSit:
                     self.doGetIntegralSit(dictMsgForMysql)
 
                 self.allModuleRunAllObj.intOverAllGetIntegralSit = 1
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("今日获取积分使用详情已经标记为1", 'runLog')
 
             else:
-                if (self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent("-->获取积分使用详情今日已执行,今日将不再执行", 'runLog')
         else:
-            if (self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("未到达时间,不执行获取积分使用详情", 'runLog')
 
 
@@ -70,16 +70,16 @@ class IntegralSit:
 
         listResult = self.mysqlUtilObj.doSearchSql(strTotalSql, dictMsgForMysql)
 
-        if (self.fileUtilObj.boolWhetherShowLog & True):
+        if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent(("获取积分使用详情sql: " + strTotalSql), 'runLog')
             self.fileUtilObj.writerContent(("获取到的结果为: " + str(listResult)), 'runLog')
 
         decTotalIntegNum = listResult[0].get('totalIntegralNum')
-        if(decTotalIntegNum is None):
+        if decTotalIntegNum is None:
             decTotalIntegNum = 0
 
         intShopNum = listResult[0].get('totalShopNum')
-        if(intShopNum is None):
+        if intShopNum is None:
             intShopNum = 0
 
         strResultContent = ("> - 查找到今日(截止至目前" + str(self.intNowHourTime) + "时)使用了积分的校区数总计 **" +
@@ -87,7 +87,7 @@ class IntegralSit:
 
         self.dataTempObj.dataAll += strResultContent + "\n\n"
 
-        if (self.fileUtilObj.boolWhetherShowLog & True):
+        if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent(("生成数据如:" + strResultContent), 'runLog')
 
 

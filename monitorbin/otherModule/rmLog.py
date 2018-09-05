@@ -28,11 +28,11 @@ class RMlog:
 
     def checkTog(self, dictMsgForRMlog):
 
-        if(self.fileUtilObj.boolWhetherShowLog & True):
+        if self.fileUtilObj.boolWhetherShowLog & True:
             self.fileUtilObj.writerContent("-->尝试准备删除日志文件", 'runLog')
 
-        if((len(dictMsgForRMlog) == 1) and ('err' in dictMsgForRMlog)):
-            if(self.fileUtilObj.boolWhetherShowLog & True):
+        if (len(dictMsgForRMlog) == 1) and ('err' in dictMsgForRMlog):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("删除日志的配置数据不全,致任务中止", 'runLog')
         else:
 
@@ -43,39 +43,39 @@ class RMlog:
             strOtherDay = str(runTime.getPastDataDay(intPassday))
             strNewOtherDay = runTime.doCutHorizontalLine(strOtherDay)
 
-            if((self.intHourTime == intRMlogHour) or (self.intHourTime == int("0" + str(intRMlogHour)))):
+            if (self.intHourTime == intRMlogHour) or (self.intHourTime == int("0" + str(intRMlogHour))):
             
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("时间已为" + str(intRMlogHour) +
                                                     "时,将准备删除日志文件"), 'runLog')
 
                 listFileName = self.fileUtilObj.getFileNameFromPath(self.strLogPath)
                 listNeedRMFileName = self.getNeedRMFileNameMonitor(listFileName, strNewOtherDay)
 
-                if(len(listNeedRMFileName) != 0):
+                if len(listNeedRMFileName) != 0:
 
-                    if(self.fileUtilObj.boolWhetherShowLog & True):
+                    if self.fileUtilObj.boolWhetherShowLog & True:
                         self.fileUtilObj.writerContent(("需要删除的日志文件有:\n" +
                                                        str(listNeedRMFileName)), 'runLog')
                 
                     intMark = self.rmLog(listNeedRMFileName)
-                    if(intMark == 1):
-                        if(self.fileUtilObj.boolWhetherShowLog & True):
+                    if intMark == 1:
+                        if self.fileUtilObj.boolWhetherShowLog & True:
                             self.fileUtilObj.writerContent((str(intPassday) + "天前(" + strOtherDay +
                                                             "之前)的日志文件已都删除"), 'runLog')
                     else:
-                        if(self.fileUtilObj.boolWhetherShowLog & True):
+                        if self.fileUtilObj.boolWhetherShowLog & True:
                             self.fileUtilObj.writerContent("删除日志出现错误,删除日志任务退出...", 'runLog')
                     
                 else:
-                    if(self.fileUtilObj.boolWhetherShowLog & True):
+                    if self.fileUtilObj.boolWhetherShowLog & True:
                         self.fileUtilObj.writerContent(("未发现" + str(intPassday) + "天前(" + strOtherDay +
                                                        "之前)的日志文件,即无文件需要删除.\n" +
                                                         "删除日志文件任务将退出"), 'runLog')
     
                     
             else:
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("时间不为" + str(intRMlogHour) +
                                                     "时,不执行删除日志文件"), 'runLog')
             
@@ -96,7 +96,7 @@ class RMlog:
         for listFileNameItem in listFileName:
 
             intFileData = int(listFileNameItem[12:20])
-            if(intFileData < int(strNewOtherDay)):
+            if intFileData < int(strNewOtherDay):
                 listNeedRMFileName.append(listFileNameItem)
         
         return listNeedRMFileName
@@ -123,10 +123,10 @@ class RMlog:
 
         for listFileNameItem in listFileName:
 
-            if('monitor' in str(listFileNameItem)):
+            if 'monitor' in str(listFileNameItem):
 
                 intFileData = int(listFileNameItem[-12:-4])
-                if (intFileData < int(strNewOtherDay)):
+                if intFileData < int(strNewOtherDay):
                     listNeedRMFileName.append(listFileNameItem)
 
         return listNeedRMFileName
@@ -148,15 +148,15 @@ class RMlog:
 
             strRMFileCL = ("rm " + (self.strLogPath + "/" + listNeedRMFileNameItem))
             dictResult = processCL.getResultAndProcess(strRMFileCL)
-            if(dictResult['stderr'] == ''):
+            if dictResult['stderr'] == '':
                 
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("日志文件" + listNeedRMFileNameItem +
                                                     "已成功删除"), 'runLog')
                 intMark = 1
             else:
 
-                if(self.fileUtilObj.boolWhetherShowLog & True):
+                if self.fileUtilObj.boolWhetherShowLog & True:
                     self.fileUtilObj.writerContent(("删除日志" + listNeedRMFileNameItem + \
                                                     "出错,将停止所有删除日志任务"), 'runLog')
                 intMark = -1
@@ -176,8 +176,8 @@ class RMlog:
         dictMsgForRMlog = {}
         for keyItem in dictNeedRunMsg:
 
-            if((keyItem == 'rm_log_passday') | (keyItem == 'when_time_rm')):
-                if(dictNeedRunMsg.get(keyItem) != ''):
+            if (keyItem == 'rm_log_passday') | (keyItem == 'when_time_rm'):
+                if dictNeedRunMsg.get(keyItem) != '':
                     dictMsgForRMlog[keyItem] = dictNeedRunMsg.get(keyItem)
                 else:
                     dictMsgForRMlog.clear()

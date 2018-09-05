@@ -20,7 +20,7 @@ def main():
     # 配置文件在于本文件同级目录的conf文件夹中
     
 
-    operate = Operate()
+    Operate()
 
 
 if __name__ == '__main__':

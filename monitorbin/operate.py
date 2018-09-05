@@ -77,7 +77,7 @@ class Operate:
             intTimeB = int(dictNeedRunMsg.get('time_beginning'))
             intTimeE = int(dictNeedRunMsg.get('time_end'))
             
-            if(len(dictNeedRunMsg) > 1):
+            if len(dictNeedRunMsg) > 1:
                 
                 # 脚本执行检测需要监控的项目
 
@@ -85,27 +85,29 @@ class Operate:
                 
                 #emailUtil = EmailUtil(dictNeedRunMsg, self.fileUtil)
                 
-            elif(len(dictNeedRunMsg) == 1):
+            elif len(dictNeedRunMsg) == 1:
                 self.fileUtil.writerContent("配置文件参数值不全,未执行检测", 'runLog')
             else:
                 self.fileUtil.writerContent("配置文件读取失败,未执行检测", 'runLog')
 
-            if((intTimeB <= int(self.fileUtil.strHourTime) < intTimeE)):
+            # if intTimeB <= int(self.fileUtil.strHourTime) < intTimeE:
+
+            if (int(self.fileUtil.strHourTime) >= intTimeB) and (int(self.fileUtil.strHourTime) <= intTimeE):
                 self.choiceSendMsgMethod(dictNeedRunMsg)
             else:
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent("不在时间段内, 不执行发送消息任务", 'runLog')
 
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent((str(intRunIntervals/60) + "分钟后将再次检测运行"), 'runLog')
                 self.fileUtil.writerContent("============" + str(RunTime().getDateTime()) + "============", 'runLog')
 
             time.sleep(intRunIntervals)
             
-            if(str(self.fileUtil.strHourTime) == "00"):
+            if str(self.fileUtil.strHourTime) == "00":
                 intIndex = self.allModuleRunAll.initAllNum()
-                if(intIndex == 1):
-                    if(self.fileUtil.boolWhetherShowLog & True):
+                if intIndex == 1:
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("所有项目一天执行次数现已重置为0", 'runLog')
                         self.fileUtil.writerContent("---" + self.fileUtil.strDateTime, 'runLog')
                 
@@ -123,58 +125,58 @@ class Operate:
         
         listKeys = dictNeedRunMsg.keys()
         for keyItem in listKeys:
-            if(keyItem.find('tomcat') != -1):
+            if keyItem.find('tomcat') != -1:
                 strTomcatPath = dictNeedRunMsg.get(keyItem)
                 tomcatOperate = TomcatOperate(strTomcatPath, self.fileUtil.strHourTime, self.intHourCheckAll,
                                               self.fileUtil, self.allModuleRunAll)
                 #print(strTomcatPath)
-            if(keyItem.find('nginx') != -1):
+            if keyItem.find('nginx') != -1:
                 strNginxPath = dictNeedRunMsg.get(keyItem)
                 nginxOperate = NginxOperate(strNginxPath, self.fileUtil.strHourTime, self.intHourCheckAll,
                                             self.fileUtil, self.allModuleRunAll)
                 #print(strNginxPath)
-            if(keyItem.find('redis') != -1):
+            if keyItem.find('redis') != -1:
                 strRedisPath = dictNeedRunMsg.get(keyItem)
                 redisOperate = RedisOperate(strRedisPath, self.fileUtil.strHourTime, self.intHourCheckAll,
                                             self.fileUtil, self.allModuleRunAll)
                 #print(strRedisPath)
-            if(keyItem.find('checkdisk') != -1):
+            if keyItem.find('checkdisk') != -1:
                 strCheckDisk = dictNeedRunMsg.get(keyItem)
                 if(strCheckDisk == 'yes'):
                     diskCheck = DiskSizeCheck(self.fileUtil, self.dataTemplate, dictNeedRunMsg,
                                               self.fileUtil.strHourTime, self.intHourCheckAll, self.warningLevel,
                                               self.allModuleRunAll)
-            if(keyItem.find('whether_check_letter') != -1):
+            if keyItem.find('whether_check_letter') != -1:
                 strCheckLetter = dictNeedRunMsg.get(keyItem)
                 if(strCheckLetter == 'yes'):
                     checkLetter = CheckLetter(self.fileUtil, self.dataTemplate, dictNeedRunMsg,
                                               self.fileUtil.strHourTime, self.intHourCheckAll, self.allModuleRunAll)
             if(keyItem.find('whether_check_pic') != -1):
                 strCheckPic = dictNeedRunMsg.get(keyItem)
-                if(strCheckPic == 'yes'):
+                if strCheckPic == 'yes':
                     picArrivals = PicArrivals(self.fileUtil, dictNeedRunMsg, self.dataTemplate,
                                               self.fileUtil.strHourTime, self.intHourCheckAll, self.allModuleRunAll)
-            if(keyItem.find('whether_check_pm2') != -1):
+            if keyItem.find('whether_check_pm2') != -1:
                 strCheckPm2 = dictNeedRunMsg.get(keyItem)
-                if(strCheckPm2 == 'yes'):
+                if strCheckPm2 == 'yes':
                     pm2Operate = Pm2Operate(self.fileUtil, self.dataTemplate, self.fileUtil.strHourTime,
                                             self.intHourCheckAll, self.allModuleRunAll)
 
-            if(keyItem.find('whether_run_count_num') != -1):
+            if keyItem.find('whether_run_count_num') != -1:
                 strWhetherRun = dictNeedRunMsg.get(keyItem)
-                if(strWhetherRun == 'yes'):
+                if strWhetherRun == 'yes':
                     countPicNum = CountPicNum(self.fileUtil, self.dataTemplate, dictNeedRunMsg, self.fileUtil.strHourTime,
                                               self.intHourCheckAll, self.allModuleRunAll)
 
-            if(keyItem.find('whether_get_integral_sit') != -1):
+            if keyItem.find('whether_get_integral_sit') != -1:
                 strWhetherRunIntegral = dictNeedRunMsg.get(keyItem)
-                if(strWhetherRunIntegral == 'yes'):
+                if strWhetherRunIntegral == 'yes':
                     integralSit = IntegralSit(self.fileUtil, self.dataTemplate, dictNeedRunMsg, self.fileUtil.strHourTime,
                                               self.intHourCheckAll, self.allModuleRunAll)
 
-            if(keyItem.find('whether_rm_log') != -1):
+            if keyItem.find('whether_rm_log') != -1:
                 strRMlog = dictNeedRunMsg.get(keyItem)
-                if(strRMlog == 'yes'):
+                if strRMlog == 'yes':
                     rmLog = RMlog(self.fileUtil, dictNeedRunMsg)
                     
                     
@@ -184,23 +186,23 @@ class Operate:
 
         # 根据配置文件来选择使用email或者dingtalk来发送消息
 
-        if('email' in dictNeedRunMsg):
-            if(dictNeedRunMsg.get('email') == 'yes'):
-                emailUtil = EmailUtil(dictNeedRunMsg, self.fileUtil)
+        if 'email' in dictNeedRunMsg:
+            if dictNeedRunMsg.get('email') == 'yes':
+                EmailUtil(dictNeedRunMsg, self.fileUtil, self.dataTemplate)
             else:
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent("不执行email服务", 'runLog')
         else:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("不执行email服务", 'runLog')
 
-        if('dingtalk' in dictNeedRunMsg):
-            if(dictNeedRunMsg.get('dingtalk') == 'yes'):
-                responseDD = ResponseDD(self.fileUtil, self.dataTemplate, dictNeedRunMsg)
+        if 'dingtalk' in dictNeedRunMsg:
+            if dictNeedRunMsg.get('dingtalk') == 'yes':
+                ResponseDD(self.fileUtil, self.dataTemplate, dictNeedRunMsg)
             else:
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent("不执行钉钉服务", 'runLog')
         else:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("不执行钉钉服务", 'runLog')    
 

@@ -37,12 +37,12 @@ class CheckLetter:
 
         self.intIndexWhetherCheck = self.checkWhetherRestartPm2(dictNeedRunMsg)
         self.intIndexWhetherExistPmPro = self.checkWhetherExistPmPro(dictNeedRunMsg)
-        if(self.intIndexWhetherExistPmPro == 1):
+        if self.intIndexWhetherExistPmPro == 1:
             self.proNameForLetter = dictNeedRunMsg.get('pro_for_letter')
         else:
             self.proNameForLetter = 'null'
         
-        if(self.fileUtil.boolWhetherShowLog & True):
+        if self.fileUtil.boolWhetherShowLog & True:
             self.fileUtil.writerContent(("-->执行检测数据库字段任务"), 'runLog')
 
         dictMsgForCheckLetter = self.getMsgForCheckLetter(dictNeedRunMsg)
@@ -77,11 +77,11 @@ class CheckLetter:
 
         # 2017-12-12添加大小任务，大任务统计前一天已推送和未推送的数据
         
-        if((self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll))):
+        if (self.intHourTime == self.intHourCheckAll) or (self.intHourTime == ("0" + self.intHourCheckAll)):
 
-            if(self.allModuleRunAllObj.intOverAllCheckLetterNum == 0):
+            if self.allModuleRunAllObj.intOverAllCheckLetterNum == 0:
 
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("执行检测" + str(self.dataDay) + "的推送情况"), 'runLog')
 
                 
@@ -95,7 +95,7 @@ class CheckLetter:
                                               str(intAlreadySendNum) + "** 条,未推送总数为 **" + str(intNoSendNum) +
                                               "** 条\n")
 
-                if(intNoSendNum != 0):
+                if intNoSendNum != 0:
 
                     # 不将为推送详情发送出去
                     #self.dataTemplate.dataAll += ("> \t\t 其未推送的信息如下:\n")
@@ -200,7 +200,7 @@ class CheckLetter:
                         self.fileUtil.writerContent("第一次查询连接意外关闭", 'runLog')
                 else:
                     objConnection.close()
-                    if(self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("第一次查询连接已正常关闭", 'runLog')
                     
         return listResult
@@ -219,10 +219,10 @@ class CheckLetter:
         listNewResultFind = []
 
         if (len(listResult) == 0):
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("无数据需要处理", 'runLog')
         else:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent((("休眠" + str(self.intSleepTime) + "秒~\n") + "..."), 'runLog')
             
             time.sleep(self.intSleepTime)
@@ -257,7 +257,7 @@ class CheckLetter:
                             
                         else:
                             listNewResultFind.append(dictInListItem)
-                            if(self.fileUtil.boolWhetherShowLog & True):
+                            if self.fileUtil.boolWhetherShowLog & True:
                                 
                                 self.fileUtil.writerContent(((self.strFieldCompare1 + " = %d, " +
                                                          self.strFieldCompare2 + "= %d及" + self.strFieldCompare3 +
@@ -268,15 +268,15 @@ class CheckLetter:
                         cursor.close()
                 finally:
                     if objConnection2._closed:
-                        if(self.fileUtil.boolWhetherShowLog & True):
+                        if self.fileUtil.boolWhetherShowLog & True:
                             self.fileUtil.writerContent("第二次查询连接意外关闭", 'runLog')
 
             objConnection2.close()
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("第二次查询连接已正常关闭", 'runLog')
             strResultItem = ""
-            if(len(listNewResultFind) == 0):
-                if(self.fileUtil.boolWhetherShowLog & True):
+            if len(listNewResultFind) == 0:
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent((("所有" + self.strField + "的值已经更改为%d") %(self.intNext)),
                                                 'runLog')
             else:
@@ -291,13 +291,13 @@ class CheckLetter:
                 for listNewResultItem in listNewResultFind:
                     strResultItem += str(listNewResultItem) + "\n"
                 
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent((strLogContent + "\n" + strNewResultFindMsgTable), 'runLog')
                     # self.fileUtil.writerContent(strNewResultFineMsgTable, 'runLog')
 
-                if(self.intIndexWhetherCheck == 1):
-                    if(self.proNameForLetter != 'null'):
-                        if (self.fileUtil.boolWhetherShowLog & True):
+                if self.intIndexWhetherCheck == 1:
+                    if self.proNameForLetter != 'null':
+                        if self.fileUtil.boolWhetherShowLog & True:
                             self.fileUtil.writerContent(("将尝试重启服务" + self.proNameForLetter), 'runLog')
 
                         projectCheck = ProjectCheck(self.fileUtil)
@@ -307,10 +307,10 @@ class CheckLetter:
                         else:
                             strContentEnd = (self.proNameForLetter + "服务重启失败")
                     else:
-                        if (self.fileUtil.boolWhetherShowLog & True):
+                        if self.fileUtil.boolWhetherShowLog & True:
                             self.fileUtil.writerContent("未配置检测项目", 'runLog')
                 else:
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent(("不执行重启服务" + self.proNameForLetter), 'runLog')
 
                 intNoSendNum = len(listNewResultFind)
@@ -369,10 +369,10 @@ class CheckLetter:
         objConnection3 = doMySql.connectionMySQL()
 
         if objConnection3 is None:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询未推送连接失败", 'runLog')
         else:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询未推送连接成功", 'runLog')
                 self.fileUtil.writerContent("准备查找" + str(dateYesterday) + "未推送的字段信息",'runLog')
             try:
@@ -394,18 +394,18 @@ class CheckLetter:
             finally:
 
                 if objConnection3._closed:
-                    if(self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询未推送数据连接意外关闭", 'runLog')
                 else:
                     objConnection3.close()
-                    if(self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询未推送数据连接已正常关闭", 'runLog')
 
-            if(len(listNoSend) == 0):
-                if(self.fileUtil.boolWhetherShowLog & True):
+            if len(listNoSend) == 0:
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("未查找到" + str(dateYesterday) + "未推送的字段信息"), 'runLog')
             else:
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("查找到%d条数据未发送" %(len(listNoSend))), 'runLog')
         
         return listNoSend
@@ -428,10 +428,10 @@ class CheckLetter:
         objConnection4 = doMySql.connectionMySQL()
 
         if objConnection4 is None:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询已推送连接失败", 'runLog')
         else:
-            if(self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询已推送连接成功", 'runLog')
                 self.fileUtil.writerContent("查找" + str(dateYesterday) + "已推送的字段信息",'runLog')
             try:
@@ -448,21 +448,21 @@ class CheckLetter:
             finally:
 
                 if objConnection4._closed:
-                    if(self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询已推送数据连接意外关闭", 'runLog')
                 else:
                     objConnection4.close()
-                    if(self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询已推送数据连接已正常关闭", 'runLog')
 
-            if(len(listAlreadySend) == 0):
-                if(self.fileUtil.boolWhetherShowLog & True):
+            if len(listAlreadySend) == 0:
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("未查找到" + str(dateYesterday) + "已推送的字段信息"), 'runLog')
             else:
 
                 dictItem = listAlreadySend[0]
                 intAlreadySendNum = int(dictItem.get("COUNT(" + self.strField + ")"))
-                if(self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("查找到%d条数据已发送" %(intAlreadySendNum)), 'runLog')
 
 
@@ -489,10 +489,10 @@ class CheckLetter:
         objConnection3 = doMySql.connectionMySQL()
 
         if objConnection3 is None:
-            if (self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询未推送连接失败", 'runLog')
         else:
-            if (self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询未推送连接成功", 'runLog')
                 self.fileUtil.writerContent("查找" + str(dateTodayBegin) + "未推送的字段信息", 'runLog')
             try:
@@ -506,7 +506,7 @@ class CheckLetter:
                                         self.strFieldCompare4 + " >= %d AND " + self.strFieldCompare4 +
                                         " <= %d") % (self.intFirst, intTodayBeginStamp, intTodayEndStamp))
 
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询今日未推送数据sql: " + strSearchNoSend)
 
 
@@ -518,18 +518,18 @@ class CheckLetter:
             finally:
 
                 if objConnection3._closed:
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询未推送数据连接意外关闭", 'runLog')
                 else:
                     objConnection3.close()
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询未推送数据连接已正常关闭", 'runLog')
 
-            if (len(listNoSend) == 0):
-                if (self.fileUtil.boolWhetherShowLog & True):
+            if len(listNoSend) == 0:
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("未查找到" + str(dateTodayBegin) + "未推送的字段信息"), 'runLog')
             else:
-                if (self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("查找到%d条数据未发送" % (len(listNoSend))), 'runLog')
 
         return listNoSend
@@ -556,10 +556,10 @@ class CheckLetter:
         objConnection4 = doMySql.connectionMySQL()
 
         if objConnection4 is None:
-            if (self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询已推送连接失败", 'runLog')
         else:
-            if (self.fileUtil.boolWhetherShowLog & True):
+            if self.fileUtil.boolWhetherShowLog & True:
                 self.fileUtil.writerContent("数据库查询已推送连接成功", 'runLog')
                 self.fileUtil.writerContent("查找" + str(dateTodayBegin) + "已推送的字段信息", 'runLog')
             try:
@@ -570,7 +570,7 @@ class CheckLetter:
                                              self.strFieldCompare4 + " <= %d") % (
                                             self.intNext, intTodayBeginStamp, intTodayEndStamp))
 
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询今日已推送数据sql: " + strSearchAlreadySend)
 
 
@@ -581,21 +581,21 @@ class CheckLetter:
             finally:
 
                 if objConnection4._closed:
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询已推送数据连接意外关闭", 'runLog')
                 else:
                     objConnection4.close()
-                    if (self.fileUtil.boolWhetherShowLog & True):
+                    if self.fileUtil.boolWhetherShowLog & True:
                         self.fileUtil.writerContent("查询已推送数据连接已正常关闭", 'runLog')
 
-            if (len(listAlreadySend) == 0):
-                if (self.fileUtil.boolWhetherShowLog & True):
+            if len(listAlreadySend) == 0:
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("未查找到" + str(dateTodayBegin) + "已推送的字段信息"), 'runLog')
             else:
 
                 dictItem = listAlreadySend[0]
                 intAlreadySendNum = int(dictItem.get("COUNT(" + self.strField + ")"))
-                if (self.fileUtil.boolWhetherShowLog & True):
+                if self.fileUtil.boolWhetherShowLog & True:
                     self.fileUtil.writerContent(("查找到%d条数据已发送" % (intAlreadySendNum)), 'runLog')
 
         return intAlreadySendNum
@@ -635,8 +635,8 @@ class CheckLetter:
         # 二是在此文件中用来判断,当程序检测到有未推送字段的时候,根据此判断是否进行重启
         # add in 2018-04-09
 
-        if('whether_check_pm2' in dictNeedRunMsg):
-            if(dictNeedRunMsg.get('whether_check_pm2') == 'yes'):
+        if 'whether_check_pm2' in dictNeedRunMsg:
+            if dictNeedRunMsg.get('whether_check_pm2') == 'yes':
                 intIndex = 1
         else:
             intIndex = 0
@@ -648,8 +648,8 @@ class CheckLetter:
 
         # 判断是否存在pro_for_letter
 
-        if('pro_for_letter' in dictNeedRunMsg):
-            if(dictNeedRunMsg.get('whether_check_pm2') != ''):
+        if 'pro_for_letter' in dictNeedRunMsg:
+            if dictNeedRunMsg.get('whether_check_pm2') != '':
                 intIndex = 1
         else:
             intIndex = 0
