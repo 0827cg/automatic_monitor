@@ -139,7 +139,7 @@ class PicArrivals:
 
         if (((len(dictMsgForMysql) == 1) and ('err' in dictMsgForMysql)) or
                 ((len(dictMsgForCheckPic) == 1) and ('err' in dictMsgForCheckPic))):
-            if (self.fileUtilObj.boolWhetherShowLog & True):
+            if self.fileUtilObj.boolWhetherShowLog & True:
                 self.fileUtilObj.writerContent("检测图片到达率所需配置信息不全,致检测任务中止", 'runLog')
         else:
 
