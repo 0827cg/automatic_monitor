@@ -56,7 +56,7 @@ class ProcessCL:
 
             strOut += lineOut
             strErr += lineErr
-            if((lineOut == '') | (lineErr == '')):
+            if (lineOut == '') or (lineErr == ''):
                 break
             
         dictResult['stdout'] = strOut

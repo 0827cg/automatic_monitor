@@ -21,7 +21,7 @@ class FileUtil:
         self.strLogPath = self.getLogPath()
         print("存放日志路径:" + self.strLogPath)
         strWhetherShowLog = self.getWhetherShowLog()
-        if(strWhetherShowLog == 'yes'):
+        if strWhetherShowLog == 'yes':
             self.boolWhetherShowLog = True
             print("savelog_to_file值为yes,将打印输出到log文件")
         else:
@@ -64,22 +64,22 @@ class FileUtil:
         # strContent: 写入文件的内容
         # whetherAdd: 是否在文件后面换行追加，默认True
         
-        if(strFileMark == 'Hour'):
-            if(whetherAdd & True):
+        if strFileMark == 'Hour':
+            if whetherAdd & True:
                 with open(self.strlogContentName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
             else:
                 with open(self.strlogContentName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
-        elif(strFileMark == 'Second'):
-            if(whetherAdd & True):
+        elif strFileMark == 'Second':
+            if whetherAdd & True:
                 with open(self.strlogContentSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
             else:
                 with open(self.strlogContentSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
         else:
-            if(whetherAdd & True):
+            if whetherAdd & True:
                 with open(self.strRunLogPathName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent + "\n")
             else:
@@ -90,15 +90,15 @@ class FileUtil:
 
         # 编写附件，即将操作异常的输出写入到monitor_err...txt文件中
 
-        if(strFileMark == 'Hour'):
-            if(whetherAdd & True):
+        if strFileMark == 'Hour':
+            if whetherAdd & True:
                 with open(self.strlogErrName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write("\n" + strContent)
             else:
                 with open(self.strlogErrName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write(strContent)
         else:
-            if(whetherAdd & True):
+            if whetherAdd & True:
                 with open(self.strlogErrSecondName, 'a', encoding='utf-8') as fileObj:
                     fileObj.write("\n" + strContent)
             else:
@@ -111,7 +111,7 @@ class FileUtil:
         # 这里的whetherAdd表示是否清空追加
         # 如果为False则会清空追加
 
-        if(whetherAdd & True):
+        if whetherAdd & True:
             with open(strFileNameAndPath, 'a', encoding='utf-8') as fileObj:
                 fileObj.write("\n" + strContent)
         else:
@@ -135,7 +135,7 @@ class FileUtil:
         # 按照顺序存放，文件内容中第一个出现该标签名字的就放在集合的下标为0的位置
         tagElement = listElementItem[intTagIndex]
         strTagElementValue = tagElement.getAttribute(strTagElementName)
-        if(self.boolWhetherShowLog & True):
+        if self.boolWhetherShowLog & True:
             print(strTagElementName + "=" + strTagElementValue)
         return strTagElementValue
 
@@ -150,12 +150,12 @@ class FileUtil:
 
         dictConfMsg = {}
         intMark = self.checkFileExists(configureFileNameAndPath)
-        if(intMark == 1):
+        if intMark == 1:
             configParserObj.read(configureFileNameAndPath)
             try:
                 listSectionName = configParserObj.sections()
             except:
-                if(self.boolWhetherShowLog & True):
+                if self.boolWhetherShowLog & True:
                     self.writerContent("读取配置文件出错", 'runLog')
             else:
                 for sectionItem in listSectionName:
@@ -407,7 +407,7 @@ class FileUtil:
         # 该方法就是单纯的过滤掉未配置值的参数
         # 即从存放的字典中去除不需要检测运行的项目(未配置值的参数)，之后返回
         
-        if(self.boolWhetherShowLog & True):
+        if self.boolWhetherShowLog & True:
             self.writerContent("", 'runLog')
             self.writerContent(("============" + self.strDateTime + "============"), 'runLog')
             self.writerContent("获取运行需要的配置数据", 'runLog')
@@ -416,23 +416,23 @@ class FileUtil:
         dictNewConfMsg = {}
         dictConfMsg = self.readConfigureFile()
         intMark = self.checkConfMsg(dictConfMsg)
-        if(intMark == 1):
+        if intMark == 1:
             intTomcatMark = self.checkRunProject("tomcat", "tomcatpath", dictConfMsg)
-            if(intTomcatMark == 0):
+            if intTomcatMark == 0:
                 del dictConfMsg['tomcatpath']
 
             intNginxMark = self.checkRunProject("nginx", "nginxpath", dictConfMsg)
-            if((intNginxMark == 0)):
+            if intNginxMark == 0:
                 del dictConfMsg['nginxpath']
 
             intRedisMark = self.checkRunProject("redis", "redispath", dictConfMsg)
-            if(intRedisMark == 0):
+            if intRedisMark == 0:
                 del dictConfMsg['redispath']
             dictNewConfMsg = dictConfMsg
-        elif(intMark == 0):
+        elif intMark == 0:
             dictNewConfMsg['0'] = 'error'
             
-        if(self.boolWhetherShowLog & True):
+        if self.boolWhetherShowLog & True:
             self.writerContent("需要运行的有: ", 'runLog')
             self.writerContent(str(dictNewConfMsg), 'runLog')
         return dictNewConfMsg
@@ -450,11 +450,11 @@ class FileUtil:
         dictConfMsgTotal.update(dictConfMsg)
         #print("dictConfMsgTotal如下")
         #print(dictConfMsgTotal)
-        if(len(dictConfMsgTotal)  == 0):
-            if(self.boolWhetherShowLog & True):
+        if len(dictConfMsgTotal)  == 0:
+            if self.boolWhetherShowLog & True:
                 self.writerContent("未获取到配置文件内容", 'runLog')
         else:
-            if(self.boolWhetherShowLog & True):
+            if self.boolWhetherShowLog & True:
                 self.writerContent("读取到的配置文件信息如下: ", 'runLog')
                 self.writerContent(str(dictConfMsgTotal), 'runLog')
 
@@ -474,13 +474,13 @@ class FileUtil:
         # 2017-12-11: 添加了time_beginning, time_end, past_days_num, savelog_to_file的验证
         
         intMark = -1
-        if(len(dictConfMsg) != 0):
+        if len(dictConfMsg) != 0:
             for keyItem in dictConfMsg:
                 if((keyItem == 'logpath') | (keyItem == 'run_intervals')
                    | (keyItem == 'when_hour_checkall') | (keyItem == 'remove_log_time') |
                    (keyItem == 'time_beginning') | (keyItem == 'time_end') |
                    (keyItem == 'past_days_num') | (keyItem == 'savelog_to_file')):
-                    if(dictConfMsg.get(keyItem) == ''):
+                    if dictConfMsg.get(keyItem) == '':
                         strErr = ("未读取到%s配置参数的值，请修改配置文件" %(keyItem))
                         self.writerContent(strErr, 'runLog')
                         intMark = 0
@@ -499,8 +499,8 @@ class FileUtil:
         # 如果返回值为1，则表示返回允许执行检测projectName这个项目
 
         intMark = -1
-        if(strKey in dictConfMsg):
-            if(dictConfMsg.get(strKey) != ''):
+        if strKey in dictConfMsg:
+            if dictConfMsg.get(strKey) != '':
                 intMark = 1
             else:
                 intMark = 0
@@ -515,7 +515,7 @@ class FileUtil:
         # 这里用到的有检测配置文件是否存在
 
         intMark = -1
-        if(os.path.exists(fileNameAndPath)):
+        if os.path.exists(fileNameAndPath):
             intMark = 1
 
         return intMark
@@ -525,7 +525,7 @@ class FileUtil:
         # 检测并初始化配置文件
 
         intMark = self.checkFileExists(configureFileNameAndPath)
-        if(intMark != 1):
+        if intMark != 1:
             str1 = ("配置文件monitor.conf不存在,脚本自动创建并初始化")
             str2 = ("配置文件monitor.conf路径为" + self.configurePath + "/"
                                    + self.configureFileName)
@@ -543,8 +543,8 @@ class FileUtil:
         # 检测并创建文件路径
 
         intMark = self.checkFileExists(strFilePath)
-        if(intMark != 1):
-            if(self.boolWhetherShowLog & True):
+        if intMark != 1:
+            if self.boolWhetherShowLog & True:
                 self.writerContent("文件" + strFilePath + "夹路径不存在，脚本执行自动创建", 'runLog')
             #self.writerContent("配置的日志文件夹路径不存在，脚本执行自动创建", 'runErr')
             os.mkdir(strFilePath)
@@ -559,7 +559,7 @@ class FileUtil:
         self.checkAndInitConfigure(configureFileNameAndPath)
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
         config.read(configureFileNameAndPath, encoding='utf-8')
-        if(config.has_section('LogConfigure')):
+        if config.has_section('LogConfigure'):
             strLogPath = config['LogConfigure']['logpath']
             self.checkAndCreate(strLogPath)
         else:
@@ -579,12 +579,12 @@ class FileUtil:
         self.checkAndInitConfigure(configureFileNameAndPath)
         config = configparser.ConfigParser(allow_no_value=True, delimiters=':')
         config.read(configureFileNameAndPath)
-        if(config.has_section('RunConfigure')):
+        if config.has_section('RunConfigure'):
             strWhetherShowLog = config['RunConfigure']['savelog_to_file']
         else:
             self.writerContent("配置文件内容缺少savelog_to_file配置参数", 'runLog')
             #self.writerContent("配置文件内容缺少日志配置参数", 'runErr')
-        if((strWhetherShowLog != 'yes') & (strWhetherShowLog != 'no')):
+        if (strWhetherShowLog != 'yes') & (strWhetherShowLog != 'no'):
             strWhetherShowLog = 'no'
         return strWhetherShowLog
 
@@ -633,17 +633,17 @@ class FileUtil:
                          strUserName + "\n" + "---" + self.strDateTime)
 
         listSendContent[1] = strNewContent
-        if(listSendContent[0] == 'Hour'):
+        if listSendContent[0] == 'Hour':
             strSubject = strServerName + "今日" + self.strHourTime + "时执行结果"
             listSendContent.insert(1, strSubject)
-        elif(listSendContent[0] == 'Second'):
+        elif listSendContent[0] == 'Second':
             strSubject = strServerName + "今日" + self.strHourMinTime + "时检测到异常"
             listSendContent.insert(1, strSubject)        
 
         else:
             strSubject = strServerName + "脚本运行异常"
             listSendContent.insert(1, strSubject)
-        if(self.boolWhetherShowLog & True):    
+        if self.boolWhetherShowLog & True:
             self.writerContent("数据已重构, 如下", 'runLog')
             self.writerContent(str(listSendContent), 'runLog')
         return listSendContent
