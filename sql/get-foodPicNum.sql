@@ -9,8 +9,8 @@ SELECT
 FROM
 	htg_record
 WHERE
-	appendtime > %d
-AND appendtime <= %d
+	appendtime > 1537113600
+AND appendtime <= 1537151171
 AND effect = 1
 AND active = 1
 AND tags is not null
